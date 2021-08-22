@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MMORPG game</title>
+    <link rel="stylesheet" href="style/style.css" />
+
+    <script src="script/gameManager.js"></script>
+    <script src="script/player.js"></script>
+    <script src="script/enemy.js"></script>
+  </head>
+  <body>
+    <div class="header">
+      <p>Play the greatest PRG ever to be made</p>
+      <h2>Pick your hero!</h2>
+    </div>
+    <div class="interface">
+      <a href="#" onclick="gameManager.setGameStart('Warrior')">
+        <img src="img/warrior.jpg" alt="warrior" />
+        <div>
+          <h3>Warrior</h3>
+          <p>
+            This class generally has the best armor, and is the most skilled
+            with the largest weapons. High HP, attack, and defense scores are a
+            usually characteristic of the Fighter class. This class is usually
+            utilized by players who favor a hack and slash style gameplay.
+          </p>
+        </div>
+      </a>
+
+      <a href="#" onclick="gameManager.setGameStart('Druid')">
+        <img src="img/druid.jpg" alt="druid" />
+        <div>
+          <h3>Druid</h3>
+          <p>
+            Druid characters tend to have abilities that involve healing,
+            weather or plant related spells, summoning animal allies, and
+            shapeshifting.
+          </p>
+        </div>
+      </a>
+
+      <a href="#" onclick="gameManager.setGameStart('Wizard')">
+        <img src="img/wizard.jpg" alt="wizard" />
+        <div>
+          <h3>Wizard</h3>
+          <p>
+            Mages usually wear the weakest of armor, many times clad in nothing
+            but robes, but can also cast shield, healing, and regeneration
+            spells. Mages also usually do their damage from long range, as
+            opposed to close quarters, where they’re usually susceptible to
+            damage.
+          </p>
+        </div>
+      </a>
+
+      <a href="#" onclick="gameManager.setGameStart('Bard')">
+        <img src="img/bard.jpg" alt="bard" />
+        <div>
+          <h3>Bard</h3>
+          <p>
+            The defining characteristics of bards is the use of music or other
+            artistic mediums to contribute to a fight. Bards can be supportive,
+            offensive, defensive, or a jack-of-all-trades type of class. They
+            often use their artistic talents to induce magical spells.
+          </p>
+        </div>
+      </a>
+    </div>
+    <div class="actions"></div>
+
+    <div class="arena"></div>
+    <div class="enemy"></div>
+
+    <div class="notification"></div>
+  </body>
+</html>
