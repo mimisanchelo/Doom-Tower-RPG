@@ -11,6 +11,217 @@ body {
   flex-direction: column;
   margin: 3rem auto;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+body {
+  background-color: #1b1b1b;
+}
+
+.header {
+  background-color: #1b1b1b;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.header p {
+  font-family: arial;
+  font-size: 18px;
+  color: #fff;
+  padding-bottom: 4px;
+}
+
+.header h2 {
+  font-family: 'Acme', sans-serif;
+  font-size: 30px;
+  color: #f8b700;
+}
+
+// /////////////////////////////////////INTERDACE
+.interface {
+  padding: 0;
+  width: 1100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: #1b1b1b;
+}
+
+.interface a {
+  display: flex;
+  max-width: 500px;
+  flex-wrap: nowrap;
+  margin: 1rem 2rem;
+}
+
+.interface img {
+  width: 180px;
+}
+
+.img-avatar {
+  width: 160px !important;
+  height: 160px !important;
+}
+
+.interface div {
+  max-width: 300px;
+  padding: 1rem;
+  background-color: #211510;
+}
+
+.interface a:hover div {
+  background-color: #3c1d3d;
+}
+
+.interface h3 {
+  font-family: 'Acme', sans-serif;
+  font-size: 22px;
+  color: #f8b700;
+  padding: 12px 0 4px;
+}
+
+.interface p {
+  font-family: arial;
+  padding: 0.3rem;
+  font-size: 12px;
+  color: #d5c8af;
+  line-height: 20px;
+}
+
+//  ///////////////////////////////BTNS
+
+.btn-prefight {
+  width: 100% !important;
+}
+.btn__next {
+  margin: 0.5rem auto;
+  border-radius: 5px;
+}
+
+.actions {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.actions a {
+  width: 50%;
+  padding: 10px 0px;
+  text-align: center;
+  font-size: 14px;
+  font-family: arial;
+  color: #1b1b1b;
+}
+
+.actions a:nth-of-type(1) {
+  background-color: #e64747;
+}
+
+.actions a:nth-of-type(2) {
+  background-color: #e6ce47;
+}
+
+.actions a:nth-of-type(3) {
+  background-color: #6de647;
+}
+
+.actions a:hover {
+  opacity: 0.9;
+}
+
+// ////////////////////////////////ARENA
+.arena {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 180px;
+  background-color: #1d373d;
+  visibility: hidden;
+}
+// NOTIFICATIONS
+.notification {
+  // display: none;
+  text-align: center;
+  width: 50%;
+  border-radius: 10px;
+  margin: auto;
+  opacity: 0;
+  padding: 1rem;
+  margin: 1rem;
+}
+.not1 {
+  background: green;
+  &.shown {
+    display: block;
+    opacity: 1;
+    transform: translateY(10px);
+    transition: all 0.8s;
+  }
+}
+.not2 {
+  background: red;
+  &.shown {
+    display: block;
+    opacity: 1;
+    transform: translateY(10px);
+    transition: all 0.8s;
+  }
+}
+//////////////////////////////////////////// ENEMY
+.enemy {
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: #1b1b1b;
+}
+
+.enemy {
+  a {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+}
+
+.enemy {
+  img {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+.enemy {
+  width: 220px;
+  padding: 0 10px 0 20px;
+  background-color: #211510;
+}
+
+.enemy {
+  h3 {
+    font-size: 22px;
+    color: #f8b700;
+    padding: 12px 0 4px;
+  }
+}
+
+.enemy {
+  p {
+    font-family: arial;
+    font-size: 12px;
+    color: #d5c8af;
+    line-height: 20px;
+  }
+}
 img {
   width: 200px;
 }
@@ -22,5 +233,204 @@ img {
     color: black;
     text-decoration: none;
     padding-top: 1rem;
+  }
+}
+// PORTFOLIO INCREASE STATS
+.input-span {
+  display: flex;
+  float: right;
+  .number-input {
+    text-align: center;
+    width: 40px;
+    height: 20px;
+    border: 0;
+    outline: none;
+    padding: 0;
+    margin: 0 10px;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+  .btn__input {
+    font-size: 1.5rem;
+    border: 0;
+    background: none;
+    line-height: 2px;
+    color: white;
+    cursor: pointer;
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
+.total-points {
+  text-align: center;
+}
+
+.portfolio {
+  position: relative;
+  width: 350px;
+
+  p {
+    display: block;
+  }
+  .question-field {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 200px;
+    padding: 0;
+    color: white;
+
+    .question {
+      position: absolute;
+      top: 0;
+      right: 0;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      z-index: 5;
+
+      &:hover {
+        color: yellow;
+      }
+    }
+  }
+}
+.question__tab {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 1.4rem;
+  right: 1rem;
+  border-radius: 10px;
+  border-top-right-radius: 0;
+  transition: opacity 0.7s;
+  .statP {
+    padding-top: 0.5rem;
+    color: rgb(93, 93, 93);
+  }
+  &.showQuestionTab {
+    visibility: visible;
+    opacity: 1;
+    width: 150px;
+    padding: 1rem;
+    text-align: center;
+    background: whitesmoke;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .interface {
+    width: 100%;
+  }
+
+  .interface a {
+    display: flex;
+    max-width: 400px;
+    flex-wrap: nowrap;
+    margin: 1rem;
+  }
+
+  .interface img {
+    width: 160px;
+  }
+
+  .img-avatar {
+    width: 160px !important;
+    height: 160px !important;
+  }
+
+  .interface h3 {
+    font-family: 'Acme', sans-serif;
+    font-size: 22px;
+    color: #f8b700;
+    padding: 10px 0 4px;
+  }
+
+  .interface p {
+    font-size: 13px;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .interface a {
+    display: flex;
+    max-width: 500px;
+    flex-wrap: nowrap;
+    margin: 1rem 2rem;
+  }
+  .interface div {
+    max-width: 500px;
+    padding: 1rem;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .header {
+    p {
+      text-align: center;
+      font-size: 16px;
+    }
+  }
+  .interface a {
+    justify-content: center;
+    max-width: 500px;
+    flex-wrap: wrap;
+    margin: 1rem 2rem;
+  }
+  .interface div {
+    max-width: 300px;
+  }
+  .interface p {
+    font-size: 13px;
+  }
+  .enemy {
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    background-color: #1b1b1b;
+  }
+
+  .enemy {
+    a {
+      display: flex;
+      flex-wrap: nowrap;
+    }
+  }
+
+  .enemy {
+    img {
+      width: 160px;
+      height: 120px;
+    }
+  }
+
+  .enemy {
+    margin-top: 1rem;
+    display: flex;
+    max-width: 500px;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #211510;
+  }
+
+  .enemy {
+    h3 {
+      font-size: 22px;
+      color: #f8b700;
+      padding: 12px 0 4px;
+    }
+  }
+
+  .enemy {
+    p {
+      font-family: arial;
+      font-size: 12px;
+      color: #d5c8af;
+      line-height: 20px;
+    }
   }
 }
