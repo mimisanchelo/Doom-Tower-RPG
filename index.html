@@ -4,12 +4,17 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MMORPG game</title>
+    <title>RPG game</title>
     <link rel="stylesheet" href="style/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
 
     <script src="script/gameManager.js"></script>
     <script src="script/player.js"></script>
     <script src="script/enemy.js"></script>
+    <script src="script/save.js"></script>
   </head>
   <body>
     <div class="header">
@@ -69,11 +74,19 @@
         </div>
       </a>
     </div>
+
     <div class="actions"></div>
 
-    <div class="arena"></div>
+    <div class="arena">
+      <div class="notification not1">
+        <p></p>
+      </div>
+      <div class="notification not2">
+        <p></p>
+      </div>
+    </div>
     <div class="enemy"></div>
 
-    <div class="notification"></div>
+    <script src="script/notifications.js"></script>
   </body>
 </html>
