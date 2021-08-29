@@ -101,7 +101,9 @@ body {
 .btn-prefight {
   width: 100% !important;
 }
-.btn__next {
+.btn__next,
+.btn__lvl,
+#prefight {
   margin: 0.5rem auto;
   border-radius: 5px;
 }
@@ -320,6 +322,19 @@ img {
     text-align: center;
     background: whitesmoke;
   }
+}
+.total {
+  display: inline-block;
+  background: transparent;
+  border: 0;
+  outline: none;
+  color: inherit;
+  width: 40px;
+  font-size: 0.9rem;
+}
+.btn__lvl {
+  display: flex;
+  justify-content: center;
 }
 
 @media only screen and (max-width: 1024px) {
