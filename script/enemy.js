@@ -1,7 +1,13 @@
 let enemy
 
+let beatenEnemy = ['enemy']
+let defeatedEnemies = function (enemyType) {
+  beatenEnemy.push(enemyType)
+}
+
 function Enemy(
   enemyType,
+  level,
   health,
   mana,
   strength,
@@ -11,6 +17,7 @@ function Enemy(
   defense
 ) {
   this.enemyType = enemyType
+  this.level = level
   this.health = health
   this.mana = mana
 
@@ -20,6 +27,8 @@ function Enemy(
 
   this.speed = speed
   this.defense = defense
+
+  this.maxHP = health
 }
 
 const enemyDmg = function () {
@@ -75,4 +84,40 @@ const enemyDmg = function () {
 
   let attackValue = [calcOutputDmg]
   return attackValue
+}
+
+const finalBoss = function () {
+  let getEnemy = document.querySelector('.enemy')
+
+  let enemy00 = new Enemy('Gator', 1, 17500, 0, 150, 10, 20, 85, 40)
+
+  let chooseRandomEnemy = Math.floor(Math.random() * 1)
+  switch (chooseRandomEnemy) {
+    case 0:
+      enemy = enemy00
+      break
+  }
+
+  getEnemy.innerHTML =
+    "<img src='img/enemies/" +
+    enemy.enemyType.toLowerCase() +
+    ".jpg' class='img-avatar'><div><h3>" +
+    enemy.enemyType +
+    ' <span class="lvl">Level: </span><span class="actual-lvl">' +
+    enemy.level +
+    '</span></h3><p class="health-enemy">Health: ' +
+    enemy.health +
+    '</p><p>Mana: ' +
+    enemy.mana +
+    '</p><p>Strength: ' +
+    enemy.strength +
+    '</p><p>Agility: ' +
+    enemy.agility +
+    '</p><p>Intelligence: ' +
+    enemy.intelligence +
+    '</p><p>Speed: ' +
+    enemy.speed +
+    '</p><p>Defense: ' +
+    enemy.defense +
+    '</p></div>'
 }
