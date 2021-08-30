@@ -64,13 +64,13 @@ let gameManager = {
     let getEnemy = document.querySelector('.enemy')
     // CREATE ENEMY
     if (beatenEnemy.length != 20) {
-      let enemy00 = new Enemy('Goblin', 1, 2, 0, 150, 25, 10, 90, 45)
-      let enemy01 = new Enemy('Slime', 1, 1, 0, 27, 150, 20, 50, 15)
-      let enemy02 = new Enemy('Doomspeaker', 1, 1, 0, 27, 150, 20, 50, 15)
-      let enemy03 = new Enemy('3-Headed witch', 1, 1, 0, 27, 150, 20, 50, 15)
-      let enemy04 = new Enemy('Basilisk', 1, 1, 0, 27, 150, 20, 50, 15)
-      let enemy05 = new Enemy('Boar warrior', 1, 1, 0, 27, 150, 20, 50, 15)
-      let enemy06 = new Enemy('Desert mummy', 1, 1, 0, 27, 150, 20, 50, 15)
+      let enemy00 = new Enemy('Goblin', 1, 200, 0, 150, 25, 10, 90, 45)
+      let enemy01 = new Enemy('Slime', 1, 100, 0, 27, 150, 20, 50, 15)
+      let enemy02 = new Enemy('Doomspeaker', 1, 100, 0, 27, 150, 20, 50, 15)
+      let enemy03 = new Enemy('3-Headed witch', 1, 100, 0, 27, 150, 20, 50, 15)
+      let enemy04 = new Enemy('Basilisk', 1, 100, 0, 27, 150, 20, 50, 15)
+      let enemy05 = new Enemy('Boar warrior', 1, 100, 0, 27, 150, 20, 50, 15)
+      let enemy06 = new Enemy('Desert mummy', 1, 100, 0, 27, 150, 20, 50, 15)
       let enemy07 = new Enemy(
         'Dragonborn Henchman',
         1,
@@ -82,13 +82,13 @@ let gameManager = {
         50,
         15
       )
-      let enemy08 = new Enemy('Enforcer', 1, 1, 0, 27, 150, 20, 50, 15)
-      let enemy09 = new Enemy('Gator', 1, 1, 0, 27, 150, 20, 50, 15)
-      let enemy10 = new Enemy('Pirate', 1, 1, 0, 27, 150, 20, 50, 15)
-      let enemy11 = new Enemy('Raven mocker', 1, 1, 0, 27, 150, 20, 50, 15)
-      let enemy12 = new Enemy('Skelet archer', 1, 1, 0, 27, 150, 20, 50, 15)
-      let enemy13 = new Enemy('Skelet warrior', 1, 1, 0, 27, 150, 20, 50, 15)
-      let enemy14 = new Enemy('Tendriculos', 1, 10, 0, 27, 150, 20, 50, 15)
+      let enemy08 = new Enemy('Enforcer', 1, 100, 0, 27, 150, 20, 50, 15)
+      let enemy09 = new Enemy('Gator', 1, 100, 0, 27, 150, 20, 50, 15)
+      let enemy10 = new Enemy('Pirate', 1, 100, 0, 27, 150, 20, 50, 15)
+      let enemy11 = new Enemy('Raven mocker', 1, 100, 0, 27, 150, 20, 50, 15)
+      let enemy12 = new Enemy('Skelet archer', 1, 100, 0, 27, 150, 20, 50, 15)
+      let enemy13 = new Enemy('Skelet warrior', 1, 100, 0, 27, 150, 20, 50, 15)
+      let enemy14 = new Enemy('Tendriculos', 1, 100, 0, 27, 150, 20, 50, 15)
 
       let chooseRandomEnemy = Math.floor(Math.random() * 15)
       let numbers = []
@@ -272,7 +272,7 @@ let gameManager = {
     getInterface.innerHTML =
       "<img src='img/" +
       player.classType.toLowerCase() +
-      ".jpg' class='img-avatar'><div class='portfolio'><h3>" +
+      ".jpg' class='img-avatar'><div class='portfolio'><h3 class='hero__type'>" +
       player.classType +
       ' <span class="lvl">Level: </span><span class="actual-lvl">' +
       chosenPlayer.level +
