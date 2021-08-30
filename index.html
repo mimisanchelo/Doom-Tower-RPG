@@ -16,16 +16,39 @@
     <script src="script/enemy.js"></script>
   </head>
   <body>
-    <div class="header">
-      <p>Play the greatest PRG ever to be made</p>
-      <h2>Pick your hero!</h2>
+    <!-- INTERFACE -->
+    <div class="banner">
+      <img class="player-img" src="img/player.png" alt="" />
+      <h1 class="banner__name">Doom Tower</h1>
+      <div class="banner__info">
+        <h1 class="banner__header">
+          Beating Doom Tower isn’t going to <br />
+          be easy.
+        </h1>
+        <div class="banner-bottom">
+          <h3 class="banner__text">Are you ready?</h3>
+          <button class="btn__startGame">Start</button>
+        </div>
+      </div>
     </div>
+
+    <div class="header">
+      <p class="header__text">
+        Enjoy playing the simplest RPG game ever to be made
+      </p>
+      <h2 class="header__title">Pick your hero!</h2>
+    </div>
+
     <div class="interface">
-      <a href="#" onclick="gameManager.setGameStart('Warrior')">
+      <a
+        href="#"
+        class="hero__box"
+        onclick="gameManager.setGameStart('Warrior')"
+      >
         <img src="img/warrior.jpg" alt="warrior" />
-        <div>
-          <h3>Warrior</h3>
-          <p>
+        <div class="hero__info">
+          <h3 class="hero__type">Warrior</h3>
+          <p class="hero__description">
             This class generally has the best armor, and is the most skilled
             with the largest weapons. High HP, attack, and defense scores are a
             usually characteristic of the Fighter class. This class is usually
@@ -34,11 +57,11 @@
         </div>
       </a>
 
-      <a href="#" onclick="gameManager.setGameStart('Druid')">
+      <a href="#" class="hero__box" onclick="gameManager.setGameStart('Druid')">
         <img src="img/druid.jpg" alt="druid" />
-        <div>
-          <h3>Druid</h3>
-          <p>
+        <div class="hero__info">
+          <h3 class="hero__type">Druid</h3>
+          <p class="hero__description">
             Druid characters tend to have abilities that involve healing,
             weather or plant related spells, summoning animal allies, and
             shapeshifting.
@@ -46,11 +69,15 @@
         </div>
       </a>
 
-      <a href="#" onclick="gameManager.setGameStart('Wizard')">
+      <a
+        href="#"
+        class="hero__box"
+        onclick="gameManager.setGameStart('Wizard')"
+      >
         <img src="img/wizard.jpg" alt="wizard" />
-        <div>
-          <h3>Wizard</h3>
-          <p>
+        <div class="hero__info">
+          <h3 class="hero__type">Wizard</h3>
+          <p class="hero__description">
             Mages usually wear the weakest of armor, many times clad in nothing
             but robes, but can also cast shield, healing, and regeneration
             spells. Mages also usually do their damage from long range, as
@@ -60,11 +87,15 @@
         </div>
       </a>
 
-      <a href="#" onclick="gameManager.setGameStart('Bard')">
-        <img src="img/bard.jpg" alt="bard" />
-        <div>
-          <h3>Bard</h3>
-          <p>
+      <a
+        href="#"
+        class="hero__box"
+        onclick="gameManager.setGameStart('Priest')"
+      >
+        <img src="img/Priest.jpg" alt="Priest" />
+        <div class="hero__info">
+          <h3 class="hero__type">Priest</h3>
+          <p class="hero__description">
             The defining characteristics of bards is the use of music or other
             artistic mediums to contribute to a fight. Bards can be supportive,
             offensive, defensive, or a jack-of-all-trades type of class. They
