@@ -55,7 +55,7 @@ let playerAttack = function () {
       ) / 100
 
     // MANA BASE CHAMP
-  } else if (player.classType == 'Wizard' || player.classType == 'Bard') {
+  } else if (player.classType == 'Wizard' || player.classType == 'Priest') {
     calcMageDmg =
       Math.round(
         ((player.intelligence * player.mana) / 1000 / (0.048 * enemy.defense)) *
@@ -143,7 +143,7 @@ let PlayerMoves = {
 
           // btn
           getAction.innerHTML =
-            '<a href="#" class="btn__next" onclick="gameManager.staircase()">Next floor!</a>'
+            '<a href="#" class="btn__next btn" onclick="gameManager.staircase()">Next floor!</a>'
 
           // score
           defeatedEnemies(enemy.enemyType)
@@ -174,7 +174,7 @@ let PlayerMoves = {
 
               // btn
               getAction.innerHTML =
-                '<a href="/" class="btn__next" onclick="gameManager.resetPlayer()">Back to heroes!</a>'
+                '<a href="/" class="btn__next btn" onclick="gameManager.resetPlayer()">Back to heroes!</a>'
             } else {
               getPlayerHealth.innerHTML =
                 'Health: ' + Math.round(player.health * 100) / 100
@@ -209,7 +209,7 @@ let PlayerMoves = {
 
             // btn
             getAction.innerHTML =
-              '<a href="/" class="btn__next" onclick="gameManager.resetPlayer()">Back to heroes!</a>'
+              '<a href="/" class="btn__next btn"  onclick="gameManager.resetPlayer()">Back to heroes!</a>'
           } else {
             getPlayerHealth.innerHTML =
               'Health: ' + Math.round(player.health * 100) / 100
@@ -251,7 +251,7 @@ let PlayerMoves = {
 
           // BTN
           getAction.innerHTML =
-            '<a href="/" class="btn__next" onclick="gameManager.resetPlayer()">Back to heroes!</a>'
+            '<a href="/" class="btn__next btn" onclick="gameManager.resetPlayer()">Back to heroes!</a>'
         } else {
           getPlayerHealth.innerHTML =
             'Health: ' + Math.round(player.health * 100) / 100
@@ -299,7 +299,7 @@ let PlayerMoves = {
 
               // btn
               getAction.innerHTML =
-                '<a href="#" class="btn__next" onclick="gameManager.staircase()">Next floor!</a>'
+                '<a href="#" class="btn__next btn" onclick="gameManager.staircase()">Next floor!</a>'
 
               // SCORE
               defeatedEnemies(enemy.enemyType)
@@ -357,7 +357,7 @@ let PlayerMoves = {
               'Health: ' + Math.round(player.health * 100) / 100
             // btn
             getAction.innerHTML =
-              '<a href="#" class="btn__next" onclick="gameManager.staircase()">Next floor!</a>'
+              '<a href="#" class="btn__next btn" onclick="gameManager.staircase()">Next floor!</a>'
 
             // score
             defeatedEnemies(enemy.enemyType)
@@ -450,7 +450,7 @@ let PlayerMoves = {
             alert('You lose!')
 
             getAction.innerHTML =
-              '<a href="/" class="btn__next" onclick="gameManager.resetPlayer()">Back to heroes!</a>'
+              '<a href="/" class="btn__next btn" onclick="gameManager.resetPlayer()">Back to heroes!</a>'
           }
         } else if (calcHealedHP > enemyAttackValues) {
           player.health = maxHeroHP
@@ -487,7 +487,7 @@ let PlayerMoves = {
             alert('You lose! ')
 
             getAction.innerHTML =
-              '<a href="/" class="btn__next" onclick="gameManager.resetPlayer()">Back to heroes!</a>'
+              '<a href="/" class="btn__next btn" onclick="gameManager.resetPlayer()">Back to heroes!</a>'
           }
         } else if (calcHealedHP > enemyAttackValues) {
           getPlayerHealth.innerHTML =
@@ -529,7 +529,7 @@ let PlayerMoves = {
             alert('You lose!')
 
             getAction.innerHTML =
-              '<a href="/" class="btn__next" onclick="gameManager.resetPlayer()>Back to heroes!</a>'
+              '<a href="/" class="btn__next btn" onclick="gameManager.resetPlayer()>Back to heroes!</a>'
           }
         } else if (calcHealedHP > enemyAttackValues) {
           calcHealedHP = Math.round(
@@ -565,7 +565,7 @@ let PlayerMoves = {
             alert('You lose! ')
 
             getAction.innerHTML =
-              '<a href="/" class="btn__next" onclick="gameManager.resetPlayer()">Back to heroes!</a>'
+              '<a href="/" class="btn__next btn"  onclick="gameManager.resetPlayer()">Back to heroes!</a>'
           }
         } else if (calcHealedHP > enemyAttackValues) {
           calcHealedHP = Math.round(
@@ -624,7 +624,7 @@ let PlayerMoves = {
           'Health: ' + Math.round(player.health * 100) / 100
         //btn
         getAction.innerHTML =
-          '<a href="#" class="btn__next" onclick="gameManager.staircase()">Next floor!</a>'
+          '<a href="#" class="btn__next btn" onclick="gameManager.staircase()">Next floor!</a>'
         //score
         defeatedEnemies(enemy.enemyType)
       } else {
@@ -653,7 +653,7 @@ let PlayerMoves = {
           getEnemyHealth.innerHTML =
             'Health: ' + Math.round(enemy.health * 100) / 100
           getAction.innerHTML =
-            '<a href="/" class="btn__next" onclick="gameManager.resetPlayer()">Back to heroes!</a>'
+            '<a href="/" class="btn__next btn" onclick="gameManager.resetPlayer()">Back to heroes!</a>'
         } else {
           getPlayerHealth.innerHTML =
             'Health: ' + Math.round(player.health * 100) / 100
@@ -679,7 +679,7 @@ let PlayerMoves = {
         getEnemyHealth.innerHTML =
           'Health: ' + Math.round(enemy.health * 100) / 100
         getAction.innerHTML =
-          '<a href="/" class="btn__next" onclick="gameManager.resetPlayer()">Back to heroes!</a>'
+          '<a href="/" class="btn__next btn" onclick="gameManager.resetPlayer()">Back to heroes!</a>'
       } else {
         getPlayerHealth.innerHTML =
           'Health: ' + Math.round(player.health * 100) / 100
@@ -703,7 +703,7 @@ let PlayerMoves = {
           // BTN
 
           getAction.innerHTML =
-            '<a href="#" class="btn__next" onclick="gameManager.staircase()">Next floor!</a>'
+            '<a href="#" class="btn__next btn" onclick="gameManager.staircase()">Next floor!</a>'
           // score
           defeatedEnemies(enemy.enemyType)
         } else {
@@ -763,7 +763,7 @@ let PlayerMoves = {
           'Health: ' + Math.round(player.health * 100) / 100
         // btn
         getAction.innerHTML =
-          '<a href="#" class="btn__next" onclick="gameManager.staircase()">Next floor!</a>'
+          '<a href="#" class="btn__next btn" onclick="gameManager.staircase()">Next floor!</a>'
 
         // score
         defeatedEnemies(enemy.enemyType)
@@ -796,7 +796,7 @@ let PlayerMoves = {
           getEnemyHealth.innerHTML =
             'Health: ' + Math.round(enemy.health * 100) / 100
           getAction.innerHTML =
-            '<a href="/" class="btn__next" onclick="gameManager.resetPlayer()">Back to heroes!</a>'
+            '<a href="/" class="btn__next btn" onclick="gameManager.resetPlayer()">Back to heroes!</a>'
         } else {
           getPlayerHealth.innerHTML =
             'Health: ' + Math.round(player.health * 100) / 100
@@ -822,7 +822,7 @@ let PlayerMoves = {
         getEnemyHealth.innerHTML =
           'Health: ' + Math.round(enemy.health * 100) / 100
         getAction.innerHTML =
-          '<a href="/" class="btn__next" onclick="gameManager.resetPlayer()">Back to heroes!</a>'
+          '<a href="/" class="btn__next btn" onclick="gameManager.resetPlayer()">Back to heroes!</a>'
       } else {
         getPlayerHealth.innerHTML =
           'Health: ' + Math.round(player.health * 100) / 100
@@ -847,7 +847,7 @@ let PlayerMoves = {
           // BTN
 
           getAction.innerHTML =
-            '<a href="#" class="btn__next" onclick="gameManager.staircase()">Next floor!</a>'
+            '<a href="#" class="btn__next btn" onclick="gameManager.staircase()">Next floor!</a>'
           // score
           defeatedEnemies(enemy.enemyType)
         } else {
@@ -913,7 +913,7 @@ let PlayerMoves = {
       getEnemyHealth.innerHTML =
         'Health: ' + Math.round(enemy.health * 100) / 100
       getAction.innerHTML =
-        '<a href="/" class="btn__next" onclick="gameManager.resetPlayer()">Back to heroes!</a>'
+        '<a href="/" class="btn__next btn" onclick="gameManager.resetPlayer()">Back to heroes!</a>'
     } else if (enemy.health <= 0) {
       alert('You Win!  Move to the next floor! Quickly!')
       getPlayerHealth.innerHTML =
@@ -921,7 +921,7 @@ let PlayerMoves = {
       getEnemyHealth.innerHTML = 'Health: 0'
       // btn
       getAction.innerHTML =
-        '<a href="#" class="btn__next" onclick="gameManager.staircase()">Next floor!</a>'
+        '<a href="#" class="btn__next btn" onclick="gameManager.staircase()">Next floor!</a>'
       // score
       defeatedEnemies(enemy.enemyType)
     } else {

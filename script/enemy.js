@@ -89,12 +89,16 @@ const enemyDmg = function () {
 const finalBoss = function () {
   let getEnemy = document.querySelector('.enemy')
 
-  let enemy00 = new Enemy('Gator', 1, 17500, 0, 150, 10, 20, 85, 40)
+  let boss00 = new Enemy('Mirror man', 1, 17500, 0, 150, 10, 20, 85, 40)
+  let boss01 = new Enemy('Shark', 1, 17500, 0, 150, 10, 20, 85, 40)
 
-  let chooseRandomEnemy = Math.floor(Math.random() * 1)
+  let chooseRandomEnemy = Math.floor(Math.random() * 2)
   switch (chooseRandomEnemy) {
     case 0:
-      enemy = enemy00
+      enemy = boss00
+      break
+    case 1:
+      enemy = boss01
       break
   }
 

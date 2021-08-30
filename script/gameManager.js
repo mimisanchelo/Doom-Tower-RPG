@@ -15,7 +15,7 @@ let gameManager = {
       case 'Wizard':
         player = new Player(classType, 1, 180, 200, 10, 30, 200, 93, 40)
         break
-      case 'Bard':
+      case 'Priest':
         player = new Player(classType, 1, 185, 200, 15, 30, 195, 98, 40)
         break
     }
@@ -23,25 +23,25 @@ let gameManager = {
     getInterface.innerHTML =
       "<img src='img/" +
       classType.toLowerCase() +
-      ".jpg' class='img-avatar'><div  class='portfolio'><h3>" +
+      ".jpg' class='img-avatar'><div  class='portfolio'><h3 class='hero__type'>" +
       classType +
       ' <span class="lvl">Level: </span><span class="actual-lvl">' +
       player.level +
-      '</span></h3><p class="health-player">Health: ' +
+      '</span></h3><p class=" health-player player-stat">Health:  ' +
       player.health +
       '/' +
       player.maxHP +
-      '</p><p>Mana: ' +
+      '</p><p class="player-stat">Mana: ' +
       player.mana +
-      '</p><p>Strength: ' +
+      '</p><p class="player-stat">Strength: ' +
       player.strength +
-      '</p><p>Agility: ' +
+      '</p><p class="player-stat">Agility: ' +
       player.agility +
-      '</p><p>Intelligence: ' +
+      '</p><p class="player-stat">Intelligence: ' +
       player.intelligence +
-      '</p><p>Speed: ' +
+      '</p><p class="player-stat">Speed: ' +
       player.speed +
-      '</p><p>Defense: ' +
+      '</p><p class="player-stat">Defense: ' +
       player.defense +
       '</p></div>'
   },
@@ -52,22 +52,45 @@ let gameManager = {
     let getArena = document.querySelector('.arena')
 
     getHeader.innerHTML =
-      '<p>Task: Find an enemy!</p><p>Doom Tower floor: <span class="floor">' +
+      '<p class="header__text">Doom Tower floor: <span class="floor">' +
       beatenEnemy.length +
-      '</span></p>'
+      '</span></p><p class="header__title">Task: Find an enemy!</p>'
     getArena.style.visibility = 'visible'
     getAction.innerHTML =
-      '<a href="#" class="btn__prefight" onclick="gameManager.setFight()">Search for enemy!</a> <a href="/" class="btn__goback" onclick="gameManager.resetPlayer()">Back to heroes</a>'
+      '<a href="#" class="btn__prefight btn" onclick="gameManager.setFight()">Search for enemy!</a> <a href="/" class="btn__goback btn" onclick="gameManager.resetPlayer()">Back to heroes</a>'
   },
 
   createEnemy: function () {
     let getEnemy = document.querySelector('.enemy')
     // CREATE ENEMY
-    if (beatenEnemy.length != 3) {
-      let enemy00 = new Enemy('Goblin', 1, 200, 0, 150, 25, 10, 90, 45)
-      let enemy01 = new Enemy('Slime', 1, 120, 0, 27, 150, 20, 50, 15)
+    if (beatenEnemy.length != 20) {
+      let enemy00 = new Enemy('Goblin', 1, 2, 0, 150, 25, 10, 90, 45)
+      let enemy01 = new Enemy('Slime', 1, 1, 0, 27, 150, 20, 50, 15)
+      let enemy02 = new Enemy('Doomspeaker', 1, 1, 0, 27, 150, 20, 50, 15)
+      let enemy03 = new Enemy('3-Headed witch', 1, 1, 0, 27, 150, 20, 50, 15)
+      let enemy04 = new Enemy('Basilisk', 1, 1, 0, 27, 150, 20, 50, 15)
+      let enemy05 = new Enemy('Boar warrior', 1, 1, 0, 27, 150, 20, 50, 15)
+      let enemy06 = new Enemy('Desert mummy', 1, 1, 0, 27, 150, 20, 50, 15)
+      let enemy07 = new Enemy(
+        'Dragonborn Henchman',
+        1,
+        120,
+        0,
+        27,
+        150,
+        20,
+        50,
+        15
+      )
+      let enemy08 = new Enemy('Enforcer', 1, 1, 0, 27, 150, 20, 50, 15)
+      let enemy09 = new Enemy('Gator', 1, 1, 0, 27, 150, 20, 50, 15)
+      let enemy10 = new Enemy('Pirate', 1, 1, 0, 27, 150, 20, 50, 15)
+      let enemy11 = new Enemy('Raven mocker', 1, 1, 0, 27, 150, 20, 50, 15)
+      let enemy12 = new Enemy('Skelet archer', 1, 1, 0, 27, 150, 20, 50, 15)
+      let enemy13 = new Enemy('Skelet warrior', 1, 1, 0, 27, 150, 20, 50, 15)
+      let enemy14 = new Enemy('Tendriculos', 1, 10, 0, 27, 150, 20, 50, 15)
 
-      let chooseRandomEnemy = Math.floor(Math.random() * 2)
+      let chooseRandomEnemy = Math.floor(Math.random() * 15)
       let numbers = []
 
       switch (chooseRandomEnemy) {
@@ -76,6 +99,45 @@ let gameManager = {
           break
         case 1:
           enemy = enemy01
+          break
+        case 2:
+          enemy = enemy02
+          break
+        case 3:
+          enemy = enemy03
+          break
+        case 4:
+          enemy = enemy04
+          break
+        case 5:
+          enemy = enemy05
+          break
+        case 6:
+          enemy = enemy06
+          break
+        case 7:
+          enemy = enemy07
+          break
+        case 8:
+          enemy = enemy08
+          break
+        case 9:
+          enemy = enemy09
+          break
+        case 10:
+          enemy = enemy10
+          break
+        case 11:
+          enemy = enemy11
+          break
+        case 12:
+          enemy = enemy12
+          break
+        case 13:
+          enemy = enemy13
+          break
+        case 14:
+          enemy = enemy14
           break
       }
       numbers.push(chooseRandomEnemy)
@@ -89,7 +151,7 @@ let gameManager = {
         enemy.level +
         '</span></h3><p class="health-enemy">Health: ' +
         enemy.health +
-        '</p><p>Mana: ' +
+        '</p><p class=>Mana: ' +
         enemy.mana +
         '</p><p>Strength: ' +
         enemy.strength +
@@ -103,7 +165,7 @@ let gameManager = {
         enemy.defense +
         '</p></div>'
       enemyLvl()
-    } else if (beatenEnemy.length == 3) {
+    } else if (beatenEnemy.length == 20) {
       finalBoss()
     }
   },
@@ -114,14 +176,14 @@ let gameManager = {
     let getEnemy = document.querySelector('.enemy')
 
     getHeader.innerHTML =
-      '<p>Task: Defeat your enemy!</p><p>Doom Tower floor: <span class="floor">' +
+      '<p class="header__text">Doom Tower floor: <span class="floor">' +
       beatenEnemy.length +
-      '</span></p>'
+      '</span></p><p class="header__title">Task: Defeat your enemy!</p>'
 
     let heroes = function () {
-      if (player.classType == 'Bard') {
+      if (player.classType == 'Priest') {
         getAction.innerHTML =
-          '<a href="#" class="btn__attack" onclick="PlayerMoves.calcAttack()">Attack!</a> <a href="#" class="btn__heal btn" onclick="PlayerMoves.calcHeal()">Heal!</a>'
+          '<a href="#" class="btn__attack btn" onclick="PlayerMoves.calcAttack()">Attack!</a> <a href="#" class="btn__heal btn" onclick="PlayerMoves.calcHeal()">Heal!</a>'
       } else if (player.classType == 'Warrior') {
         getAction.innerHTML =
           '<a href="#" class="btn__attack btn" onclick="PlayerMoves.calcAttack()">Attack!</a> <a href="#" class="btn__counter btn" onclick="PlayerMoves.calcCounterAttack()">Counter-Attack!</a>'
@@ -151,42 +213,45 @@ let gameManager = {
     let getInterface = document.querySelector('.interface')
 
     getHeader.innerHTML =
-      '<p>Task: Restore you power and clean the next floor of Doom Tower!</p> <p>Doom Tower floor: <span class="floor">' +
+      '<p class="header__text">Doom Tower floor: <span class="floor">' +
       beatenEnemy.length +
-      '</span></p>'
+      '</span></p><p class="header__title">Task: Restore you power and clean the next floor of Doom Tower!</p>'
     getArena.style.visibility = 'hidden'
     getEnemy.style.visibility = 'hidden'
     getAction.innerHTML =
-      '<a href="#" class="btn__lvl" onclick="gameManager.playerLvl()">Increase your stats</a>'
+      '<a href="#" class="btn__lvl btn" onclick="gameManager.playerLvl()">Increase your stats</a>'
 
     let chosenPlayer = player
 
     getInterface.innerHTML =
       "<img src='img/" +
       player.classType.toLowerCase() +
-      ".jpg' class='img-avatar'><div class='portfolio'><h3>" +
+      ".jpg' class='img-avatar'><div  class='portfolio'><h3 class='hero__type'>" +
       player.classType +
       ' <span class="lvl">Level: </span><span class="actual-lvl">' +
       chosenPlayer.level +
-      '</span></h3><p class="health-player">Health: ' +
+      '</span></h3><p class=" health-player player-stat">Health:  ' +
+      chosenPlayer.health +
+      '/' +
       chosenPlayer.maxHP +
-      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="hp" step="25" type="number" value="0" max="10"><button class="increase btn__input">&#43</button></span></p> <p>Mana: ' +
+      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="hp" step="25" type="number" value="0" max="10"disabled><button class="increase btn__input">&#43</button></span></p><p class="player-stat">Mana: ' +
       chosenPlayer.mana +
-      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="mp" step="20" type="number" value="0" max="10"><button class="increase btn__input">&#43</button></span></p><p>Strength: ' +
+      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="mp" step="20" type="number" value="0" max="10" disabled><button class="increase btn__input">&#43</button></span></p><p class="player-stat">Strength: ' +
       chosenPlayer.strength +
-      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="str" step="5" type="number" value="0" max="10"><button class="increase btn__input">&#43</button></span></p><p>Agility: ' +
+      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="str" step="5" type="number" value="0" max="10" disabled><button class="increase btn__input">&#43</button></span></p><p class="player-stat">Agility: ' +
       chosenPlayer.agility +
-      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="agi" step="5" type="number" value="0" max="10"><button class="increase btn__input">&#43</button></span></p><p>Intelligence: ' +
+      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="str" step="5" type="number" value="0" max="10" disabled><button class="increase btn__input">&#43</button></span></p><p class="player-stat">Intelligence: ' +
       chosenPlayer.intelligence +
-      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="int" step="5" type="number" value="0" max="10"><button class="increase btn__input">&#43</button></span></p><p>Speed: ' +
+      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="str" step="5" type="number" value="0" max="10" disabled><button class="increase btn__input">&#43</button></span></p><p class="player-stat">Speed: ' +
       chosenPlayer.speed +
-      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="spd" step="1" type="number" value="0" max="10"><button class="increase btn__input">&#43</button></span></p><p>Defense: ' +
+      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="str" step="5" type="number" value="0" max="10" disabled><button class="increase btn__input">&#43</button></span></p><p class="player-stat">Defense: ' +
       chosenPlayer.defense +
-      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" step="2" type="number" id="def" value="0" max="10"><button class="increase btn__input">&#43</button></span></p> <p class="total-points">Available points: <input class="total" type="number" id="totalN" value="10" disabled></input></p> <div class="question-field"><i class="ri-question-line question"></i><div class="question__tab"><p class="statP">25 HP for 1 point</p><p class="statP">20 MP for 1 point</p><p class="statP">5 STR for 1 point</p><p class="statP">5 AGI for 1 point</p><p class="statP">5 INT for 1 point</p><p class="statP">1 SPD for 1 point</p><p class="statP">2 DEF for 1 point</p></div></div></div>'
+      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="str" step="5" type="number" value="0" max="10" disabled><button class="increase btn__input">&#43</button></span></p><p class="total-points">Available points: <input class="total" type="number" id="totalN" value="10" disabled></input></p> <div class="question-field"><i class="ri-question-line question"></i><div class="question__tab"><p class="statP">25 HP for 1 point</p><p class="statP">20 MP for 1 point</p><p class="statP">5 STR for 1 point</p><p class="statP">5 AGI for 1 point</p><p class="statP">5 INT for 1 point</p><p class="statP">1 SPD for 1 point</p><p class="statP">2 DEF for 1 point</p></div></div></div>'
 
     questionMenu()
     playerLvlUp()
   },
+
   playerLvl: function () {
     let getInterface = document.querySelector('.interface')
     let getAction = document.querySelector('.actions')
@@ -195,12 +260,12 @@ let gameManager = {
 
     chosenPlayer.level += 1
     chosenPlayer.health = chosenPlayer.maxHP + statsInput[0].value * 25
-    chosenPlayer.mana += statsInput[1].value * 1.5
-    chosenPlayer.strength += statsInput[2].value * 1.5
-    chosenPlayer.agility += statsInput[3].value * 1.5
-    chosenPlayer.intelligence += statsInput[4].value * 1.5
-    chosenPlayer.speed += statsInput[5].value * 1.5
-    chosenPlayer.defense += statsInput[6].value * 1.5
+    chosenPlayer.mana += statsInput[1].value * 20
+    chosenPlayer.strength += statsInput[2].value * 5
+    chosenPlayer.agility += statsInput[3].value * 5
+    chosenPlayer.intelligence += statsInput[4].value * 5
+    chosenPlayer.speed += statsInput[5].value * 1
+    chosenPlayer.defense += statsInput[6].value * 2.5
     chosenPlayer.maxHP += statsInput[0].value * 25
     console.log(statsInput)
 
@@ -211,23 +276,25 @@ let gameManager = {
       player.classType +
       ' <span class="lvl">Level: </span><span class="actual-lvl">' +
       chosenPlayer.level +
-      '</span></h3><p class="health-player">Health: ' +
-      Math.round(chosenPlayer.maxHP * 100) / 100 +
-      '</p><p>Mana: ' +
-      Math.round(chosenPlayer.mana * 100) / 100 +
-      '</p><p>Strength: ' +
-      Math.round(chosenPlayer.strength * 100) / 100 +
-      '</p><p>Agility: ' +
-      Math.round(chosenPlayer.agility * 100) / 100 +
-      '</p><p>Intelligence: ' +
-      Math.round(chosenPlayer.intelligence * 100) / 100 +
-      '</p><p>Speed: ' +
-      Math.round(chosenPlayer.speed * 100) / 100 +
-      '</p><p>Defense: ' +
-      Math.round(chosenPlayer.defense * 100) / 100 +
-      '</p></div>'
+      '</span></h3><p class=" health-player player-stat">Health:  ' +
+      chosenPlayer.health +
+      '/' +
+      chosenPlayer.maxHP +
+      '</p><p class="player-stat">Mana: ' +
+      chosenPlayer.mana +
+      '</p><p class="player-stat">Strength: ' +
+      chosenPlayer.strength +
+      '</p><p class="player-stat">Agility: ' +
+      chosenPlayer.agility +
+      '</p><p class="player-stat">Intelligence: ' +
+      chosenPlayer.intelligence +
+      '</p><p class="player-stat">Speed: ' +
+      chosenPlayer.speed +
+      '</p><p class="player-stat">Defense: ' +
+      chosenPlayer.defense +
+      '</p>'
     getAction.innerHTML =
-      '<a href="#" class="btn__prefight" id="prefight" onclick="gameManager.setFight()">Search for enemy!</a>'
+      '<a href="#" class="btn__prefight btn" id="prefight" onclick="gameManager.setFight()">Search for enemy!</a>'
   },
 }
 
