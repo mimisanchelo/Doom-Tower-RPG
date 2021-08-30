@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Glory&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
-
-@import url('https://fonts.googleapis.com/css2?family=Prociono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Trocchi&display=swap');
 
 * {
   padding: 0;
@@ -23,12 +22,9 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-image: url(https://s3.eu-west-1.amazonaws.com/images.geeknative.com/wp-content/uploads/2015/01/Jeremy-Chong-6.jpg);
-  max-height: 100vh;
-  background-repeat: no-repeat;
-  background-position: 40% 50%;
-  background-size: cover;
-  overflow: hidden;
+  margin: auto;
+  height: 100vh;
+  background-color: var(--background);
 }
 
 * {
@@ -36,32 +32,118 @@ body {
   padding: 0;
   text-decoration: none;
 }
+
+// HEADER
 .banner {
-  .playerArt {
+  background-image: url(https://images-geeknative-com.exactdn.com/wp-content/uploads/2015/01/Jeremy-Chong-6.jpg?strip=all&lossy=1&ssl=1);
+  background-size: cover;
+  background-position: 40% 20%;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 50;
+  overflow: hidden;
+  transition: height 0.6s;
+
+  &.close {
+    height: 0;
+  }
+  img {
     position: absolute;
-    right: 5%;
-    bottom: 0%;
-    width: 110px;
+    bottom: 3%;
+    right: 17%;
+    width: 100px;
+    transform: translateY(150%);
+    transition: transform 0.3s;
+    transition-delay: 0.6s;
+    &.show-player {
+      transform: translateY(0%);
+    }
   }
   .banner__name {
-    width: 250px;
-    margin: auto;
-    text-align: right;
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 40px;
+    color: var(--hover);
+    text-shadow: -1px -1px 1px rgb(255, 255, 255),
+      1px 1px 1px rgb(255, 255, 255);
   }
-  .banner__box {
+  .banner__info {
+    color: var(--headers);
+    height: 70%;
+    width: 70%;
+    margin: auto auto 0 10rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    &.close-info {
+      display: none;
+    }
     .banner__header {
-      margin: 5rem 0;
+      max-width: 580px;
+      color: #d5cabd;
+      text-shadow: -1px -1px 1px rgb(0, 0, 0), 1px 1px 1px rgb(0, 0, 0);
+
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 5rem auto 2rem 0;
+      font-size: 60px;
+      transform: translateX(-150%);
+      transition: 0.3s;
+      transition-delay: 0.05s;
+      &.show-header {
+        transform: translateX(0%);
+      }
+    }
+    .banner-bottom {
+      text-align: center;
+      transform: translateY(-10%);
+      opacity: 0;
+      transition: all 0.3s;
+      transition-delay: 0.3s;
+      &.show-bottom {
+        opacity: 1;
+        transform: translateY(0%);
+      }
+      .banner__text {
+        margin: 15rem 0 2rem;
+        font-size: 24px;
+        color: #d5cabd;
+        text-shadow: -1px -1px 1px rgb(0, 0, 0), 1px 1px 5px rgb(0, 0, 0);
+      }
+      .btn__startGame {
+        padding: 12px 40px;
+        letter-spacing: 1px;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 22px;
+        border: 0;
+        background: #716c8f;
+        color: var(--descriptions);
+        cursor: pointer;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+          rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+          rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+        &:active {
+          transform: scale(0.98);
+        }
+        &:hover {
+          background: #48455a;
+          color: #c58d2b;
+        }
+      }
     }
   }
 }
 
-// HEADER
 .header {
-  visibility: hidden;
   background-color: var(--background);
   padding: 1rem 0;
   display: flex;
@@ -69,6 +151,14 @@ body {
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
+  transform: scale(0.5);
+  opacity: 0;
+  transition: all 0.4s;
+  transition-delay: 0.5s;
+  &.show-interface {
+    opacity: 1;
+    transform: scale(1);
+  }
   .header__title {
     font-family: 'Acme', sans-serif;
     font-size: 30px;
@@ -84,13 +174,19 @@ body {
 
 // /////////////////////////////////////INTERDACE
 .interface {
-  visibility: hidden;
-  padding: 0;
   width: 1300px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   background-color: var(--background);
+  transform: scale(0.5);
+  opacity: 0;
+  transition: all 0.4s;
+  transition-delay: 0.5s;
+  &.show-interface {
+    opacity: 1;
+    transform: scale(1);
+  }
   a {
     display: flex;
     align-items: center;
@@ -124,9 +220,9 @@ body {
     letter-spacing: 2px;
   }
   .hero__description {
-    font-family: 'Prociono', serif;
+    font-family: arial;
     padding: 0.3rem;
-    font-size: 14px;
+    font-size: 12px;
     color: var(--descriptions);
     line-height: 20px;
   }
@@ -159,19 +255,19 @@ body {
   }
   .player-stat {
     display: block;
-
+    font-family: arial;
     padding: 0.3rem 0 0;
     font-size: 16px;
     color: var(--descriptions);
     line-height: 20px;
-    font-family: 'Prociono', serif;
+    font-family: 'Trocchi', serif;
   }
 }
 .lvl,
 .actual-lvl {
   font-size: 15px;
   color: var(--descriptions);
-  font-family: 'Prociono', serif;
+  font-family: 'Trocchi', serif;
 }
 .lvl {
   margin-left: 0.5rem;
@@ -239,7 +335,7 @@ body {
     z-index: 5;
 
     &:hover {
-      color: yellow;
+      color: #db0000;
     }
   }
 }
@@ -344,6 +440,7 @@ body {
   opacity: 0;
   padding: 1rem;
   margin: 1rem;
+  max-width: 500px;
 }
 .not1 {
   background: green;
@@ -405,114 +502,8 @@ body {
 }
 
 @media only screen and (max-width: 1024px) {
-  .interface {
-    width: 100%;
-  }
-
-  .interface a {
-    display: flex;
-    max-width: 400px;
-    flex-wrap: nowrap;
-    margin: 1rem;
-  }
-
-  .interface img {
-    width: 160px;
-  }
-
-  .img-avatar {
-    width: 160px !important;
-    height: auto;
-  }
-
-  .interface h3 {
-    font-family: 'Acme', sans-serif;
-    font-size: 22px;
-    color: #f8b700;
-    padding: 10px 0 4px;
-  }
-
-  .interface p {
-    font-size: 13px;
-  }
 }
 @media only screen and (max-width: 900px) {
-  .interface a {
-    display: flex;
-    max-width: 500px;
-    flex-wrap: nowrap;
-    margin: 1rem 2rem;
-  }
-  .interface div {
-    max-width: 500px;
-    padding: 1rem;
-  }
 }
 @media only screen and (max-width: 500px) {
-  .header {
-    p {
-      text-align: center;
-      font-size: 16px;
-    }
-  }
-  .interface a {
-    justify-content: center;
-    max-width: 500px;
-    flex-wrap: wrap;
-    margin: 1rem 2rem;
-  }
-  .interface div {
-    max-width: 300px;
-  }
-  .interface p {
-    font-size: 13px;
-  }
-  .enemy {
-    padding: 0;
-    width: 100%;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    background-color: #1b1b1b;
-  }
-
-  .enemy {
-    a {
-      display: flex;
-      flex-wrap: nowrap;
-    }
-  }
-
-  .enemy {
-    img {
-      width: 160px;
-      height: 120px;
-    }
-  }
-
-  .enemy {
-    margin-top: 1rem;
-    display: flex;
-    max-width: 500px;
-    gap: 1rem;
-    padding: 1rem;
-    background-color: #211510;
-  }
-
-  .enemy {
-    h3 {
-      font-size: 22px;
-      color: #f8b700;
-      padding: 12px 0 4px;
-    }
-  }
-
-  .enemy {
-    p {
-      font-family: arial;
-      font-size: 12px;
-      color: #d5c8af;
-      line-height: 20px;
-    }
-  }
 }

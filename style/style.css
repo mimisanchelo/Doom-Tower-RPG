@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Glory&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Caveat&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Prociono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Trocchi&display=swap");
 * {
   padding: 0;
   margin: 0;
@@ -32,12 +32,9 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  background-image: url(https://s3.eu-west-1.amazonaws.com/images.geeknative.com/wp-content/uploads/2015/01/Jeremy-Chong-6.jpg);
-  max-height: 100vh;
-  background-repeat: no-repeat;
-  background-position: 40% 50%;
-  background-size: cover;
-  overflow: hidden;
+  margin: auto;
+  height: 100vh;
+  background-color: var(--background);
 }
 
 * {
@@ -46,20 +43,61 @@ body {
   text-decoration: none;
 }
 
-.banner .playerArt {
+.banner {
+  background-image: url(https://images-geeknative-com.exactdn.com/wp-content/uploads/2015/01/Jeremy-Chong-6.jpg?strip=all&lossy=1&ssl=1);
+  background-size: cover;
+  background-position: 40% 20%;
+  background-repeat: no-repeat;
   position: absolute;
-  right: 5%;
-  bottom: 0%;
-  width: 110px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 50;
+  overflow: hidden;
+  -webkit-transition: height 0.6s;
+  transition: height 0.6s;
+}
+
+.banner.close {
+  height: 0;
+}
+
+.banner img {
+  position: absolute;
+  bottom: 3%;
+  right: 17%;
+  width: 100px;
+  -webkit-transform: translateY(150%);
+          transform: translateY(150%);
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+  -webkit-transition-delay: 0.6s;
+          transition-delay: 0.6s;
+}
+
+.banner img.show-player {
+  -webkit-transform: translateY(0%);
+          transform: translateY(0%);
 }
 
 .banner .banner__name {
-  width: 250px;
-  margin: auto;
-  text-align: right;
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 40px;
+  color: var(--hover);
+  text-shadow: -1px -1px 1px white, 1px 1px 1px white;
 }
 
-.banner .banner__box {
+.banner .banner__info {
+  color: var(--headers);
+  height: 70%;
+  width: 70%;
+  margin: auto auto 0 10rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -75,12 +113,80 @@ body {
           justify-content: center;
 }
 
-.banner .banner__box .banner__header {
-  margin: 5rem 0;
+.banner .banner__info.close-info {
+  display: none;
+}
+
+.banner .banner__info .banner__header {
+  max-width: 580px;
+  color: #d5cabd;
+  text-shadow: -1px -1px 1px black, 1px 1px 1px black;
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 5rem auto 2rem 0;
+  font-size: 60px;
+  -webkit-transform: translateX(-150%);
+          transform: translateX(-150%);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  -webkit-transition-delay: 0.05s;
+          transition-delay: 0.05s;
+}
+
+.banner .banner__info .banner__header.show-header {
+  -webkit-transform: translateX(0%);
+          transform: translateX(0%);
+}
+
+.banner .banner__info .banner-bottom {
+  text-align: center;
+  -webkit-transform: translateY(-10%);
+          transform: translateY(-10%);
+  opacity: 0;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  -webkit-transition-delay: 0.3s;
+          transition-delay: 0.3s;
+}
+
+.banner .banner__info .banner-bottom.show-bottom {
+  opacity: 1;
+  -webkit-transform: translateY(0%);
+          transform: translateY(0%);
+}
+
+.banner .banner__info .banner-bottom .banner__text {
+  margin: 15rem 0 2rem;
+  font-size: 24px;
+  color: #d5cabd;
+  text-shadow: -1px -1px 1px black, 1px 1px 5px black;
+}
+
+.banner .banner__info .banner-bottom .btn__startGame {
+  padding: 12px 40px;
+  letter-spacing: 1px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 22px;
+  border: 0;
+  background: #716c8f;
+  color: var(--descriptions);
+  cursor: pointer;
+  -webkit-box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.banner .banner__info .banner-bottom .btn__startGame:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+}
+
+.banner .banner__info .banner-bottom .btn__startGame:hover {
+  background: #48455a;
+  color: #c58d2b;
 }
 
 .header {
-  visibility: hidden;
   background-color: var(--background);
   padding: 1rem 0;
   display: -webkit-box;
@@ -98,6 +204,19 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-transform: scale(0.5);
+          transform: scale(0.5);
+  opacity: 0;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  -webkit-transition-delay: 0.5s;
+          transition-delay: 0.5s;
+}
+
+.header.show-interface {
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
 }
 
 .header .header__title {
@@ -114,8 +233,6 @@ body {
 }
 
 .interface {
-  visibility: hidden;
-  padding: 0;
   width: 1300px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -126,6 +243,19 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   background-color: var(--background);
+  -webkit-transform: scale(0.5);
+          transform: scale(0.5);
+  opacity: 0;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  -webkit-transition-delay: 0.5s;
+          transition-delay: 0.5s;
+}
+
+.interface.show-interface {
+  opacity: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
 }
 
 .interface a {
@@ -173,9 +303,9 @@ body {
 }
 
 .hero__box .hero__description {
-  font-family: 'Prociono', serif;
+  font-family: arial;
   padding: 0.3rem;
-  font-size: 14px;
+  font-size: 12px;
   color: var(--descriptions);
   line-height: 20px;
 }
@@ -208,18 +338,19 @@ body {
 
 .portfolio .player-stat {
   display: block;
+  font-family: arial;
   padding: 0.3rem 0 0;
   font-size: 16px;
   color: var(--descriptions);
   line-height: 20px;
-  font-family: 'Prociono', serif;
+  font-family: 'Trocchi', serif;
 }
 
 .lvl,
 .actual-lvl {
   font-size: 15px;
   color: var(--descriptions);
-  font-family: 'Prociono', serif;
+  font-family: 'Trocchi', serif;
 }
 
 .lvl {
@@ -296,7 +427,7 @@ body {
 }
 
 .question-field .question:hover {
-  color: yellow;
+  color: #db0000;
 }
 
 .total-points {
@@ -420,6 +551,7 @@ body {
   opacity: 0;
   padding: 1rem;
   margin: 1rem;
+  max-width: 500px;
 }
 
 .not1 {
@@ -493,119 +625,5 @@ body {
   font-size: 16px;
   color: var(--descriptions);
   line-height: 20px;
-}
-
-@media only screen and (max-width: 1024px) {
-  .interface {
-    width: 100%;
-  }
-  .interface a {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    max-width: 400px;
-    -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-    margin: 1rem;
-  }
-  .interface img {
-    width: 160px;
-  }
-  .img-avatar {
-    width: 160px !important;
-    height: auto;
-  }
-  .interface h3 {
-    font-family: 'Acme', sans-serif;
-    font-size: 22px;
-    color: #f8b700;
-    padding: 10px 0 4px;
-  }
-  .interface p {
-    font-size: 13px;
-  }
-}
-
-@media only screen and (max-width: 900px) {
-  .interface a {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    max-width: 500px;
-    -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-    margin: 1rem 2rem;
-  }
-  .interface div {
-    max-width: 500px;
-    padding: 1rem;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  .header p {
-    text-align: center;
-    font-size: 16px;
-  }
-  .interface a {
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    max-width: 500px;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    margin: 1rem 2rem;
-  }
-  .interface div {
-    max-width: 300px;
-  }
-  .interface p {
-    font-size: 13px;
-  }
-  .enemy {
-    padding: 0;
-    width: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    background-color: #1b1b1b;
-  }
-  .enemy a {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-  }
-  .enemy img {
-    width: 160px;
-    height: 120px;
-  }
-  .enemy {
-    margin-top: 1rem;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    max-width: 500px;
-    gap: 1rem;
-    padding: 1rem;
-    background-color: #211510;
-  }
-  .enemy h3 {
-    font-size: 22px;
-    color: #f8b700;
-    padding: 12px 0 4px;
-  }
-  .enemy p {
-    font-family: arial;
-    font-size: 12px;
-    color: #d5c8af;
-    line-height: 20px;
-  }
 }
 /*# sourceMappingURL=style.css.map */
