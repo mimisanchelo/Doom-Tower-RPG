@@ -372,13 +372,18 @@ body {
 .btn {
   width: 100%;
   max-width: 250px;
-  margin: 0 1rem;
   border-radius: 5px;
+  padding: 15px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
 }
 .btn__prefight,
 .btn__attack {
   width: 100%;
   background-color: #db0000;
+  border-radius: 5px;
 }
 .btn__next,
 .btn__lvl {
@@ -387,17 +392,18 @@ body {
   display: flex;
   justify-content: center;
 }
+// ICONS
 
-.btn__next {
+.btn__next,
+.btn__heal {
   background-color: #6de647;
 }
 .btn__goback,
-.btn__counter,
+.btn__lvl,
 .btn__bite,
-.btn__heal,
-.btn__thunder,
-.btn__lvl {
+.btn__counter {
   background-color: #e6ce47;
+  border-radius: 5px;
 }
 .actions {
   width: 50%;
@@ -553,6 +559,9 @@ body {
   /////////////////////////////////HEADER
   .header {
     .header__title {
+      text-align: center;
+      margin: auto;
+      width: 400px;
       font-size: 24px;
     }
   }
