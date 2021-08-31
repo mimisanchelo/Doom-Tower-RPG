@@ -73,6 +73,11 @@ let playerAttack = function () {
 
 let PlayerMoves = {
   calcAttack: function () {
+    document
+      .querySelector('.btn__attack')
+      .addEventListener('click', function (e) {
+        e.preventDefault()
+      })
     let notification1 = document.querySelector('.not1')
     let notification2 = document.querySelector('.not2')
     notify()
@@ -374,6 +379,11 @@ let PlayerMoves = {
 
   /////////////////////////////////////////////////////////////////////////
   calcHeal: function () {
+    document
+      .querySelector('.btn__heal')
+      .addEventListener('click', function (e) {
+        e.preventDefault()
+      })
     let notification1 = document.querySelector('.not1')
     let notification2 = document.querySelector('.not2')
     notify()
@@ -585,6 +595,11 @@ let PlayerMoves = {
   },
   ///////////////////////////////////////////
   calcFerociousBite: function () {
+    document
+      .querySelector('.btn__bite')
+      .addEventListener('click', function (e) {
+        e.preventDefault()
+      })
     let notification1 = document.querySelector('.not1')
     let notification2 = document.querySelector('.not2')
     notify()
@@ -722,6 +737,11 @@ let PlayerMoves = {
 
   /////////////////////////////////////
   calcThunderStruck: function () {
+    document
+      .querySelector('.btn__thunder')
+      .addEventListener('click', function (e) {
+        e.preventDefault()
+      })
     let notification1 = document.querySelector('.not1')
     let notification2 = document.querySelector('.not2')
     notify()
@@ -866,6 +886,11 @@ let PlayerMoves = {
 
   ////////////////////////////////
   calcCounterAttack: function () {
+    document
+      .querySelector('.btn__counter')
+      .addEventListener('click', function (e) {
+        e.preventDefault()
+      })
     let notification1 = document.querySelector('.not1')
     let notification2 = document.querySelector('.not2')
     notify()

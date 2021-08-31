@@ -28,8 +28,6 @@ let gameManager = {
       ' <span class="lvl">Level: </span><span class="actual-lvl">' +
       player.level +
       '</span></h3><p class=" health-player player-stat">Health:  ' +
-      player.health +
-      '/' +
       player.maxHP +
       '</p><p class="player-stat">Mana: ' +
       player.mana +
@@ -70,18 +68,8 @@ let gameManager = {
       let enemy03 = new Enemy('3-Headed witch', 1, 100, 0, 27, 150, 20, 50, 15)
       let enemy04 = new Enemy('Basilisk', 1, 100, 0, 27, 150, 20, 50, 15)
       let enemy05 = new Enemy('Boar warrior', 1, 100, 0, 27, 150, 20, 50, 15)
-      let enemy06 = new Enemy('Desert mummy', 1, 100, 0, 27, 150, 20, 50, 15)
-      let enemy07 = new Enemy(
-        'Dragonborn Henchman',
-        1,
-        120,
-        0,
-        27,
-        150,
-        20,
-        50,
-        15
-      )
+      let enemy06 = new Enemy('Mummy', 1, 100, 0, 27, 150, 20, 50, 15)
+      let enemy07 = new Enemy('Henchman', 1, 120, 0, 27, 150, 20, 50, 15)
       let enemy08 = new Enemy('Enforcer', 1, 100, 0, 27, 150, 20, 50, 15)
       let enemy09 = new Enemy('Gator', 1, 100, 0, 27, 150, 20, 50, 15)
       let enemy10 = new Enemy('Pirate', 1, 100, 0, 27, 150, 20, 50, 15)
@@ -231,8 +219,6 @@ let gameManager = {
       ' <span class="lvl">Level: </span><span class="actual-lvl">' +
       chosenPlayer.level +
       '</span></h3><p class=" health-player player-stat">Health:  ' +
-      chosenPlayer.health +
-      '/' +
       chosenPlayer.maxHP +
       '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="hp" step="25" type="number" value="0" max="10"disabled><button class="increase btn__input">&#43</button></span></p><p class="player-stat">Mana: ' +
       chosenPlayer.mana +
@@ -277,8 +263,6 @@ let gameManager = {
       ' <span class="lvl">Level: </span><span class="actual-lvl">' +
       chosenPlayer.level +
       '</span></h3><p class=" health-player player-stat">Health:  ' +
-      chosenPlayer.health +
-      '/' +
       chosenPlayer.maxHP +
       '</p><p class="player-stat">Mana: ' +
       chosenPlayer.mana +
