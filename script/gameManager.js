@@ -61,22 +61,22 @@ let gameManager = {
   createEnemy: function () {
     let getEnemy = document.querySelector('.enemy')
     // CREATE ENEMY
-    if (beatenEnemy.length != 20) {
-      let enemy00 = new Enemy('Goblin', 1, 200, 0, 150, 25, 10, 90, 45)
-      let enemy01 = new Enemy('Slime', 1, 100, 0, 27, 150, 20, 50, 15)
-      let enemy02 = new Enemy('Doomspeaker', 1, 100, 0, 27, 150, 20, 50, 15)
-      let enemy03 = new Enemy('3-Headed witch', 1, 100, 0, 27, 150, 20, 50, 15)
-      let enemy04 = new Enemy('Basilisk', 1, 100, 0, 27, 150, 20, 50, 15)
-      let enemy05 = new Enemy('Boar warrior', 1, 100, 0, 27, 150, 20, 50, 15)
-      let enemy06 = new Enemy('Mummy', 1, 100, 0, 27, 150, 20, 50, 15)
-      let enemy07 = new Enemy('Henchman', 1, 120, 0, 27, 150, 20, 50, 15)
-      let enemy08 = new Enemy('Enforcer', 1, 100, 0, 27, 150, 20, 50, 15)
-      let enemy09 = new Enemy('Gator', 1, 100, 0, 27, 150, 20, 50, 15)
-      let enemy10 = new Enemy('Pirate', 1, 100, 0, 27, 150, 20, 50, 15)
-      let enemy11 = new Enemy('Raven mocker', 1, 100, 0, 27, 150, 20, 50, 15)
-      let enemy12 = new Enemy('Skelet archer', 1, 100, 0, 27, 150, 20, 50, 15)
-      let enemy13 = new Enemy('Skelet warrior', 1, 100, 0, 27, 150, 20, 50, 15)
-      let enemy14 = new Enemy('Tendriculos', 1, 100, 0, 27, 150, 20, 50, 15)
+    if (beatenEnemy.length != 30) {
+      let enemy00 = new Enemy('Goblin', 1, 200, 0, 150, 35, 5, 85, 35)
+      let enemy01 = new Enemy('Slime', 1, 175, 0, 25, 150, 20, 90, 30)
+      let enemy02 = new Enemy('Doomspeaker', 1, 150, 130, 26, 150, 20, 85, 25)
+      let enemy03 = new Enemy('Witch', 1, 150, 160, 5, 20, 150, 50, 25)
+      let enemy04 = new Enemy('Basilisk', 1, 175, 0, 27, 150, 20, 90, 35)
+      let enemy05 = new Enemy('Boar warrior', 1, 200, 0, 150, 30, 20, 78, 50)
+      let enemy06 = new Enemy('Mummy', 1, 150, 0, 30, 152, 0, 88, 30)
+      let enemy07 = new Enemy('Henchman', 1, 200, 0, 155, 27, 20, 85, 35)
+      let enemy08 = new Enemy('Enforcer', 1, 200, 0, 160, 27, 20, 89, 30)
+      let enemy09 = new Enemy('Gator', 1, 200, 0, 28, 155, 10, 80, 40)
+      let enemy10 = new Enemy('Pirate', 1, 200, 0, 35, 150, 12, 87, 35)
+      let enemy11 = new Enemy('Raven mocker', 1, 175, 0, 30, 155, 10, 91, 30)
+      let enemy12 = new Enemy('Skelet archer', 1, 175, 0, 20, 160, 0, 84, 25)
+      let enemy13 = new Enemy('Skelet warrior', 1, 200, 0, 160, 25, 0, 81, 42)
+      let enemy14 = new Enemy('Tendriculos', 1, 200, 0, 40, 150, 0, 87, 39)
 
       let chooseRandomEnemy = Math.floor(Math.random() * 15)
       let numbers = []
@@ -128,10 +128,11 @@ let gameManager = {
           enemy = enemy14
           break
       }
+
       numbers.push(chooseRandomEnemy)
 
       getEnemy.innerHTML =
-        "<img src='img/enemies/" +
+        "<img src='img/" +
         enemy.enemyType.toLowerCase() +
         ".jpg' class='img-avatar'><div><h3>" +
         enemy.enemyType +
@@ -152,8 +153,7 @@ let gameManager = {
         '</p><p>Defense: ' +
         enemy.defense +
         '</p></div>'
-      enemyLvl()
-    } else if (beatenEnemy.length == 20) {
+    } else if (beatenEnemy.length == 31) {
       finalBoss()
     }
   },
@@ -171,16 +171,16 @@ let gameManager = {
     let heroes = function () {
       if (player.classType == 'Priest') {
         getAction.innerHTML =
-          '<a href="#" class="btn__attack btn" onclick="PlayerMoves.calcAttack()">Attack!</a> <a href="#" class="btn__heal btn" onclick="PlayerMoves.calcHeal()">Heal!</a>'
+          '<div class="spell spell-attack"> <img src="img/skills/healStaff.svg" class="icon"/><a href="#" class="btn__attack" onclick="PlayerMoves.calcAttack()">Attack!</a></div> <div class="spell spell-heal"> <img src="img/skills/healing.svg" class="icon"/><a href="#" class="btn__heal" onclick="PlayerMoves.calcHeal()"> Heal!</a></div>'
       } else if (player.classType == 'Warrior') {
         getAction.innerHTML =
-          '<a href="#" class="btn__attack btn" onclick="PlayerMoves.calcAttack()">Attack!</a> <a href="#" class="btn__counter btn" onclick="PlayerMoves.calcCounterAttack()">Counter-Attack!</a>'
+          '<div class="spell spell-attack"> <img src="img/skills/blade-drag.svg" class="icon"/><a href="#" class="btn__attack btn" onclick="PlayerMoves.calcAttack()">Attack!</a></div> <div class="spell spell-counter"> <img src="img/skills/counter.svg" class="icon"/><a href="#" class="btn__counter btn" onclick="PlayerMoves.calcCounterAttack()">Counter-Attack!</a></div>'
       } else if (player.classType == 'Wizard') {
         getAction.innerHTML =
-          '<a href="#" class="btn__attack btn" onclick="PlayerMoves.calcAttack()">Attack!</a> <a href="#" class="btn__thunder btn" onclick="PlayerMoves.calcThunderStruck()">Thunder struck!</a>'
+          '<div class="spell spell-attack"> <img src="img/skills/staff.svg" class="icon"/><a href="#" class="btn__attack btn" onclick="PlayerMoves.calcAttack()">Attack!</a></div> <div class="spell spell-thander"> <img src="img/skills/thunder.svg" class="icon"/><a href="#" class="btn__thunder btn" onclick="PlayerMoves.calcThunderStruck()">Thunder struck!</a></div>'
       } else if (player.classType == 'Druid') {
         getAction.innerHTML =
-          '<a href="#" class="btn__attack btn" onclick="PlayerMoves.calcAttack()">Attack!</a> <a href="#" class="btn__bite btn" onclick="PlayerMoves.calcFerociousBite()">Ferocious bite!</a>'
+          '<div class="spell spell-attack"> <img src="img/skills/nails.svg" class="icon"/><a href="#" class="btn__attack btn" onclick="PlayerMoves.calcAttack()">Attack!</a></div> <div class="spell spell-bite"> <img src="img/skills/bite.svg" class="icon"/><a href="#" class="btn__bite btn" onclick="PlayerMoves.calcFerociousBite()">Ferocious bite!</a></div>'
       }
     }
     heroes(player.classType)
@@ -253,7 +253,6 @@ let gameManager = {
     chosenPlayer.speed += statsInput[5].value * 1
     chosenPlayer.defense += statsInput[6].value * 2.5
     chosenPlayer.maxHP += statsInput[0].value * 25
-    console.log(statsInput)
 
     getInterface.innerHTML =
       "<img src='img/" +
@@ -279,6 +278,8 @@ let gameManager = {
       '</p>'
     getAction.innerHTML =
       '<a href="#" class="btn__prefight btn" id="prefight" onclick="gameManager.setFight()">Search for enemy!</a>'
+
+    enemyLvl()
   },
 }
 
@@ -291,31 +292,76 @@ const enemyLvl = function () {
   enemy.level = beatenEnemy.length
   enemy.health = enemy.maxHP
 
-  if (type == 'Gator' || type == 'Goblin') {
-    enemy.strength = enemy.strength * 1.05
-    enemy.defense = enemy.defense * 1.06
+  if (
+    type == 'Gator' ||
+    type == 'Goblin' ||
+    type == 'Tendriculos' ||
+    type == 'Enforcer' ||
+    type == 'Boar warrior' ||
+    type == 'Henchman' ||
+    type == 'Skelet warrior'
+  ) {
+    enemy.strength = enemy.strength + 15
+    enemy.defense = enemy.defense + 4
+    enemy.maxHP = enemy.maxHP + 100
+    if (beatenEnemy.length >= 15) {
+      enemy.strength = enemy.strength + 20
+      enemy.defense = enemy.defense + 4
+      enemy.maxHP = enemy.maxHP + 100
+    }
   } else {
-    enemy.strength = enemy.strength * 1.02
-    enemy.defense = enemy.defense * 1.06
+    enemy.strength += 10
+    enemy.defense += 3
+    if (beatenEnemy.length >= 15) {
+      enemy.strength += 12
+      enemy.defense += 4
+    }
   }
-  if (type == 'Slime') {
-    enemy.agility = enemy.agility * 1.05
-    enemy.speed = enemy.speed + 1
+  if (
+    type == 'Slime' ||
+    type == 'Basilisk' ||
+    type == 'Mummy' ||
+    type == 'Skelet archer' ||
+    type == 'Pirate' ||
+    type == 'Raven mocker'
+  ) {
+    enemy.agility = enemy.agility += 15
+    enemy.speed = enemy.speed += 1
+    enemy.maxHP = enemy.maxHP += 75
+    if (beatenEnemy.length >= 15) {
+      enemy.agility = enemy.agility += 20
+      enemy.speed = enemy.speed += 1.5
+      enemy.maxHP = enemy.maxHP += 100
+    }
   } else {
-    enemy.agility = enemy.agility * 1.02
-    enemy.speed = enemy.speed + 0.5
+    enemy.agility = enemy.agility += 5
+    enemy.speed = enemy.speed += 0.5
+    if (beatenEnemy.length >= 15) {
+      enemy.agility = enemy.agility += 7
+      enemy.speed = enemy.speed += 1
+    }
   }
-  if (type == 'Dragon') {
-    enemy.intelligence = enemy.intelligence * 1.05
-    enemy.mana = enemy.mana * 1.05
+  if (type == '3-Headed witch' || type == 'Doomspeaker') {
+    enemy.intelligence = enemy.intelligence += 15
+    enemy.mana = enemy.mana += 40
+    enemy.maxHP = enemy.maxHP += 75
+    if (beatenEnemy.length >= 15) {
+      enemy.intelligence = enemy.intelligence += 20
+      enemy.mana = enemy.mana += 60
+      enemy.maxHP = enemy.maxHP += 100
+    }
   } else {
-    enemy.intelligence = enemy.intelligence * 1.02
-    enemy.mana = enemy.mana * 1
+    enemy.intelligence = enemy.intelligence += 5
+    enemy.mana = enemy.mana
+    if (beatenEnemy.length >= 15) {
+      enemy.intelligence = enemy.intelligence += 10
+      enemy.mana = enemy.mana
+    }
   }
-  enemy.maxHP = enemy.health * beatenEnemy.length * 1.3
+  console.log((enemy.defense += 4))
 
   getEnemy.innerHTML =
-    "<img src='img/enemies/" +
+    "<img src='img/" +
     enemy.enemyType.toLowerCase() +
     ".jpg' class='img-avatar'><div><h3>" +
     enemy.enemyType +
