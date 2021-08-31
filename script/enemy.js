@@ -36,29 +36,25 @@ const enemyDmg = function () {
   let calcMageDmg
   let calcAgilityDmg
 
+  let type = enemy.enemyType
+
   // AGILITY
-  if (enemy.agility >= 50) {
+  if (
+    type == 'Slime' ||
+    type == 'Basilisk' ||
+    type == 'Mummy' ||
+    type == 'Skelet archer' ||
+    type == 'Raven mocker'
+  ) {
     calcPhysicalDmg = 0
     calcAgilityDmg =
       Math.round(
         ((enemy.agility * enemy.speed) / 250 / (0.048 * player.defense)) * 100
       ) / 100
     calcMageDmg = 0
-  } // GIBRID
-  else if (enemy.mana >= 35 && enemy.mana <= 150) {
-    calcAgilityDmg = 0
-    calcPhysicalDmg =
-      Math.round(
-        ((enemy.strength * enemy.defense) / 250 / (0.048 * player.defense)) *
-          100
-      ) / 100
-    calcMageDmg =
-      Math.round(
-        ((enemy.intelligence * enemy.mana) / 1000 / (0.048 * player.defense)) *
-          100
-      ) / 100
-  } // MAGE
-  else if (enemy.mana >= 190) {
+  }
+  // MAGE
+  else if (type == '3-Headed witch' || type == 'Doomspeaker') {
     calcMageDmg =
       Math.round(
         ((enemy.intelligence * enemy.mana) / 1000 / (0.048 * player.defense)) *
@@ -67,7 +63,16 @@ const enemyDmg = function () {
     calcPhysicalDmg = 0
     calcAgilityDmg = 0
   } //full STRENGTH
-  else if (enemy.mana <= 30 && enemy.strength >= 50) {
+  else if (
+    type == 'Gator' ||
+    type == 'Goblin' ||
+    type == 'Tendriculos' ||
+    type == 'Enforcer' ||
+    type == 'Boar warrior' ||
+    type == 'Henchman' ||
+    type == 'Pirate' ||
+    type == 'Skelet warrior'
+  ) {
     calcAgilityDmg = 0
     calcPhysicalDmg =
       Math.round(
@@ -87,10 +92,11 @@ const enemyDmg = function () {
 }
 
 const finalBoss = function () {
+  alert('Careful! You have reached the Final boss! Good luck!')
   let getEnemy = document.querySelector('.enemy')
 
-  let boss00 = new Enemy('Mirror man', 1, 17500, 0, 150, 10, 20, 85, 40)
-  let boss01 = new Enemy('Shark', 1, 17500, 0, 150, 10, 20, 85, 40)
+  let boss00 = new Enemy('Mirror man', 1, 4200, 1400, 15, 15, 500, 95, 45)
+  let boss01 = new Enemy('Shark', 1, 4300, 0, 500, 10, 20, 85, 55)
 
   let chooseRandomEnemy = Math.floor(Math.random() * 2)
   switch (chooseRandomEnemy) {
@@ -103,7 +109,7 @@ const finalBoss = function () {
   }
 
   getEnemy.innerHTML =
-    "<img src='img/enemies/" +
+    "<img src='img/" +
     enemy.enemyType.toLowerCase() +
     ".jpg' class='img-avatar'><div><h3>" +
     enemy.enemyType +

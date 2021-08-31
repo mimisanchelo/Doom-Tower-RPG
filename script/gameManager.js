@@ -171,16 +171,16 @@ let gameManager = {
     let heroes = function () {
       if (player.classType == 'Priest') {
         getAction.innerHTML =
-          '<div class="spell spell-attack"> <img src="img/skills/healStaff.svg" class="icon"/><a href="#" class="btn__attack" onclick="PlayerMoves.calcAttack()">Attack!</a></div> <div class="spell spell-heal"> <img src="img/skills/healing.svg" class="icon"/><a href="#" class="btn__heal" onclick="PlayerMoves.calcHeal()"> Heal!</a></div>'
+          '<a href="#" class="btn__attack btn" onclick="PlayerMoves.calcAttack()">Attack!</a> <a href="#" class="btn__heal btn" onclick="PlayerMoves.calcHeal()"> Heal!</a>'
       } else if (player.classType == 'Warrior') {
         getAction.innerHTML =
-          '<div class="spell spell-attack"> <img src="img/skills/blade-drag.svg" class="icon"/><a href="#" class="btn__attack btn" onclick="PlayerMoves.calcAttack()">Attack!</a></div> <div class="spell spell-counter"> <img src="img/skills/counter.svg" class="icon"/><a href="#" class="btn__counter btn" onclick="PlayerMoves.calcCounterAttack()">Counter-Attack!</a></div>'
+          '<a href="#" class="btn__attack btn" onclick="PlayerMoves.calcAttack()">Attack!</a> <a href="#" class="btn__counter btn" onclick="PlayerMoves.calcCounterAttack()">Counter-Attack!</a>'
       } else if (player.classType == 'Wizard') {
         getAction.innerHTML =
-          '<div class="spell spell-attack"> <img src="img/skills/staff.svg" class="icon"/><a href="#" class="btn__attack btn" onclick="PlayerMoves.calcAttack()">Attack!</a></div> <div class="spell spell-thander"> <img src="img/skills/thunder.svg" class="icon"/><a href="#" class="btn__thunder btn" onclick="PlayerMoves.calcThunderStruck()">Thunder struck!</a></div>'
+          '<a href="#" class="btn__attack btn" onclick="PlayerMoves.calcAttack()">Attack!</a><a href="#" class="btn__thunder btn" onclick="PlayerMoves.calcThunderStruck()">Thunder struck!</a>'
       } else if (player.classType == 'Druid') {
         getAction.innerHTML =
-          '<div class="spell spell-attack"> <img src="img/skills/nails.svg" class="icon"/><a href="#" class="btn__attack btn" onclick="PlayerMoves.calcAttack()">Attack!</a></div> <div class="spell spell-bite"> <img src="img/skills/bite.svg" class="icon"/><a href="#" class="btn__bite btn" onclick="PlayerMoves.calcFerociousBite()">Ferocious bite!</a></div>'
+          '<a href="#" class="btn__attack btn" onclick="PlayerMoves.calcAttack()">Attack!</a><a href="#" class="btn__bite btn" onclick="PlayerMoves.calcFerociousBite()">Ferocious bite!</a>'
       }
     }
     heroes(player.classType)
@@ -236,6 +236,7 @@ let gameManager = {
 
     questionMenu()
     playerLvlUp()
+    enemyLvl()
   },
 
   playerLvl: function () {
@@ -278,8 +279,6 @@ let gameManager = {
       '</p>'
     getAction.innerHTML =
       '<a href="#" class="btn__prefight btn" id="prefight" onclick="gameManager.setFight()">Search for enemy!</a>'
-
-    enemyLvl()
   },
 }
 
@@ -292,74 +291,81 @@ const enemyLvl = function () {
   enemy.level = beatenEnemy.length
   enemy.health = enemy.maxHP
 
-  if (
-    type == 'Gator' ||
-    type == 'Goblin' ||
-    type == 'Tendriculos' ||
-    type == 'Enforcer' ||
-    type == 'Boar warrior' ||
-    type == 'Henchman' ||
-    type == 'Skelet warrior'
-  ) {
-    enemy.strength = enemy.strength + 15
-    enemy.defense = enemy.defense + 4
-    enemy.maxHP = enemy.maxHP + 100
-    if (beatenEnemy.length >= 15) {
-      enemy.strength = enemy.strength + 20
-      enemy.defense = enemy.defense + 4
+  if (enemy.enemyType) {
+    if (
+      type == 'Gator' ||
+      type == 'Goblin' ||
+      type == 'Tendriculos' ||
+      type == 'Enforcer' ||
+      type == 'Boar warrior' ||
+      type == 'Henchman' ||
+      type == 'Skelet warrior'
+    ) {
       enemy.maxHP = enemy.maxHP + 100
-    }
-  } else {
-    enemy.strength += 10
-    enemy.defense += 3
-    if (beatenEnemy.length >= 15) {
-      enemy.strength += 12
-      enemy.defense += 4
-    }
-  }
-  if (
-    type == 'Slime' ||
-    type == 'Basilisk' ||
-    type == 'Mummy' ||
-    type == 'Skelet archer' ||
-    type == 'Pirate' ||
-    type == 'Raven mocker'
-  ) {
-    enemy.agility = enemy.agility += 15
-    enemy.speed = enemy.speed += 1
-    enemy.maxHP = enemy.maxHP += 75
-    if (beatenEnemy.length >= 15) {
-      enemy.agility = enemy.agility += 20
-      enemy.speed = enemy.speed += 1.5
-      enemy.maxHP = enemy.maxHP += 100
-    }
-  } else {
-    enemy.agility = enemy.agility += 5
-    enemy.speed = enemy.speed += 0.5
-    if (beatenEnemy.length >= 15) {
-      enemy.agility = enemy.agility += 7
-      enemy.speed = enemy.speed += 1
-    }
-  }
-  if (type == '3-Headed witch' || type == 'Doomspeaker') {
-    enemy.intelligence = enemy.intelligence += 15
-    enemy.mana = enemy.mana += 40
-    enemy.maxHP = enemy.maxHP += 75
-    if (beatenEnemy.length >= 15) {
-      enemy.intelligence = enemy.intelligence += 20
-      enemy.mana = enemy.mana += 60
-      enemy.maxHP = enemy.maxHP += 100
-    }
-  } else {
-    enemy.intelligence = enemy.intelligence += 5
-    enemy.mana = enemy.mana
-    if (beatenEnemy.length >= 15) {
-      enemy.intelligence = enemy.intelligence += 10
       enemy.mana = enemy.mana
+      enemy.strength = enemy.strength + 15
+      enemy.agility = enemy.agility + 5
+      enemy.intelligence = enemy.intelligence + 5
+      enemy.speed = enemy.speed + 0.5
+      enemy.defense = enemy.defense + 4
+      enemy.health = enemy.maxHP
+      if (beatenEnemy.length >= 15) {
+        enemy.maxHP = enemy.maxHP + 100
+        enemy.mana = enemy.mana
+        enemy.strength = enemy.strength + 20
+        enemy.agility = enemy.agility + 7
+        enemy.intelligence = enemy.intelligence + 10
+        enemy.speed = enemy.speed + 1
+        enemy.defense = enemy.defense + 4
+        enemy.health = enemy.maxHP
+      }
+    } else if (
+      type == 'Slime' ||
+      type == 'Basilisk' ||
+      type == 'Mummy' ||
+      type == 'Skelet archer' ||
+      type == 'Pirate' ||
+      type == 'Raven mocker'
+    ) {
+      enemy.maxHP = enemy.maxHP + 75
+      enemy.mana = enemy.mana
+      enemy.strength = enemy.strength + 10
+      enemy.agility = enemy.agility + 15
+      enemy.intelligence = enemy.intelligence + 5
+      enemy.defense = enemy.defense + 3
+      enemy.speed = enemy.speed + 1
+      enemy.health = enemy.maxHP
+      if (beatenEnemy.length >= 15) {
+        enemy.maxHP = enemy.maxHP + 100
+        enemy.mana = enemy.mana
+        enemy.strength = enemy.strength + 12
+        enemy.agility = enemy.agility + 20
+        enemy.intelligence = enemy.intelligence + 10
+        enemy.speed = enemy.speed + 1.5
+        enemy.defense = enemy.defense + 4
+        enemy.health = enemy.maxHP
+      }
+    } else if (type == 'Witch' || type == 'Doomspeaker') {
+      enemy.maxHP = enemy.maxHP + 75
+      enemy.mana = enemy.mana + 40
+      enemy.strength = enemy.strength + 10
+      enemy.agility = enemy.agility + 5
+      enemy.intelligence = enemy.intelligence + 15
+      enemy.speed = enemy.speed + 1
+      enemy.defense = enemy.defense + 3
+      enemy.health = enemy.maxHP
+      if (beatenEnemy.length >= 15) {
+        enemy.maxHP = enemy.maxHP + 100
+        enemy.mana = enemy.mana + 60
+        enemy.strength = enemy.strength + 12
+        enemy.agility = enemy.agility + 7
+        enemy.intelligence = enemy.intelligence + 20
+        enemy.speed = enemy.speed + 1
+        enemy.defense = enemy.defense + 4
+        enemy.health = enemy.maxHP
+      }
     }
   }
-  console.log((enemy.defense += 4))
-
   getEnemy.innerHTML =
     "<img src='img/" +
     enemy.enemyType.toLowerCase() +
