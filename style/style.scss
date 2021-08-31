@@ -22,8 +22,7 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin: auto;
-  height: 100vh;
+  overflow-x: hidden;
   background-color: var(--background);
 }
 
@@ -33,7 +32,7 @@ body {
   text-decoration: none;
 }
 
-// HEADER
+// //////////////////////////////////////////BANNER
 .banner {
   background-image: url(https://images-geeknative-com.exactdn.com/wp-content/uploads/2015/01/Jeremy-Chong-6.jpg?strip=all&lossy=1&ssl=1);
   background-size: cover;
@@ -47,7 +46,7 @@ body {
   width: 100vw;
   height: 100vh;
   z-index: 50;
-  overflow: hidden;
+
   transition: height 0.6s;
 
   &.close {
@@ -143,6 +142,7 @@ body {
   }
 }
 
+// /////////////////////////////////HEADER
 .header {
   background-color: var(--background);
   padding: 1rem 0;
@@ -465,6 +465,7 @@ body {
 .enemy {
   padding: 0;
   width: 1300px;
+  margin-top: 1rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -501,9 +502,373 @@ body {
   }
 }
 
+@media only screen and (max-width: 1300px) {
+  // BANNER
+  .banner {
+    max-width: 100vw;
+    height: 100vh;
+    .banner__name {
+      font-size: 36px;
+    }
+    .banner__info {
+      .banner__header {
+        margin: 7rem auto 2rem 0;
+        font-size: 50px;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 1100px) {
+  // BANNER
+  .hero__box {
+    max-width: 420px;
+    img {
+      width: 160px;
+    }
+  }
+}
 @media only screen and (max-width: 1024px) {
+  // BANNER
+  .banner {
+    .banner__name {
+      font-size: 34px;
+    }
+    .banner__info {
+      width: 85%;
+      margin: auto;
+      .banner__header {
+        margin: 15rem auto 2rem 0;
+        font-size: 45px;
+        max-width: 450px;
+        padding: 0rem;
+      }
+    }
+
+    img {
+      right: 10%;
+      width: 90px;
+    }
+  }
+
+  /////////////////////////////////HEADER
+  .header {
+    .header__title {
+      font-size: 24px;
+    }
+  }
+
+  // /////////////////////////////////////INTERDACE
+  .interface {
+    width: 1000px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: var(--background);
+    transform: scale(0.5);
+    opacity: 0;
+    transition: all 0.4s;
+    transition-delay: 0.5s;
+  }
+  .actions {
+    width: 80%;
+  }
+  .enemy {
+    margin-top: 0.8rem;
+  }
 }
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 950px) {
+  // BANNER
+  .banner {
+    .banner__name {
+      font-size: 34px;
+    }
+    .banner__info {
+      width: 80%;
+      margin: auto;
+      .banner__header {
+        max-width: 400px;
+        font-size: 40px;
+      }
+    }
+    img {
+      right: 3%;
+      width: 90px;
+    }
+  }
+
+  /////////////////////////////////HEADER
+  .header {
+    .header__title {
+      font-size: 24px;
+    }
+  }
+
+  // /////////////////////////////////////INTERDACE
+  .interface {
+    width: 95%;
+  }
+
+  .hero__box {
+    max-width: 500px;
+    img {
+      width: 180px;
+    }
+  }
 }
+@media only screen and (max-width: 700px) {
+  .banner {
+    .banner__info {
+      width: 80%;
+      height: 75%;
+      margin: auto;
+      .banner__header {
+        margin: 18rem auto 2rem 0;
+        font-size: 35px;
+        max-width: 330px;
+        padding: 0rem;
+      }
+    }
+    img {
+      right: 15%;
+      width: 90px;
+    }
+  }
+  .btn {
+    max-width: 200px;
+  }
+  .actions {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    margin: 1rem auto;
+    flex-wrap: wrap;
+
+    a {
+      width: 50%;
+      padding: 10px 0px;
+      text-align: center;
+      margin: 0.5rem;
+      font-size: 14px;
+    }
+  }
+}
+@media only screen and (max-width: 600px) {
+  // /////////////////////////HEADER
+  .header {
+    background-color: var(--background);
+    padding: 1rem;
+    width: 105%;
+    text-align: center;
+    margin: auto;
+    &.show-interface {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .header__title {
+      font-size: 24px;
+    }
+    .header__text {
+      font-size: 18px;
+    }
+  }
+
+  // //////////////////////////INTERFACE
+  .interface {
+    width: 95%;
+    margin: auto;
+  }
+
+  .hero__box {
+    max-width: 350px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .img-avatar {
+    max-width: 150px;
+  }
+
+  .portfolio {
+    max-width: 250px;
+    max-height: 300px;
+    margin: auto 0;
+    padding: 1rem;
+    margin-left: 0.5rem;
+
+    .player-stat {
+      padding: 0.4rem 0 0;
+      font-size: 14px;
+    }
+  }
+  // NOTIFICATIONS
+  .arena {
+    height: 120px;
+  }
+  .not1 {
+    &.shown {
+      transform: translateY(3px);
+      transition: all 0.6s;
+    }
+  }
+  .not2 {
+    &.shown {
+      transform: translateY(3px);
+      transition: all 0.6s;
+    }
+  }
+
+  // ENEMY FIELD
+  .enemy {
+    width: 95%;
+    .img-avatar {
+      max-width: 150px;
+      max-height: 300px;
+      margin-right: 0.5rem;
+    }
+    div {
+      max-width: 500px;
+      max-height: 300px;
+      padding: 1rem 1rem;
+    }
+  }
+}
+
 @media only screen and (max-width: 500px) {
+  .banner {
+    img {
+      right: 5%;
+    }
+  }
+  // /////////////////////////HEADER
+  .header {
+    .header__text {
+      max-width: 350px;
+      font-size: 16px;
+    }
+  }
+
+  // //////////////////////////INTERFACE
+  .interface {
+    width: 95%;
+    margin: auto;
+  }
+
+  .hero__box {
+    max-width: 350px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  // CHOSEN HERO
+  .img-avatar {
+    max-width: 150px;
+  }
+
+  .portfolio {
+    max-width: 250px;
+    max-height: 300px;
+    margin: auto 0;
+    padding: 1rem;
+    margin-left: 0.5rem;
+    .hero__type {
+      font-size: 18px;
+    }
+    .player-stat {
+      padding: 0.4rem 0 0;
+      font-size: 14px;
+    }
+  }
+  .lvl,
+  .actual-lvl {
+    font-size: 15px;
+    color: var(--descriptions);
+    font-family: 'Trocchi', serif;
+  }
+  .lvl {
+    margin-left: 0.5rem;
+  }
+
+  // BTNS
+  .btn {
+    max-width: 150px;
+  }
+  .actions {
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    margin: 1rem auto;
+    flex-wrap: wrap;
+
+    a {
+      width: 50%;
+      padding: 10px 0px;
+      text-align: center;
+      margin: 0.5rem;
+      font-size: 14px;
+    }
+  }
+  // ENEMY
+  .enemy {
+    width: 100%;
+    .img-avatar {
+      max-width: 150px;
+      margin-right: 0.5rem;
+    }
+    div {
+      max-width: 250px;
+      max-height: 300px;
+      margin: auto 0;
+      padding: 0.5rem;
+    }
+    h3 {
+      font-size: 18px;
+    }
+    p {
+      padding: 0.4rem 0 0;
+      font-size: 14px;
+    }
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .img-avatar {
+    max-width: 125px;
+  }
+  .portfolio {
+    max-width: 200px;
+    padding: 0.5rem;
+    .player-stat {
+      padding: 0.4rem 0 0;
+      font-size: 14px;
+    }
+  }
+  .lvl,
+  .actual-lvl {
+    font-size: 12px;
+  }
+  .lvl {
+    margin-left: 0rem;
+  }
+  .question-field {
+    top: 0.3rem;
+    right: 0.3rem;
+  }
+  .input-span {
+    .number-input {
+      margin: 0 3px;
+    }
+  }
+  .enemy {
+    width: 100%;
+    .img-avatar {
+      max-width: 125px;
+    }
+    div {
+      margin-right: 0.5rem;
+    }
+  }
+  .arena {
+    height: 150px;
+  }
 }
