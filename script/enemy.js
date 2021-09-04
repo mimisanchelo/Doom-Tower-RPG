@@ -44,6 +44,7 @@ const enemyDmg = function () {
     type == 'Basilisk' ||
     type == 'Mummy' ||
     type == 'Skelet archer' ||
+    type == 'Pirate' ||
     type == 'Raven mocker'
   ) {
     calcPhysicalDmg = 0
@@ -54,7 +55,7 @@ const enemyDmg = function () {
     calcMageDmg = 0
   }
   // MAGE
-  else if (type == '3-Headed witch' || type == 'Doomspeaker') {
+  else if (type == 'Witch' || type == 'Doomspeaker') {
     calcMageDmg =
       Math.round(
         ((enemy.intelligence * enemy.mana) / 1000 / (0.048 * player.defense)) *
@@ -70,7 +71,6 @@ const enemyDmg = function () {
     type == 'Enforcer' ||
     type == 'Boar warrior' ||
     type == 'Henchman' ||
-    type == 'Pirate' ||
     type == 'Skelet warrior'
   ) {
     calcAgilityDmg = 0

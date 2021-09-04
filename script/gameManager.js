@@ -55,13 +55,13 @@ let gameManager = {
       '</span></p><p class="header__title">Task: Find an enemy!</p>'
     getArena.style.visibility = 'visible'
     getAction.innerHTML =
-      '<a href="#" class="btn__prefight btn" onclick="gameManager.setFight()">Search for enemy!</a> <a href="/" class="btn__goback btn" onclick="gameManager.resetPlayer()">Back to heroes</a>'
+      '<button class="btn__prefight btn" onclick="gameManager.setFight()"><img class="abilityImg" src="img/skills/magnifier.svg" alt="">Search for enemy</button> <button class="btn__goback btn" onclick="gameManager.resetPlayer()"><img class="abilityImg" src="img/skills/player-next.svg" alt="">Back to heroes</button>'
   },
 
   createEnemy: function () {
     let getEnemy = document.querySelector('.enemy')
     // CREATE ENEMY
-    if (beatenEnemy.length != 30) {
+    if (beatenEnemy.length !== 30) {
       let enemy00 = new Enemy('Goblin', 1, 200, 0, 150, 35, 5, 85, 35)
       let enemy01 = new Enemy('Slime', 1, 175, 0, 25, 150, 20, 90, 30)
       let enemy02 = new Enemy('Doomspeaker', 1, 150, 130, 26, 150, 20, 85, 25)
@@ -138,21 +138,23 @@ let gameManager = {
         enemy.enemyType +
         ' <span class="lvl">Level: </span><span class="actual-lvl">' +
         enemy.level +
-        '</span></h3><p class="health-enemy">Health: ' +
+        '</span></h3><p class="health-enemy enemy-stat">Health: ' +
         enemy.health +
-        '</p><p class=>Mana: ' +
+        '</p><p class="enemy-stat">Mana: ' +
         enemy.mana +
-        '</p><p>Strength: ' +
+        '</p><p class="enemy-stat">Strength: ' +
         enemy.strength +
-        '</p><p>Agility: ' +
+        '</p><p class="enemy-stat">Agility: ' +
         enemy.agility +
-        '</p><p>Intelligence: ' +
+        '</p><p class="enemy-stat">Intelligence: ' +
         enemy.intelligence +
-        '</p><p>Speed: ' +
+        '</p><p class="enemy-stat">Speed: ' +
         enemy.speed +
-        '</p><p>Defense: ' +
+        '</p><p class="enemy-stat">Defense: ' +
         enemy.defense +
         '</p></div>'
+
+      enemyLvl()
     } else if (beatenEnemy.length == 31) {
       finalBoss()
     }
@@ -171,21 +173,20 @@ let gameManager = {
     let heroes = function () {
       if (player.classType == 'Priest') {
         getAction.innerHTML =
-          '<a href="#" class="btn__attack btn" onclick="PlayerMoves.calcAttack()">Attack!</a> <a href="#" class="btn__heal btn" onclick="PlayerMoves.calcHeal()"> Heal!</a>'
+          '<button class="btn btn__attack player_btn" id="attack" onclick="PlayerAttack.calcAttack()"><img class="abilityImg" src="img/skills/healStaff.svg" alt="">Attack</button> <button class="btn btn__counter player_btn" id="heal" onclick="PlayerHeal.calcHeal()"> <img class="abilityImg" src="img/skills/healing.svg" alt="">Healing</button>'
       } else if (player.classType == 'Warrior') {
         getAction.innerHTML =
-          '<a href="#" class="btn__attack btn" onclick="PlayerMoves.calcAttack()">Attack!</a> <a href="#" class="btn__counter btn" onclick="PlayerMoves.calcCounterAttack()">Counter-Attack!</a>'
+          '<button class="btn btn__attack player_btn" id="attack" onclick="PlayerAttack.calcAttack()"><img class="abilityImg" src="img/skills/blade-drag.svg" alt="">Attack</button> <button class="btn btn__counter player_btn"  id="counter" onclick="PlayerCounter.calcCounterAttack()"> <img class="abilityImg" src="img/skills/counter.svg" alt="">Counter Attack</button>'
       } else if (player.classType == 'Wizard') {
         getAction.innerHTML =
-          '<a href="#" class="btn__attack btn" onclick="PlayerMoves.calcAttack()">Attack!</a><a href="#" class="btn__thunder btn" onclick="PlayerMoves.calcThunderStruck()">Thunder struck!</a>'
+          '<button class="btn btn__attack player_btn" id="attack" onclick="PlayerAttack.calcAttack()"><img class="abilityImg" src="img/skills/staff.svg" alt="">Attack</button> <button class="btn btn__thunder player_btn " id="thunder" onclick="PlayerThunder.calcThunderStruck()"> <img class="abilityImg" src="img/skills/thunder.svg" alt="">Thunder strike</button>'
       } else if (player.classType == 'Druid') {
         getAction.innerHTML =
-          '<a href="#" class="btn__attack btn" onclick="PlayerMoves.calcAttack()">Attack!</a><a href="#" class="btn__bite btn" onclick="PlayerMoves.calcFerociousBite()">Ferocious bite!</a>'
+          '<button class="btn btn__attack player_btn" id="attack" onclick="PlayerAttack.calcAttack()"><img class="abilityImg" src="img/skills/nails.svg" alt="">Attack</button> <button class="btn btn__bite player_btn" id="bite" onclick="PlayerBite.calcFerociousBite()"> <img class="abilityImg" src="img/skills/bite.svg" alt="">Ferocious Bite</button>'
       }
     }
     heroes(player.classType)
     this.createEnemy()
-    enemyLvl()
 
     //////////////
     let getArena = document.querySelector('.arena')
@@ -207,7 +208,7 @@ let gameManager = {
     getArena.style.visibility = 'hidden'
     getEnemy.style.visibility = 'hidden'
     getAction.innerHTML =
-      '<a href="#" class="btn__lvl btn" onclick="gameManager.playerLvl()">Increase your stats</a>'
+      '<button class="btn__lvl btn" onclick="gameManager.playerLvl()"><img class="abilityImg" src="img/skills/upgrade.svg" alt="">Increase level</button>'
 
     let chosenPlayer = player
 
@@ -220,23 +221,22 @@ let gameManager = {
       chosenPlayer.level +
       '</span></h3><p class=" health-player player-stat">Health:  ' +
       chosenPlayer.maxHP +
-      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="hp" step="25" type="number" value="0" max="10"disabled><button class="increase btn__input">&#43</button></span></p><p class="player-stat">Mana: ' +
+      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="hp" step="25" type="number" value="0" disabled><button class="increase btn__input">&#43</button></span></p><p class="player-stat">Mana: ' +
       chosenPlayer.mana +
-      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="mp" step="20" type="number" value="0" max="10" disabled><button class="increase btn__input">&#43</button></span></p><p class="player-stat">Strength: ' +
+      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="mp" step="20" type="number" value="0" disabled><button class="increase btn__input">&#43</button></span></p><p class="player-stat">Strength: ' +
       chosenPlayer.strength +
-      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="str" step="5" type="number" value="0" max="10" disabled><button class="increase btn__input">&#43</button></span></p><p class="player-stat">Agility: ' +
+      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="str" step="5" type="number" value="0" disabled><button class="increase btn__input">&#43</button></span></p><p class="player-stat">Agility: ' +
       chosenPlayer.agility +
-      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="str" step="5" type="number" value="0" max="10" disabled><button class="increase btn__input">&#43</button></span></p><p class="player-stat">Intelligence: ' +
+      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="str" step="5" type="number" value="0" disabled><button class="increase btn__input">&#43</button></span></p><p class="player-stat">Intelligence: ' +
       chosenPlayer.intelligence +
-      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="str" step="5" type="number" value="0" max="10" disabled><button class="increase btn__input">&#43</button></span></p><p class="player-stat">Speed: ' +
+      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="str" step="5" type="number" value="0" disabled><button class="increase btn__input">&#43</button></span></p><p class="player-stat">Speed: ' +
       chosenPlayer.speed +
-      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="str" step="5" type="number" value="0" max="10" disabled><button class="increase btn__input">&#43</button></span></p><p class="player-stat">Defense: ' +
+      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="str" step="1" type="number" value="0" disabled><button class="increase btn__input">&#43</button></span></p><p class="player-stat">Defense: ' +
       chosenPlayer.defense +
-      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="str" step="5" type="number" value="0" max="10" disabled><button class="increase btn__input">&#43</button></span></p><p class="total-points">Available points: <input class="total" type="number" id="totalN" value="10" disabled></input></p> <div class="question-field"><i class="ri-question-line question"></i><div class="question__tab"><p class="statP">25 HP for 1 point</p><p class="statP">20 MP for 1 point</p><p class="statP">5 STR for 1 point</p><p class="statP">5 AGI for 1 point</p><p class="statP">5 INT for 1 point</p><p class="statP">1 SPD for 1 point</p><p class="statP">2 DEF for 1 point</p></div></div></div>'
+      '<span class="input-span"><button class="decrease btn__input">&#8722</button><input class="number-input" id="str" step="1.5" type="number" value="0" disabled><button class="increase btn__input">&#43</button></span></p><p class="total-points">Available points: <input class="total" type="number" id="totalN" disabled></input></p> <div class="question-field"><i class="ri-question-line question"></i><div class="question__tab"><p class="statP">25 HP for 1 point</p><p class="statP">20 MP for 1 point</p><p class="statP">5 STR for 1 point</p><p class="statP">5 AGI for 1 point</p><p class="statP">5 INT for 1 point</p><p class="statP">1 SPD for 1 point</p><p class="statP">2 DEF for 1 point</p></div></div></div>'
 
     questionMenu()
     playerLvlUp()
-    enemyLvl()
   },
 
   playerLvl: function () {
@@ -278,114 +278,111 @@ let gameManager = {
       chosenPlayer.defense +
       '</p>'
     getAction.innerHTML =
-      '<a href="#" class="btn__prefight btn" id="prefight" onclick="gameManager.setFight()">Search for enemy!</a>'
+      '<button class="btn__prefight btn" onclick="gameManager.setFight()"><img class="abilityImg" src="img/skills/magnifier.svg" alt="">Search for enemy</button>'
   },
 }
-
-const enemyLvl = function () {
+let enemyLvl = function () {
   let getEnemy = document.querySelector('.enemy')
 
   let type = enemy.enemyType
+  let enemy1 = enemy
 
-  enemy.enemyType = enemy.enemyType
-  enemy.level = beatenEnemy.length
+  enemy.level += 1
   enemy.health = enemy.maxHP
 
-  if (enemy.enemyType) {
-    if (
-      type == 'Gator' ||
-      type == 'Goblin' ||
-      type == 'Tendriculos' ||
-      type == 'Enforcer' ||
-      type == 'Boar warrior' ||
-      type == 'Henchman' ||
-      type == 'Skelet warrior'
-    ) {
-      enemy.maxHP = enemy.maxHP + 100
-      enemy.mana = enemy.mana
-      enemy.strength = enemy.strength + 15
-      enemy.agility = enemy.agility + 5
-      enemy.intelligence = enemy.intelligence + 5
-      enemy.speed = enemy.speed + 0.5
-      enemy.defense = enemy.defense + 4
-      enemy.health = enemy.maxHP
-      if (beatenEnemy.length >= 15) {
-        enemy.maxHP = enemy.maxHP + 100
-        enemy.mana = enemy.mana
-        enemy.strength = enemy.strength + 20
-        enemy.agility = enemy.agility + 7
-        enemy.intelligence = enemy.intelligence + 10
-        enemy.speed = enemy.speed + 1
-        enemy.defense = enemy.defense + 4
-        enemy.health = enemy.maxHP
-      }
-    } else if (
-      type == 'Slime' ||
-      type == 'Basilisk' ||
-      type == 'Mummy' ||
-      type == 'Skelet archer' ||
-      type == 'Pirate' ||
-      type == 'Raven mocker'
-    ) {
-      enemy.maxHP = enemy.maxHP + 75
-      enemy.mana = enemy.mana
-      enemy.strength = enemy.strength + 10
-      enemy.agility = enemy.agility + 15
-      enemy.intelligence = enemy.intelligence + 5
-      enemy.defense = enemy.defense + 3
-      enemy.speed = enemy.speed + 1
-      enemy.health = enemy.maxHP
-      if (beatenEnemy.length >= 15) {
-        enemy.maxHP = enemy.maxHP + 100
-        enemy.mana = enemy.mana
-        enemy.strength = enemy.strength + 12
-        enemy.agility = enemy.agility + 20
-        enemy.intelligence = enemy.intelligence + 10
-        enemy.speed = enemy.speed + 1.5
-        enemy.defense = enemy.defense + 4
-        enemy.health = enemy.maxHP
-      }
-    } else if (type == 'Witch' || type == 'Doomspeaker') {
-      enemy.maxHP = enemy.maxHP + 75
-      enemy.mana = enemy.mana + 40
-      enemy.strength = enemy.strength + 10
-      enemy.agility = enemy.agility + 5
-      enemy.intelligence = enemy.intelligence + 15
-      enemy.speed = enemy.speed + 1
-      enemy.defense = enemy.defense + 3
-      enemy.health = enemy.maxHP
-      if (beatenEnemy.length >= 15) {
-        enemy.maxHP = enemy.maxHP + 100
-        enemy.mana = enemy.mana + 60
-        enemy.strength = enemy.strength + 12
-        enemy.agility = enemy.agility + 7
-        enemy.intelligence = enemy.intelligence + 20
-        enemy.speed = enemy.speed + 1
-        enemy.defense = enemy.defense + 4
-        enemy.health = enemy.maxHP
-      }
-    }
+  if (
+    type == 'Gator' ||
+    type == 'Goblin' ||
+    type == 'Tendriculos' ||
+    type == 'Enforcer' ||
+    type == 'Boar warrior' ||
+    type == 'Henchman' ||
+    type == 'Skelet warrior'
+  ) {
+    enemy1.maxHP = enemy1.maxHP + 100
+
+    enemy1.strength = enemy.strength + 15
+    enemy1.agility = enemy.agility + 5
+    enemy1.intelligence = enemy.intelligence + 5
+    enemy1.speed = enemy.speed + 0.5
+    enemy1.defense = enemy.defense + 4
+    // if (beatenEnemy.length >= 15) {
+    //   enemy.maxHP = enemy.maxHP + 100
+    //   enemy.mana = enemy.mana
+    //   enemy.strength = enemy.strength + 20
+    //   enemy.agility = enemy.agility + 7
+    //   enemy.intelligence = enemy.intelligence + 10
+    //   enemy.speed = enemy.speed + 1
+    //   enemy.defense = enemy.defense + 4
+    //   enemy.health = enemy.maxHP
+    // }
+  } else if (
+    type == 'Slime' ||
+    type == 'Basilisk' ||
+    type == 'Mummy' ||
+    type == 'Skelet archer' ||
+    type == 'Pirate' ||
+    type == 'Raven mocker'
+  ) {
+    enemy1.maxHP = enemy.maxHP + 75
+
+    enemy1.strength = enemy.strength + 10
+    enemy1.agility = enemy.agility + 15
+    enemy1.intelligence = enemy.intelligence + 5
+    enemy1.defense = enemy.defense + 3
+    enemy1.speed = enemy.speed + 1
+
+    // if (beatenEnemy.length >= 15 {
+    //   enemy.maxHP = enemy.maxHP + 100
+    //   enemy.mana = enemy.mana
+    //   enemy.strength = enemy.strength + 12
+    //   enemy.agility = enemy.agility + 20
+    //   enemy.intelligence = enemy.intelligence + 10
+    //   enemy.speed = enemy.speed + 1.5
+    //   enemy.defense = enemy.defense + 4
+    //   enemy.health = enemy.maxHP
+    // }
+  } else if (type == 'Witch' || type == 'Doomspeaker') {
+    enemy1.maxHP += enemy.maxHP + 75
+    enemy1.mana += enemy.mana + 40
+    enemy1.strength += enemy.strength + 10
+    enemy1.agility += enemy.agility + 5
+    enemy1.intelligence += enemy.intelligence + 15
+    enemy1.speed += enemy.speed + 1
+    enemy1.defense += enemy.defense + 3
+
+    // if (beatenEnemy.length >= 15) {
+    //   enemy.maxHP = enemy.maxHP + 100
+    //   enemy.mana = enemy.mana + 60
+    //   enemy.strength = enemy.strength + 12
+    //   enemy.agility = enemy.agility + 7
+    //   enemy.intelligence = enemy.intelligence + 20
+    //   enemy.speed = enemy.speed + 1
+    //   enemy.defense = enemy.defense + 4
+    //   enemy.health = enemy.maxHP
+    // }
   }
+
   getEnemy.innerHTML =
     "<img src='img/" +
-    enemy.enemyType.toLowerCase() +
+    enemy1.enemyType.toLowerCase() +
     ".jpg' class='img-avatar'><div><h3>" +
-    enemy.enemyType +
+    enemy1.enemyType +
     ' <span class="lvl">Level: </span><span class="actual-lvl">' +
-    enemy.level +
+    enemy1.level +
     '</span></h3><p class="health-enemy">Health: ' +
-    Math.round(enemy.health * 100) / 100 +
+    Math.round(enemy1.health * 100) / 100 +
     '</p><p>Mana: ' +
-    Math.round(enemy.mana * 100) / 100 +
+    Math.round(enemy1.mana * 100) / 100 +
     '</p><p>Strength: ' +
-    Math.round(enemy.strength * 100) / 100 +
+    Math.round(enemy1.strength * 100) / 100 +
     '</p><p>Agility: ' +
-    Math.round(enemy.agility * 100) / 100 +
+    Math.round(enemy1.agility * 100) / 100 +
     '</p><p>Intelligence: ' +
-    Math.round(enemy.intelligence * 100) / 100 +
+    Math.round(enemy1.intelligence * 100) / 100 +
     '</p><p>Speed: ' +
-    Math.round(enemy.speed * 100) / 100 +
+    Math.round(enemy1.speed * 100) / 100 +
     '</p><p>Defense: ' +
-    Math.round(enemy.defense * 100) / 100 +
+    Math.round(enemy1.defense * 100) / 100 +
     '</p></div>'
 }
