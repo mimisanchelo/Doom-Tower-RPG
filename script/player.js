@@ -87,7 +87,6 @@ let PlayerAttack = {
   cooldown: false,
 
   calcAttack: function () {
-    this.cooldownCheck()
     let notification1 = document.querySelector('.not1')
     let notification2 = document.querySelector('.not2')
     notify()
@@ -923,7 +922,7 @@ let PlayerCounter = {
     let notification1 = document.querySelector('.not1')
     let notification2 = document.querySelector('.not2')
     notify()
-    this.cooldownCheck()
+
     moves.push(this.ability)
 
     // who attacks first?
