@@ -464,7 +464,9 @@ body {
   width: 100%;
   max-width: 250px;
   border-radius: 5px;
-  padding: 15px 25px;
+  border: 0;
+  padding: 5px 10px;
+  margin: 0 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -475,6 +477,17 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   font-weight: 600;
+  cursor: pointer;
+  outline: none;
+}
+
+.btn:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+}
+
+.btn:hover {
+  opacity: 0.8;
 }
 
 .btn__prefight,
@@ -496,6 +509,12 @@ body {
           justify-content: center;
 }
 
+.abilityImg {
+  width: 40px;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
 .btn__next,
 .btn__heal {
   background-color: #6de647;
@@ -504,13 +523,14 @@ body {
 .btn__goback,
 .btn__lvl,
 .btn__bite,
-.btn__counter {
+.btn__counter,
+.btn__thunder {
   background-color: #e6ce47;
   border-radius: 5px;
 }
 
 .actions {
-  width: 50%;
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -520,20 +540,6 @@ body {
   margin: 1rem auto;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-}
-
-.actions a {
-  width: 50%;
-  padding: 10px 0px;
-  text-align: center;
-  margin: 0.5rem;
-  font-size: 14px;
-  font-family: arial;
-  color: #1b1b1b;
-}
-
-.actions a:hover {
-  opacity: 0.8;
 }
 
 .arena {
@@ -739,6 +745,10 @@ body {
   .hero__box img {
     width: 180px;
   }
+  .btn {
+    max-width: 200px;
+    margin: 1rem 0.5rem;
+  }
 }
 
 @media only screen and (max-width: 700px) {
@@ -759,25 +769,6 @@ body {
   }
   .btn {
     max-width: 200px;
-  }
-  .actions {
-    width: 90%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    margin: 1rem auto;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-  }
-  .actions a {
-    width: 50%;
-    padding: 10px 0px;
-    text-align: center;
-    margin: 0.5rem;
-    font-size: 14px;
   }
 }
 
@@ -911,25 +902,6 @@ body {
   .btn {
     max-width: 150px;
   }
-  .actions {
-    width: 95%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    margin: 1rem auto;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-  }
-  .actions a {
-    width: 50%;
-    padding: 10px 0px;
-    text-align: center;
-    margin: 0.5rem;
-    font-size: 14px;
-  }
   .enemy {
     width: 100%;
   }
@@ -989,6 +961,10 @@ body {
   }
   .arena {
     height: 150px;
+  }
+  .btn {
+    max-width: 150px;
+    margin: 0.5rem 0.5rem;
   }
 }
 /*# sourceMappingURL=style.css.map */

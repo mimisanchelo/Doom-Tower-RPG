@@ -373,11 +373,24 @@ body {
   width: 100%;
   max-width: 250px;
   border-radius: 5px;
-  padding: 15px 25px;
+  border: 0;
+  padding: 5px 10px;
+  margin: 0 1rem;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
 }
 .btn__prefight,
 .btn__attack {
@@ -393,6 +406,11 @@ body {
   justify-content: center;
 }
 // ICONS
+.abilityImg {
+  width: 40px;
+  margin-right: 10px;
+  border-radius: 5px;
+}
 
 .btn__next,
 .btn__heal {
@@ -401,29 +419,17 @@ body {
 .btn__goback,
 .btn__lvl,
 .btn__bite,
-.btn__counter {
+.btn__counter,
+.btn__thunder {
   background-color: #e6ce47;
   border-radius: 5px;
 }
 .actions {
-  width: 50%;
+  width: 100%;
   display: flex;
   justify-content: center;
   margin: 1rem auto;
   flex-wrap: wrap;
-
-  a {
-    width: 50%;
-    padding: 10px 0px;
-    text-align: center;
-    margin: 0.5rem;
-    font-size: 14px;
-    font-family: arial;
-    color: #1b1b1b;
-    &:hover {
-      opacity: 0.8;
-    }
-  }
 }
 
 // //////////////////////////////////////////////////////////ARENA
@@ -623,6 +629,11 @@ body {
       width: 180px;
     }
   }
+
+  .btn {
+    max-width: 200px;
+    margin: 1rem 0.5rem;
+  }
 }
 @media only screen and (max-width: 700px) {
   .banner {
@@ -644,21 +655,6 @@ body {
   }
   .btn {
     max-width: 200px;
-  }
-  .actions {
-    width: 90%;
-    display: flex;
-    justify-content: center;
-    margin: 1rem auto;
-    flex-wrap: wrap;
-
-    a {
-      width: 50%;
-      padding: 10px 0px;
-      text-align: center;
-      margin: 0.5rem;
-      font-size: 14px;
-    }
   }
 }
 @media only screen and (max-width: 600px) {
@@ -802,21 +798,6 @@ body {
   .btn {
     max-width: 150px;
   }
-  .actions {
-    width: 95%;
-    display: flex;
-    justify-content: center;
-    margin: 1rem auto;
-    flex-wrap: wrap;
-
-    a {
-      width: 50%;
-      padding: 10px 0px;
-      text-align: center;
-      margin: 0.5rem;
-      font-size: 14px;
-    }
-  }
   // ENEMY
   .enemy {
     width: 100%;
@@ -879,5 +860,9 @@ body {
   }
   .arena {
     height: 150px;
+  }
+  .btn {
+    max-width: 150px;
+    margin: 0.5rem 0.5rem;
   }
 }
