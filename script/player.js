@@ -80,6 +80,19 @@ let newFloor = function () {
     moves.shift()
   }
 }
+let cooldownCounter = function () {
+  let counter = document.querySelector('.btn__counter')
+  if (counter.disabled == true) {
+    counter.disabled = true
+    counter.innerHTML =
+      '<button disabled class="btn btn__counter" id="counter" onclick="PlayerCounter.calcCounterAttack()"> <img class="abilityImg" src="img/skills/counter.svg" alt="">Counter Attack [1]</button>'
+  }
+  if (moves[moves.length - 1] == this.ability) {
+    counter.disabled = false
+    counter.innerHTML =
+      '<button class="btn btn__counter" id="counter" onclick="PlayerCounter.calcCounterAttack()"> <img class="abilityImg" src="img/skills/counter.svg" alt="">Counter Attack</button>'
+  }
+}
 
 // ///////////////////////////////////PLAYER ABILITIES
 let PlayerAttack = {
@@ -91,6 +104,7 @@ let PlayerAttack = {
     let notification2 = document.querySelector('.not2')
     notify()
     moves.push(this.ability)
+    cooldownCounter()
 
     getPlayerSpeed = player.speed
     getEnemySpeed = enemy.speed
@@ -387,19 +401,6 @@ let PlayerAttack = {
           notification1.textContent = 'You missed!'
         }
       }
-    }
-  },
-  cooldownCounter: function () {
-    let counter = document.querySelector('.btn__counter')
-    if (counter.disabled == true) {
-      counter.disabled = true
-      counter.innerHTML =
-        '<button disabled class="btn btn__counter" id="counter" onclick="PlayerCounter.calcCounterAttack()"> <img class="abilityImg" src="img/skills/counter.svg" alt="">Counter Attack [1]</button>'
-    }
-    if (moves[moves.length - 1] == this.ability) {
-      counter.disabled = false
-      counter.innerHTML =
-        '<button class="btn btn__counter" id="counter" onclick="PlayerCounter.calcCounterAttack()"> <img class="abilityImg" src="img/skills/counter.svg" alt="">Counter Attack</button>'
     }
   },
 }
@@ -922,7 +923,7 @@ let PlayerCounter = {
     let notification1 = document.querySelector('.not1')
     let notification2 = document.querySelector('.not2')
     notify()
-
+    cooldownCounterAbility()
     moves.push(this.ability)
 
     // who attacks first?
@@ -993,10 +994,10 @@ let PlayerCounter = {
         playerAttackValue
     }
   },
-  cooldownCounterAbility: function () {
-    let counter = document.querySelector('.btn__counter')
-    counter.innerHTML =
-      '<button disabled class="btn btn__counter" id="counter" onclick="PlayerCounter.calcCounterAttack()"> <img class="abilityImg" src="img/skills/counter.svg" alt="">Counter Attack [2]</button>'
-    counter.disabled = true
-  },
+}
+let cooldownCounterAbility = function () {
+  let counter = document.querySelector('.btn__counter')
+  counter.innerHTML =
+    '<button disabled class="btn btn__counter" id="counter" onclick="PlayerCounter.calcCounterAttack()"> <img class="abilityImg" src="img/skills/counter.svg" alt="">Counter Attack [2]</button>'
+  counter.disabled = true
 }
