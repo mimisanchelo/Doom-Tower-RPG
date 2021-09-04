@@ -80,18 +80,19 @@ let newFloor = function () {
     moves.shift()
   }
 }
-let cooldownCounter = function () {
+let cooldownCounter = function (ability) {
   let counter = document.querySelector('.btn__counter')
+
   if (counter.disabled == true) {
     counter.disabled = true
     counter.innerHTML =
-      '<button disabled class="btn btn__counter" id="counter" onclick="PlayerCounter.calcCounterAttack()"> <img class="abilityImg" src="img/skills/counter.svg" alt="">Counter Attack [1]</button>'
-  } else {
-    counter
-  }
-  if (moves[moves.length - 1] == this.ability) {
+      '<img class="abilityImg" src="img/skills/counter.svg" alt="">Counter Attack [1]'
+  } else counter
+
+  if (moves[moves.length - 2] == ability) {
     counter.disabled = false
-    counter
+    counter.innerHTML =
+      '<img class="abilityImg" src="img/skills/counter.svg" alt="">Counter Attack'
   }
 }
 
@@ -104,8 +105,9 @@ let PlayerAttack = {
     let notification1 = document.querySelector('.not1')
     let notification2 = document.querySelector('.not2')
     notify()
+
     moves.push(this.ability)
-    cooldownCounter()
+    cooldownCounter(this.ability)
 
     getPlayerSpeed = player.speed
     getEnemySpeed = enemy.speed
@@ -998,7 +1000,7 @@ let PlayerCounter = {
 }
 let cooldownCounterAbility = function () {
   let counter = document.querySelector('.btn__counter')
-  counter.innerHTML =
-    '<button disabled class="btn btn__counter" id="counter" onclick="PlayerCounter.calcCounterAttack()"> <img class="abilityImg" src="img/skills/counter.svg" alt="">Counter Attack [2]</button>'
   counter.disabled = true
+  counter.innerHTML =
+    '<img class="abilityImg" src="img/skills/counter.svg" alt="">Counter Attack [2]'
 }
