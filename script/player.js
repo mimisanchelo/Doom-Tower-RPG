@@ -81,6 +81,7 @@ let newFloor = function () {
   }
 }
 
+// COOLDOWN OF ABILITIES
 let cooldownCounter = function (ability) {
   let btns = document.querySelectorAll('.player_btn')
   let abilitySrc = getAbilitySRC()
@@ -92,7 +93,7 @@ let cooldownCounter = function (ability) {
       '<img class="abilityImg" src="img/skills' +
       abilitySrc +
       '.svg" alt="">Cooldown [1]'
-  } else counter
+  } else btns[1]
 
   if (moves[moves.length - 2] == ability) {
     btns[1].disabled = false
@@ -104,19 +105,55 @@ let cooldownCounter = function (ability) {
   }
 }
 
+let cooldownCounterAbility = function () {
+  let btns = document.querySelectorAll('.player_btn')
+  let abilitySrc = getAbilitySRC()
+
+  btns[1].disabled = true
+  btns[1].innerHTML =
+    '<img class="abilityImg" src="img/skills' +
+    abilitySrc +
+    '.svg" alt="">Cooldown [2]'
+}
+
+// ADDITIONAL STUFF
+let getAbilitySRC = function () {
+  const abilities = document.querySelectorAll('.abilityImg')
+
+  let srcImg = abilities[1].src
+  let word = srcImg.slice(srcImg.lastIndexOf('/'), srcImg.lastIndexOf('.'))
+
+  return word
+}
+
+let getAbilityName = function () {
+  if (player.classType == 'Warrior') {
+    return 'Counter Attack'
+  } else if (player.classType == 'Druid') {
+    return 'Ferocious Bite'
+  } else if (player.classType == 'Wizard') {
+    return 'Thunder strike'
+  } else if (player.classType == 'Priest') {
+    return 'Healing'
+  }
+}
+
 // ///////////////////////////////////PLAYER ABILITIES
 let PlayerAttack = {
   ability: 'attack',
   cooldown: false,
 
   calcAttack: function () {
+    // notifications
     let notification1 = document.querySelector('.not1')
     let notification2 = document.querySelector('.not2')
     notify()
 
+    // cooldowns
     moves.push(this.ability)
     cooldownCounter(this.ability)
 
+    ////
     getPlayerSpeed = player.speed
     getEnemySpeed = enemy.speed
     let getAction = document.querySelector('.actions')
@@ -419,12 +456,16 @@ let PlayerHeal = {
   ability: 'heal',
   cooldown: false,
   calcHeal: function () {
+    // notifications
     let notification1 = document.querySelector('.not1')
     let notification2 = document.querySelector('.not2')
     notify()
+
+    // cooldowns
     cooldownCounterAbility()
     moves.push(this.ability)
 
+    ////
     getPlayerSpeed = player.speed
     getEnemySpeed = enemy.speed
     let getAction = document.querySelector('.actions')
@@ -636,13 +677,16 @@ let PlayerBite = {
   ability: 'bite',
   cooldown: false,
   calcFerociousBite: function () {
+    // notifications
     let notification1 = document.querySelector('.not1')
     let notification2 = document.querySelector('.not2')
     notify()
 
+    // cooldowns
     cooldownCounterAbility()
     moves.push(this.ability)
 
+    ////
     getPlayerSpeed = player.speed
     getEnemySpeed = enemy.speed
     let getAction = document.querySelector('.actions')
@@ -777,17 +821,19 @@ let PlayerBite = {
   },
 }
 
-let PlyaerThunder = {
+let PlayerThunder = {
   ability: 'thunder',
   cooldown: false,
   calcThunderStruck: function () {
+    // notifications
     let notification1 = document.querySelector('.not1')
     let notification2 = document.querySelector('.not2')
     notify()
+    // cooldowns
     cooldownCounterAbility()
-
     moves.push(this.ability)
 
+    ////
     getPlayerSpeed = player.speed
     getEnemySpeed = enemy.speed
     let getAction = document.querySelector('.actions')
@@ -934,9 +980,11 @@ let PlayerCounter = {
   cooldown: false,
 
   calcCounterAttack: function () {
+    // notifications
     let notification1 = document.querySelector('.not1')
     let notification2 = document.querySelector('.not2')
     notify()
+    // cooldowns
     cooldownCounterAbility()
     moves.push(this.ability)
 
@@ -1008,36 +1056,4 @@ let PlayerCounter = {
         playerAttackValue
     }
   },
-}
-
-let cooldownCounterAbility = function () {
-  let btns = document.querySelectorAll('.player_btn')
-  let abilitySrc = getAbilitySRC()
-
-  btns[1].disabled = true
-  btns[1].innerHTML =
-    '<img class="abilityImg" src="img/skills' +
-    abilitySrc +
-    '.svg" alt="">Cooldown [2]'
-}
-
-let getAbilitySRC = function () {
-  const abilities = document.querySelectorAll('.abilityImg')
-
-  let srcImg = abilities[1].src
-  let word = srcImg.slice(srcImg.lastIndexOf('/'), srcImg.lastIndexOf('.'))
-
-  return word
-}
-
-let getAbilityName = function () {
-  if (player.classType == 'Warrior') {
-    return 'Counter Attack'
-  } else if (player.classType == 'Druid') {
-    return 'Ferocious Bite'
-  } else if (player.classType == 'Wizard') {
-    return 'Thunder strike'
-  } else if (player.classType == 'Priest') {
-    return 'Healing'
-  }
 }
