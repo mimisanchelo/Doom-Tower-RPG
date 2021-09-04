@@ -86,6 +86,8 @@ let cooldownCounter = function () {
     counter.disabled = true
     counter.innerHTML =
       '<button disabled class="btn btn__counter" id="counter" onclick="PlayerCounter.calcCounterAttack()"> <img class="abilityImg" src="img/skills/counter.svg" alt="">Counter Attack [1]</button>'
+  } else {
+    counter
   }
   if (moves[moves.length - 1] == this.ability) {
     counter.disabled = false
