@@ -80,19 +80,27 @@ let newFloor = function () {
     moves.shift()
   }
 }
+
 let cooldownCounter = function (ability) {
   let btns = document.querySelectorAll('.player_btn')
+  let abilitySrc = getAbilitySRC()
+  let abilityName = getAbilityName()
 
   if (btns[1].disabled == true) {
     btns[1].disabled = true
     btns[1].innerHTML =
-      '<img class="abilityImg" src="img/skills/counter.svg" alt="">Cooldown [1]'
+      '<img class="abilityImg" src="img/skills' +
+      abilitySrc +
+      '.svg" alt="">Cooldown [1]'
   } else counter
 
   if (moves[moves.length - 2] == ability) {
     btns[1].disabled = false
     btns[1].innerHTML =
-      '<img class="abilityImg" src="img/skills/counter.svg" alt="">Counter Attack'
+      '<img class="abilityImg" src="img/skills' +
+      abilitySrc +
+      '.svg" alt="">' +
+      abilityName
   }
 }
 
@@ -414,7 +422,7 @@ let PlayerHeal = {
     let notification1 = document.querySelector('.not1')
     let notification2 = document.querySelector('.not2')
     notify()
-
+    cooldownCounterAbility()
     moves.push(this.ability)
 
     getPlayerSpeed = player.speed
@@ -632,6 +640,7 @@ let PlayerBite = {
     let notification2 = document.querySelector('.not2')
     notify()
 
+    cooldownCounterAbility()
     moves.push(this.ability)
 
     getPlayerSpeed = player.speed
@@ -775,6 +784,7 @@ let PlyaerThunder = {
     let notification1 = document.querySelector('.not1')
     let notification2 = document.querySelector('.not2')
     notify()
+    cooldownCounterAbility()
 
     moves.push(this.ability)
 
@@ -922,6 +932,7 @@ let PlyaerThunder = {
 let PlayerCounter = {
   ability: 'counter',
   cooldown: false,
+
   calcCounterAttack: function () {
     let notification1 = document.querySelector('.not1')
     let notification2 = document.querySelector('.not2')
@@ -998,15 +1009,35 @@ let PlayerCounter = {
     }
   },
 }
+
 let cooldownCounterAbility = function () {
-  let abilities = document.querySelectorAll('.abilityImg')
   let btns = document.querySelectorAll('.player_btn')
-  let srcImg = abilities[1].src
-  let words = srcImg.indexOf('.')
-  console.log(words)
-  console.log(srcImg)
+  let abilitySrc = getAbilitySRC()
 
   btns[1].disabled = true
   btns[1].innerHTML =
-    '<img class="abilityImg" src="img/skills/counter.svg" alt="">Cooldown [2]'
+    '<img class="abilityImg" src="img/skills' +
+    abilitySrc +
+    '.svg" alt="">Cooldown [2]'
+}
+
+let getAbilitySRC = function () {
+  const abilities = document.querySelectorAll('.abilityImg')
+
+  let srcImg = abilities[1].src
+  let word = srcImg.slice(srcImg.lastIndexOf('/'), srcImg.lastIndexOf('.'))
+
+  return word
+}
+
+let getAbilityName = function () {
+  if (player.classType == 'Warrior') {
+    return 'Counter Attack'
+  } else if (player.classType == 'Druid') {
+    return 'Ferocious Bite'
+  } else if (player.classType == 'Wizard') {
+    return 'Thunder strike'
+  } else if (player.classType == 'Priest') {
+    return 'Healing'
+  }
 }
