@@ -81,17 +81,17 @@ let newFloor = function () {
   }
 }
 let cooldownCounter = function (ability) {
-  let counter = document.querySelector('.btn__counter')
+  let btns = document.querySelectorAll('.player_btn')
 
-  if (counter.disabled == true) {
-    counter.disabled = true
-    counter.innerHTML =
-      '<img class="abilityImg" src="img/skills/counter.svg" alt="">Counter Attack [1]'
+  if (btns[1].disabled == true) {
+    btns[1].disabled = true
+    btns[1].innerHTML =
+      '<img class="abilityImg" src="img/skills/counter.svg" alt="">Cooldown [1]'
   } else counter
 
   if (moves[moves.length - 2] == ability) {
-    counter.disabled = false
-    counter.innerHTML =
+    btns[1].disabled = false
+    btns[1].innerHTML =
       '<img class="abilityImg" src="img/skills/counter.svg" alt="">Counter Attack'
   }
 }
@@ -999,8 +999,14 @@ let PlayerCounter = {
   },
 }
 let cooldownCounterAbility = function () {
-  let counter = document.querySelector('.btn__counter')
-  counter.disabled = true
-  counter.innerHTML =
-    '<img class="abilityImg" src="img/skills/counter.svg" alt="">Counter Attack [2]'
+  let abilities = document.querySelectorAll('.abilityImg')
+  let btns = document.querySelectorAll('.player_btn')
+  let srcImg = abilities[1].src
+  let words = srcImg.indexOf('.')
+  console.log(words)
+  console.log(srcImg)
+
+  btns[1].disabled = true
+  btns[1].innerHTML =
+    '<img class="abilityImg" src="img/skills/counter.svg" alt="">Cooldown [2]'
 }
