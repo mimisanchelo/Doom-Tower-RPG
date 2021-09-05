@@ -82,25 +82,25 @@ let newFloor = function () {
 }
 
 // COOLDOWN OF ABILITIES
-let cooldownCounter = function (ability) {
+let cooldownCounter = function () {
   let btns = document.querySelectorAll('.player_btn')
   let abilitySrc = getAbilitySRC()
   let abilityName = getAbilityName()
 
-  if (btns[1].disabled == true) {
+  if (moves[moves.length - 2] == abilitySrc) {
     btns[1].disabled = true
     btns[1].innerHTML =
-      '<img class="abilityImg" src="img/skills' +
+      '<img class="abilityImg" src="img/skills/' +
       abilitySrc +
-      '.svg" alt="">Cooldown [1]'
-  } else btns[1]
+      '.jpg" alt="">Cooldown [1]'
+  }
 
-  if (moves[moves.length - 2] == ability) {
+  if (moves[moves.length - 3] == abilitySrc) {
     btns[1].disabled = false
     btns[1].innerHTML =
-      '<img class="abilityImg" src="img/skills' +
+      '<img class="abilityImg" src="img/skills/' +
       abilitySrc +
-      '.svg" alt="">' +
+      '.jpg" alt="">' +
       abilityName
   }
 }
@@ -111,9 +111,9 @@ let cooldownCounterAbility = function () {
 
   btns[1].disabled = true
   btns[1].innerHTML =
-    '<img class="abilityImg" src="img/skills' +
+    '<img class="abilityImg" src="img/skills/' +
     abilitySrc +
-    '.svg" alt="">Cooldown [2]'
+    '.jpg" alt="">Cooldown [2]'
 }
 
 // ADDITIONAL STUFF
@@ -121,7 +121,7 @@ let getAbilitySRC = function () {
   const abilities = document.querySelectorAll('.abilityImg')
 
   let srcImg = abilities[1].src
-  let word = srcImg.slice(srcImg.lastIndexOf('/'), srcImg.lastIndexOf('.'))
+  let word = srcImg.slice(srcImg.lastIndexOf('a'), srcImg.lastIndexOf('.'))
 
   return word
 }
@@ -151,7 +151,8 @@ let PlayerAttack = {
 
     // cooldowns
     moves.push(this.ability)
-    cooldownCounter(this.ability)
+    cooldownCounter()
+    cooldownCounter1()
 
     ////
     getPlayerSpeed = player.speed
@@ -453,7 +454,7 @@ let PlayerAttack = {
   },
 }
 let PlayerHeal = {
-  ability: 'heal',
+  ability: 'ability1P',
   cooldown: false,
   calcHeal: function () {
     // notifications
@@ -674,7 +675,7 @@ let PlayerHeal = {
 }
 
 let PlayerBite = {
-  ability: 'bite',
+  ability: 'ability1D',
   cooldown: false,
   calcFerociousBite: function () {
     // notifications
@@ -822,7 +823,7 @@ let PlayerBite = {
 }
 
 let PlayerThunder = {
-  ability: 'thunder',
+  ability: 'ability1Wi',
   cooldown: false,
   calcThunderStruck: function () {
     // notifications
@@ -976,7 +977,7 @@ let PlayerThunder = {
 }
 
 let PlayerCounter = {
-  ability: 'counter',
+  ability: 'ability1W',
   cooldown: false,
 
   calcCounterAttack: function () {
@@ -985,8 +986,9 @@ let PlayerCounter = {
     let notification2 = document.querySelector('.not2')
     notify()
     // cooldowns
-    cooldownCounterAbility()
     moves.push(this.ability)
+    cooldownCounterAbility()
+    cooldownCounter1()
 
     // who attacks first?
 
@@ -1054,6 +1056,148 @@ let PlayerCounter = {
         totalDmg +
         ' damage and then hit enemy back ' +
         playerAttackValue
+      notification2.textContent =
+        enemy.enemyType +
+        ' hit ' +
+        player.classType +
+        ' in the shield. Damage reduced'
     }
   },
+}
+
+let PlayerSurprise = {
+  ability: 'ability2W',
+  cooldown: false,
+
+  calcSurpriseAttack: function () {
+    // notifications
+    let notification1 = document.querySelector('.not1')
+    let notification2 = document.querySelector('.not2')
+    notify()
+
+    // cooldowns
+
+    moves.push(this.ability)
+    cooldownCounterAbility1()
+    cooldownCounter()
+
+    let getAction = document.querySelector('.actions')
+
+    let playerSurprise = function () {
+      if (player.strength) {
+        let calcSurpriseDmg
+        calcSurpriseDmg =
+          Math.round(
+            ((player.strength * player.defense) /
+              250 /
+              (0.048 * enemy.defense)) *
+              100
+          ) / 100
+        return calcSurpriseDmg
+      }
+    }
+
+    // ROUND CONDITION
+    playerSurprise()
+
+    let getPlayerHealth = document.querySelector('.health-player')
+    let getEnemyHealth = document.querySelector('.health-enemy')
+
+    let playerSurpriseValue = playerSurprise()
+
+    let totalDmg = Math.floor(playerSurpriseValue * 100) / 100
+
+    enemy.health = enemy.health - totalDmg
+
+    // NOTIFICATION WHEN BLOCK
+
+    // HEALTH CONDITION
+
+    if (enemy.health <= 0) {
+      alert('You Win!  Move to the next floor! Quickly!')
+      getPlayerHealth.innerHTML =
+        'Health: ' + Math.round(player.health * 100) / 100
+      getEnemyHealth.innerHTML = 'Health: 0'
+      // btn
+      getAction.innerHTML =
+        '<button class="btn__next btn" onclick="gameManager.staircase()"><img class="abilityImg" src="img/skills/stairs.svg" alt="">Next floor</button>'
+      // score
+      newFloor()
+      defeatedEnemies(enemy.enemyType)
+    } else {
+      getPlayerHealth.innerHTML =
+        'Health: ' + Math.round(player.health * 100) / 100
+      getEnemyHealth.innerHTML =
+        'Health: ' + Math.round(enemy.health * 100) / 100
+      notification1.textContent =
+        'You stunned enemy and dealt ' +
+        totalDmg +
+        ' damage to ' +
+        enemy.enemyType
+      notification2.textContent = enemy.enemyType + ' got stunned'
+    }
+  },
+}
+
+// unblock ability
+let cooldownCounter1 = function (ability) {
+  let btns = document.querySelectorAll('.player_btn')
+  let abilitySrc = getAbilitySRC1()
+  let abilityName = getAbilityName1()
+
+  if (moves[moves.length - 2] == abilitySrc) {
+    btns[2].disabled = true
+    btns[2].innerHTML =
+      '<img class="abilityImg" src="img/skills/' +
+      abilitySrc +
+      '.jpg" alt="">Cooldown [2]'
+  } else if (moves[moves.length - 3] == abilitySrc) {
+    btns[2].disabled = true
+    btns[2].innerHTML =
+      '<img class="abilityImg" src="img/skills/' +
+      abilitySrc +
+      '.jpg" alt="">Cooldown [1]'
+  }
+  if (moves[moves.length - 4] == abilitySrc) {
+    btns[2].disabled = false
+    btns[2].innerHTML =
+      '<img class="abilityImg" src="img/skills/' +
+      abilitySrc +
+      '.jpg" alt="">' +
+      abilityName
+  }
+}
+
+// block ability
+let cooldownCounterAbility1 = function () {
+  let btns = document.querySelectorAll('.player_btn')
+  let abilitySrc = getAbilitySRC1()
+
+  btns[2].disabled = true
+  btns[2].innerHTML =
+    '<img class="abilityImg" src="img/skills/' +
+    abilitySrc +
+    '.jpg" alt="">Cooldown [3]'
+}
+
+// ADDITIONAL STUFF
+let getAbilitySRC1 = function () {
+  const abilities = document.querySelectorAll('.abilityImg')
+
+  let srcImg = abilities[2].src
+  let word = srcImg.slice(srcImg.lastIndexOf('a'), srcImg.lastIndexOf('.'))
+
+  return word
+}
+
+let getAbilityName1 = function () {
+  if (player.classType == 'Warrior') {
+    return 'Surprise attack'
+  } else if (player.classType == 'Druid') {
+    return 'Wrath of nature'
+  } else if (player.classType == 'Wizard') {
+    return 'Freezing pillar'
+  } else if (player.classType == 'Priest') {
+    return 'Confusiong'
+  }
 }
