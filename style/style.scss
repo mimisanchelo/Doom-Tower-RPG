@@ -234,25 +234,37 @@ body {
     align-items: center;
     justify-content: center;
     .ability__box {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      &:hover p {
+      &:hover .ability__description {
         visibility: visible;
       }
       img {
         margin: auto 1rem;
         width: 40px;
-        &:hover {
-          transform: scale(1.1);
-        }
       }
-      p {
+      .ability__description {
+        background: var(--hover);
+        position: absolute;
+        top: 120%;
+        width: 250px;
+        max-height: 250px;
+
         visibility: hidden;
-        padding-top: 0.5rem;
+        padding: 1.5rem;
+        border-radius: 10px;
+        z-index: 4;
 
         color: var(--descriptions);
+        h3 {
+          padding-bottom: 0.5rem;
+        }
+        .cooldown {
+          padding-top: 0.5rem;
+        }
       }
     }
   }
@@ -425,7 +437,7 @@ body {
 .btn__prefight,
 .btn__attack {
   width: 100%;
-  background-color: #db0000;
+  background-color: #ff4d4d;
   border-radius: 5px;
 }
 .btn__next,
@@ -446,12 +458,20 @@ body {
 .btn__heal {
   background-color: #6de647;
 }
+.btn__confusion,
+.btn__pillar,
+.btn__wrath,
+.btn__surprise {
+  background-color: rgb(90, 90, 255);
+  border-radius: 5px;
+}
+
 .btn__goback,
 .btn__lvl,
 .btn__bite,
 .btn__counter,
 .btn__thunder {
-  background-color: #e6ce47;
+  background-color: rgb(255, 230, 89);
   border-radius: 5px;
 }
 .actions {

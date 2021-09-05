@@ -323,6 +323,7 @@ body {
 }
 
 .hero__box .abilities .ability__box {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -338,7 +339,7 @@ body {
           justify-content: center;
 }
 
-.hero__box .abilities .ability__box:hover p {
+.hero__box .abilities .ability__box:hover .ability__description {
   visibility: visible;
 }
 
@@ -347,15 +348,25 @@ body {
   width: 40px;
 }
 
-.hero__box .abilities .ability__box img:hover {
-  -webkit-transform: scale(1.1);
-          transform: scale(1.1);
+.hero__box .abilities .ability__box .ability__description {
+  background: var(--hover);
+  position: absolute;
+  top: 120%;
+  width: 250px;
+  max-height: 250px;
+  visibility: hidden;
+  padding: 1.5rem;
+  border-radius: 10px;
+  z-index: 4;
+  color: var(--descriptions);
 }
 
-.hero__box .abilities .ability__box p {
-  visibility: hidden;
+.hero__box .abilities .ability__box .ability__description h3 {
+  padding-bottom: 0.5rem;
+}
+
+.hero__box .abilities .ability__box .ability__description .cooldown {
   padding-top: 0.5rem;
-  color: var(--descriptions);
 }
 
 .img-avatar {
@@ -543,7 +554,7 @@ body {
 .btn__prefight,
 .btn__attack {
   width: 100%;
-  background-color: #db0000;
+  background-color: #ff4d4d;
   border-radius: 5px;
 }
 
@@ -570,12 +581,20 @@ body {
   background-color: #6de647;
 }
 
+.btn__confusion,
+.btn__pillar,
+.btn__wrath,
+.btn__surprise {
+  background-color: #5a5aff;
+  border-radius: 5px;
+}
+
 .btn__goback,
 .btn__lvl,
 .btn__bite,
 .btn__counter,
 .btn__thunder {
-  background-color: #e6ce47;
+  background-color: #ffe659;
   border-radius: 5px;
 }
 
