@@ -55,3 +55,28 @@ function DOMisLoaded() {
   })
 }
 DOMisLoaded()
+
+function result() {
+  const result = document.querySelector('.result')
+  const resultMessage = document.querySelector('.result_message')
+  const btnCounter = document.querySelector('.btn__counter')
+
+  result.classList.remove('hidden')
+
+  if (enemy.health <= 0) {
+    resultMessage.innerHTML =
+      '<h1>You Win!</h1><h3>Move to the next floor! Quickly!</h3><button class="btn__next btn" onclick="gameManager.staircase()"><img class="abilityImg" src="img/skills/stairs.svg" alt="">Next floor</button>'
+  }
+  if (player.health <= 0) {
+    if (
+      player.classType == 'Warrior' &&
+      moves[moves.length - 1] == btnCounter
+    ) {
+      resultMessage.innerHTML =
+        '<h1>You lose!</h1><h3>Enemy`s hit was stronger than you possible could blocked</h3><button class="btn__goback btn" onclick="gameManager.resetPlayer()"><img class="abilityImg" src="img/skills/player-next.svg" alt="" />Back to heroes</button>'
+    } else {
+      resultMessage.innerHTML =
+        '<h1>You lose!</h1><button class="btn__goback btn" onclick="gameManager.resetPlayer()"><img class="abilityImg" src="img/skills/player-next.svg" alt="" />Back to heroes</button>'
+    }
+  }
+}

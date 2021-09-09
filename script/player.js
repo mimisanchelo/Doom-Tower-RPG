@@ -72,7 +72,7 @@ let playerAttack = function () {
   return attackValue
 }
 
-// ////////////////////////////////////PLAYER MOVES
+// ////////////////////////////////////PLAYER`s MOVES
 let moves = []
 
 let newFloor = function () {
@@ -81,64 +81,7 @@ let newFloor = function () {
   }
 }
 
-// COOLDOWN OF ABILITIES
-let cooldownCounter = function () {
-  let btns = document.querySelectorAll('.player_btn')
-  let abilitySrc = getAbilitySRC()
-  let abilityName = getAbilityName()
-
-  if (moves[moves.length - 2] == abilitySrc) {
-    btns[1].disabled = true
-    btns[1].innerHTML =
-      '<img class="abilityImg" src="img/skills/' +
-      abilitySrc +
-      '.jpg" alt="">Cooldown [1]'
-  }
-
-  if (moves[moves.length - 3] == abilitySrc) {
-    btns[1].disabled = false
-    btns[1].innerHTML =
-      '<img class="abilityImg" src="img/skills/' +
-      abilitySrc +
-      '.jpg" alt="">' +
-      abilityName
-  }
-}
-
-let cooldownCounterAbility = function () {
-  let btns = document.querySelectorAll('.player_btn')
-  let abilitySrc = getAbilitySRC()
-
-  btns[1].disabled = true
-  btns[1].innerHTML =
-    '<img class="abilityImg" src="img/skills/' +
-    abilitySrc +
-    '.jpg" alt="">Cooldown [2]'
-}
-
-// ADDITIONAL STUFF
-let getAbilitySRC = function () {
-  const abilities = document.querySelectorAll('.abilityImg')
-
-  let srcImg = abilities[1].src
-  let word = srcImg.slice(srcImg.lastIndexOf('a'), srcImg.lastIndexOf('.'))
-
-  return word
-}
-
-let getAbilityName = function () {
-  if (player.classType == 'Warrior') {
-    return 'Counter Attack'
-  } else if (player.classType == 'Druid') {
-    return 'Ferocious Bite'
-  } else if (player.classType == 'Wizard') {
-    return 'Thunder strike'
-  } else if (player.classType == 'Priest') {
-    return 'Healing'
-  }
-}
-
-// ///////////////////////////////////PLAYER ABILITIES
+// ///////////////////////////////////PLAYER`s ABILITIES
 let PlayerAttack = {
   ability: 'attack',
   cooldown: false,
@@ -151,13 +94,12 @@ let PlayerAttack = {
 
     // cooldowns
     moves.push(this.ability)
-    cooldownCounter()
     cooldownCounter1()
+    cooldownCounter2()
 
     ////
     getPlayerSpeed = player.speed
     getEnemySpeed = enemy.speed
-    let getAction = document.querySelector('.actions')
 
     // PLAYER ATTACK
     playerAttack()
@@ -213,15 +155,11 @@ let PlayerAttack = {
         }
         // health condition
         if (enemy.health <= 0) {
-          alert('You win! Move to the next floor! Quickly!')
+          result()
 
           getEnemyHealth.innerHTML = 'Health: 0'
           getPlayerHealth.innerHTML =
             'Health: ' + Math.round(player.health * 100) / 100
-
-          // btn
-          getAction.innerHTML =
-            '<button class="btn__next btn" onclick="gameManager.staircase()"><img class="abilityImg" src="img/skills/stairs.svg" alt="">Next floor</button>'
 
           // score
           newFloor()
@@ -246,14 +184,10 @@ let PlayerAttack = {
               player.classType
 
             if (player.health <= 0) {
-              alert('You lose!')
+              result()
               getPlayerHealth.innerHTML = 'Health: 0'
               getEnemyHealth.innerHTML =
                 'Health: ' + Math.round(enemy.health * 100) / 100
-
-              // btn
-              getAction.innerHTML =
-                '<button class="btn__next btn" onclick="gameManager.resetPlayer()"><img class="abilityImg" src="img/skills/player-next.svg" alt="">Back to heroes</button>'
             } else {
               getPlayerHealth.innerHTML =
                 'Health: ' + Math.round(player.health * 100) / 100
@@ -281,14 +215,10 @@ let PlayerAttack = {
             player.classType
 
           if (player.health <= 0) {
-            alert('You lose!')
+            result()
             getPlayerHealth.innerHTML = 'Health: 0'
             getEnemyHealth.innerHTML =
               'Health: ' + Math.round(enemy.health * 100) / 100
-
-            // btn
-            getAction.innerHTML =
-              '<button class="btn__next btn" onclick="gameManager.resetPlayer()"><img class="abilityImg" src="img/skills/player-next.svg" alt="">Back to heroes</button>'
           } else {
             getPlayerHealth.innerHTML =
               'Health: ' + Math.round(player.health * 100) / 100
@@ -323,14 +253,10 @@ let PlayerAttack = {
           player.classType
 
         if (player.health <= 0) {
-          alert('You lose!')
+          result()
           getPlayerHealth.innerHTML = 'Health: 0'
           getEnemyHealth.innerHTML =
             'Health: ' + Math.round(enemy.health * 100) / 100
-
-          // BTN
-          getAction.innerHTML =
-            '<button class="btn__next btn" onclick="gameManager.resetPlayer()"><img class="abilityImg" src="img/skills/player-next.svg" alt="">Back to heroes</button>'
         } else {
           getPlayerHealth.innerHTML =
             'Health: ' + Math.round(player.health * 100) / 100
@@ -371,14 +297,10 @@ let PlayerAttack = {
                 enemy.enemyType
             }
             if (enemy.health <= 0) {
-              alert('You win! Move to the next floor! Quickly!')
+              result()
               getEnemyHealth.innerHTML = 'Health: 0'
               getPlayerHealth.innerHTML =
                 'Health: ' + Math.round(player.health * 100) / 100
-
-              // btn
-              getAction.innerHTML =
-                '<button class="btn__next btn" onclick="gameManager.staircase()"><img class="abilityImg" src="img/skills/stairs.svg" alt="">Next floor</button>'
 
               // SCORE
               newFloor()
@@ -431,13 +353,10 @@ let PlayerAttack = {
               enemy.enemyType
           }
           if (enemy.health <= 0) {
-            alert('You win! Move to the next floor! Quickly!')
+            result()
             getEnemyHealth.innerHTML = 'Health: 0'
             getPlayerHealth.innerHTML =
               'Health: ' + Math.round(player.health * 100) / 100
-            // btn
-            getAction.innerHTML =
-              '<button class="btn__next btn" onclick="gameManager.staircase()"><img class="abilityImg" src="img/skills/stairs.svg" alt="">Next floor</button>'
 
             // score
             newFloor()
@@ -463,13 +382,13 @@ let PlayerHeal = {
     notify()
 
     // cooldowns
-    cooldownCounterAbility()
     moves.push(this.ability)
+    cooldownCounterAbility1()
+    cooldownCounter2()
 
     ////
     getPlayerSpeed = player.speed
     getEnemySpeed = enemy.speed
-    let getAction = document.querySelector('.actions')
 
     let maxHeroHP = player.maxHP
 
@@ -536,10 +455,7 @@ let PlayerHeal = {
             getPlayerHealth.innerHTML = 'Health: 0'
             getEnemyHealth.innerHTML =
               'Health: ' + Math.round(enemy.health * 100) / 100
-            alert('You lose!')
-
-            getAction.innerHTML =
-              '<button class="btn__next btn" onclick="gameManager.resetPlayer()"><img class="abilityImg" src="img/skills/player-next.svg" alt="">Back to heroes</button>'
+            result()
           }
         } else if (calcHealedHP > enemyAttackValues) {
           player.health = maxHeroHP
@@ -564,19 +480,16 @@ let PlayerHeal = {
 
           getPlayerHealth.innerHTML =
             'Health: ' + Math.round(player.health * 100) / 100
-          alert(
+          notification1.textContent =
             'Enemy dealt more dmg than you healed. You restored ' +
-              playerHealValues
-          )
-          alert('Enemy dealt ' + enemyAttackValues)
+            playerHealValues
+
+          notification2.textContent = 'Enemy dealt ' + enemyAttackValues
           if (player.health <= 0) {
             getPlayerHealth.innerHTML = 'Health: 0'
             getEnemyHealth.innerHTML =
               'Health: ' + Math.round(enemy.health * 100) / 100
-            alert('You lose! ')
-
-            getAction.innerHTML =
-              '<button class="btn__next btn" onclick="gameManager.resetPlayer()"><img class="abilityImg" src="img/skills/player-next.svg" alt="">Back to heroes</button>'
+            result()
           }
         } else if (calcHealedHP > enemyAttackValues) {
           getPlayerHealth.innerHTML =
@@ -584,8 +497,9 @@ let PlayerHeal = {
           calcHealedHP = Math.round(
             ((player.intelligence * player.mana) / player.maxHP / 80) * 10
           )
-          alert('Enemy dealt ' + enemyAttackValues)
-          alert('You restored ' + playerHealValues + 'after enemy`s hit.')
+          notification2.textContent = 'Enemy dealt ' + enemyAttackValues
+          notification1.textContent =
+            'You restored ' + playerHealValues + 'after enemy`s hit.'
         }
       }
     } else if (getPlayerSpeed < getEnemySpeed) {
@@ -606,19 +520,16 @@ let PlayerHeal = {
           player.health = maxHeroHP + playerHealValues
           getPlayerHealth.innerHTML =
             'Health: ' + Math.round(player.health * 100) / 100
-          alert(
+          notification1.textContent =
             'Enemy dealt more dmg than you healed. You restored ' +
-              playerHealValues
-          )
-          alert('Enemy dealt ' + enemyAttackValues)
+            playerHealValues
+
+          notification2.textContent = 'Enemy dealt ' + enemyAttackValues
           if (player.health <= 0) {
             getPlayerHealth.innerHTML = 'Health: 0'
             getEnemyHealth.innerHTML =
               'Health: ' + Math.round(enemy.health * 100) / 100()
-            alert('You lose!')
-
-            getAction.innerHTML =
-              '<button class="btn__next btn" onclick="gameManager.resetPlayer()"><img class="abilityImg" src="img/skills/player-next.svg" alt="">Back to heroes</button>'
+            result()
           }
         } else if (calcHealedHP > enemyAttackValues) {
           calcHealedHP = Math.round(
@@ -627,12 +538,11 @@ let PlayerHeal = {
           player.health = maxHeroHP
           getPlayerHealth.innerHTML =
             'Health: ' + Math.round(player.health * 100) / 100
-          alert('Enemy dealt ' + enemyAttackValues)
-          alert(
+          notification2.textContent = 'Enemy dealt ' + enemyAttackValues
+          notification1.textContent =
             'You restored ' +
-              playerHealValues +
-              'after enemy`s hit. You health is full.'
-          )
+            playerHealValues +
+            'after enemy`s hit. You health is full.'
         }
       } else if (player.health < maxHeroHP) {
         if (calcHealedHP < enemyAttackValues) {
@@ -642,19 +552,16 @@ let PlayerHeal = {
           player.health = player.health + playerHealValues
           getPlayerHealth.innerHTML =
             'Health: ' + Math.round(player.health * 100) / 100
-          alert(
+          notification1.textContent =
             'Enemy dealt more dmg than you healed. You restored ' +
-              playerHealValues
-          )
-          alert('Enemy dealt ' + enemyAttackValues)
+            playerHealValues
+
+          notification2.textContent = 'Enemy dealt ' + enemyAttackValues
           if (player.health <= 0) {
             getPlayerHealth.innerHTML = 'Health: 0'
             getEnemyHealth.innerHTML =
               'Health: ' + Math.round(enemy.health * 100) / 100()
-            alert('You lose! ')
-
-            getAction.innerHTML =
-              '<button class="btn__next btn" onclick="gameManager.resetPlayer()"><img class="abilityImg" src="img/skills/player-next.svg" alt="">Back to heroes</button>'
+            result()
           }
         } else if (calcHealedHP > enemyAttackValues) {
           calcHealedHP = Math.round(
@@ -662,12 +569,11 @@ let PlayerHeal = {
           )
           getPlayerHealth.innerHTML =
             'Health: ' + Math.round(player.health * 100) / 100
-          alert('Enemy dealt ' + enemyAttackValues)
-          alert(
+          notification2.textContent = 'Enemy dealt ' + enemyAttackValues
+          notification1.textContent =
             'You restored ' +
-              playerHealValues +
-              'after enemy`s hit. You health is full.'
-          )
+            playerHealValues +
+            'after enemy`s hit. You health is full.'
         }
       }
     }
@@ -684,13 +590,13 @@ let PlayerBite = {
     notify()
 
     // cooldowns
-    cooldownCounterAbility()
     moves.push(this.ability)
+    cooldownCounterAbility1()
+    cooldownCounter2()
 
     ////
     getPlayerSpeed = player.speed
     getEnemySpeed = enemy.speed
-    let getAction = document.querySelector('.actions')
 
     let playerBite = function () {
       let calcBite
@@ -717,13 +623,11 @@ let PlayerBite = {
 
       enemy.health = enemy.health - playerBiteValue
       if (enemy.health <= 0) {
-        alert('You win! Move to the next floor! Quickly!')
+        result()
         getEnemyHealth.innerHTML = 'Health: 0'
         getPlayerHealth.innerHTML =
           'Health: ' + Math.round(player.health * 100) / 100
-        //btn
-        getAction.innerHTML =
-          '<button class="btn__next btn" onclick="gameManager.staircase()"><img class="abilityImg" src="img/skills/stairs.svg" alt="">Next floor</button>'
+
         //score
         newFloor()
         defeatedEnemies(enemy.enemyType)
@@ -748,12 +652,10 @@ let PlayerBite = {
           player.classType
 
         if (player.health <= 0) {
-          alert('You lose!')
+          result()
           getPlayerHealth.innerHTML = 'Health: 0'
           getEnemyHealth.innerHTML =
             'Health: ' + Math.round(enemy.health * 100) / 100
-          getAction.innerHTML =
-            '<button class="btn__next btn" onclick="gameManager.resetPlayer()"><img class="abilityImg" src="img/skills/player-next.svg" alt="">Back to heroes</button>'
         } else {
           getPlayerHealth.innerHTML =
             'Health: ' + Math.round(player.health * 100) / 100
@@ -774,12 +676,10 @@ let PlayerBite = {
         player.classType
 
       if (player.health <= 0) {
-        alert('You lose!')
+        result()
         getPlayerHealth.innerHTML = 'Health: 0'
         getEnemyHealth.innerHTML =
           'Health: ' + Math.round(enemy.health * 100) / 100
-        getAction.innerHTML =
-          '<button class="btn__next btn" onclick="gameManager.resetPlayer()"><img class="abilityImg" src="img/skills/player-next.svg" alt="">Back to heroes</button>'
       } else {
         getPlayerHealth.innerHTML =
           'Health: ' + Math.round(player.health * 100) / 100
@@ -793,17 +693,13 @@ let PlayerBite = {
 
         if (enemy.health <= 0) {
           // NOTIFICATION
-          alert('You win! Move to the next floor! Quickly!')
+          result()
 
           // HEALTHS
           getEnemyHealth.innerHTML = 'Health: 0'
           getPlayerHealth.innerHTML =
             'Health: ' + Math.round(player.health * 100) / 100
 
-          // BTN
-
-          getAction.innerHTML =
-            '<button class="btn__next btn" onclick="gameManager.staircase()"><img class="abilityImg" src="img/skills/stairs.svg" alt="">Next floor</button>'
           // score
           newFloor()
           defeatedEnemies(enemy.enemyType)
@@ -831,13 +727,13 @@ let PlayerThunder = {
     let notification2 = document.querySelector('.not2')
     notify()
     // cooldowns
-    cooldownCounterAbility()
     moves.push(this.ability)
+    cooldownCounterAbility1()
+    cooldownCounter2()
 
     ////
     getPlayerSpeed = player.speed
     getEnemySpeed = enemy.speed
-    let getAction = document.querySelector('.actions')
 
     let playerThunder = function () {
       let calcThunder
@@ -866,13 +762,10 @@ let PlayerThunder = {
       // HEALTH CONDITION
 
       if (enemy.health <= 0) {
-        alert('You win! Move to the next floor! Quickly!')
+        result()
         getEnemyHealth.innerHTML = 'Health: 0'
         getPlayerHealth.innerHTML =
           'Health: ' + Math.round(player.health * 100) / 100
-        // btn
-        getAction.innerHTML =
-          '<button class="btn__next btn" onclick="gameManager.staircase()"><img class="abilityImg" src="img/skills/stairs.svg" alt="">Next floor</button>'
 
         // score
         newFloor()
@@ -901,12 +794,10 @@ let PlayerThunder = {
           player.classType
 
         if (player.health <= 0) {
-          alert('You lose!')
+          result()
           getPlayerHealth.innerHTML = 'Health: 0'
           getEnemyHealth.innerHTML =
             'Health: ' + Math.round(enemy.health * 100) / 100
-          getAction.innerHTML =
-            '<button class="btn__next btn" onclick="gameManager.resetPlayer()"><img class="abilityImg" src="img/skills/player-next.svg" alt="">Back to heroes</button>'
         } else {
           getPlayerHealth.innerHTML =
             'Health: ' + Math.round(player.health * 100) / 100
@@ -927,12 +818,10 @@ let PlayerThunder = {
         player.classType
 
       if (player.health <= 0) {
-        alert('You lose!')
+        result()
         getPlayerHealth.innerHTML = 'Health: 0'
         getEnemyHealth.innerHTML =
           'Health: ' + Math.round(enemy.health * 100) / 100
-        getAction.innerHTML =
-          '<button class="btn__next btn" onclick="gameManager.resetPlayer()"><img class="abilityImg" src="img/skills/player-next.svg" alt="">Back to heroes</button>'
       } else {
         getPlayerHealth.innerHTML =
           'Health: ' + Math.round(player.health * 100) / 100
@@ -947,7 +836,7 @@ let PlayerThunder = {
 
         if (enemy.health <= 0) {
           // NOTIFICATION
-          alert('You win! Move to the next floor! Quickly!')
+          result()
 
           // HEALTHS
           getEnemyHealth.innerHTML = 'Health: 0'
@@ -956,8 +845,6 @@ let PlayerThunder = {
 
           // BTN
 
-          getAction.innerHTML =
-            '<button class="btn__next btn" onclick="gameManager.staircase()"><img class="abilityImg" src="img/skills/stairs.svg" alt="">Next floor</button>'
           // score
           newFloor()
           defeatedEnemies(enemy.enemyType)
@@ -987,12 +874,10 @@ let PlayerCounter = {
     notify()
     // cooldowns
     moves.push(this.ability)
-    cooldownCounterAbility()
-    cooldownCounter1()
+    cooldownCounterAbility1()
+    cooldownCounter2()
 
     // who attacks first?
-
-    let getAction = document.querySelector('.actions')
 
     let playerBlock = function () {
       let calcBlockDmg
@@ -1027,22 +912,16 @@ let PlayerCounter = {
 
     // HEALTH CONDITION
     if (player.health <= 0) {
-      alert(
-        'You lose! Enemy`s hit was stronger than you possible could blocked'
-      )
+      result()
       getPlayerHealth.innerHTML = 'Health: 0'
       getEnemyHealth.innerHTML =
         'Health: ' + Math.round(enemy.health * 100) / 100
-      getAction.innerHTML =
-        '<button class="btn__next btn" onclick="gameManager.resetPlayer()"><img class="abilityImg" src="img/skills/player-next.svg" alt="">Back to heroes</button>'
     } else if (enemy.health <= 0) {
-      alert('You Win!  Move to the next floor! Quickly!')
+      result()
       getPlayerHealth.innerHTML =
         'Health: ' + Math.round(player.health * 100) / 100
       getEnemyHealth.innerHTML = 'Health: 0'
-      // btn
-      getAction.innerHTML =
-        '<button class="btn__next btn" onclick="gameManager.staircase()"><img class="abilityImg" src="img/skills/stairs.svg" alt="">Next floor</button>'
+
       // score
       newFloor()
       defeatedEnemies(enemy.enemyType)
@@ -1065,6 +944,8 @@ let PlayerCounter = {
   },
 }
 
+//
+
 let PlayerSurprise = {
   ability: 'ability2W',
   cooldown: false,
@@ -1078,10 +959,8 @@ let PlayerSurprise = {
     // cooldowns
 
     moves.push(this.ability)
-    cooldownCounterAbility1()
-    cooldownCounter()
-
-    let getAction = document.querySelector('.actions')
+    cooldownCounterAbility2()
+    cooldownCounter1()
 
     let playerSurprise = function () {
       if (player.strength) {
@@ -1114,13 +993,11 @@ let PlayerSurprise = {
     // HEALTH CONDITION
 
     if (enemy.health <= 0) {
-      alert('You Win!  Move to the next floor! Quickly!')
+      result()
       getPlayerHealth.innerHTML =
         'Health: ' + Math.round(player.health * 100) / 100
       getEnemyHealth.innerHTML = 'Health: 0'
-      // btn
-      getAction.innerHTML =
-        '<button class="btn__next btn" onclick="gameManager.staircase()"><img class="abilityImg" src="img/skills/stairs.svg" alt="">Next floor</button>'
+
       // score
       newFloor()
       defeatedEnemies(enemy.enemyType)
@@ -1139,11 +1016,283 @@ let PlayerSurprise = {
   },
 }
 
+let PlayerWrath = {
+  ability: 'ability2D',
+  cooldown: false,
+
+  calcWrathOfNature: function () {
+    // notifications
+    let notification1 = document.querySelector('.not1')
+    let notification2 = document.querySelector('.not2')
+    notify()
+
+    // cooldowns
+
+    moves.push(this.ability)
+    cooldownCounterAbility2()
+    cooldownCounter1()
+
+    let playerWrath = function () {
+      let calcWrath
+      if (player.intelligence) {
+        calcWrath =
+          Math.round(
+            ((player.intelligence * player.mana) /
+              800 /
+              (0.048 * enemy.defense)) *
+              100
+          ) / 100
+
+        return calcWrath
+      }
+    }
+
+    // ROUND CONDITION
+    playerWrath()
+
+    let getPlayerHealth = document.querySelector('.health-player')
+    let getEnemyHealth = document.querySelector('.health-enemy')
+
+    let playerWrathValue = playerWrath()
+
+    let totalDmg = Math.floor(playerWrathValue * 100) / 100
+
+    enemy.health = enemy.health - totalDmg
+
+    // NOTIFICATION WHEN BLOCK
+
+    // HEALTH CONDITION
+
+    if (enemy.health <= 0) {
+      result()
+      getPlayerHealth.innerHTML =
+        'Health: ' + Math.round(player.health * 100) / 100
+      getEnemyHealth.innerHTML = 'Health: 0'
+
+      // score
+      newFloor()
+      defeatedEnemies(enemy.enemyType)
+    } else {
+      getPlayerHealth.innerHTML =
+        'Health: ' + Math.round(player.health * 100) / 100
+      getEnemyHealth.innerHTML =
+        'Health: ' + Math.round(enemy.health * 100) / 100
+      notification1.textContent =
+        'You stunned enemy and dealt ' +
+        totalDmg +
+        ' damage to ' +
+        enemy.enemyType
+      notification2.textContent = enemy.enemyType + ' got stunned'
+    }
+  },
+}
+let PlayerPillar = {
+  ability: 'ability2Wi',
+  cooldown: false,
+
+  calcFreezingPillar: function () {
+    // notifications
+    let notification1 = document.querySelector('.not1')
+    let notification2 = document.querySelector('.not2')
+    notify()
+
+    // cooldowns
+
+    moves.push(this.ability)
+    cooldownCounterAbility2()
+    cooldownCounter1()
+
+    let playerPillar = function () {
+      let calcFreezingPillar
+      if (player.intelligence) {
+        calcFreezingPillar =
+          Math.round(
+            ((player.intelligence * player.mana) /
+              800 /
+              (0.048 * enemy.defense)) *
+              100
+          ) / 100
+
+        return calcFreezingPillar
+      }
+    }
+
+    // ROUND CONDITION
+    playerPillar()
+
+    let getPlayerHealth = document.querySelector('.health-player')
+    let getEnemyHealth = document.querySelector('.health-enemy')
+
+    let playerPillarValue = playerPillar()
+
+    let totalDmg = Math.floor(playerPillarValue * 100) / 100
+
+    enemy.health = enemy.health - totalDmg
+
+    // NOTIFICATION WHEN BLOCK
+
+    // HEALTH CONDITION
+
+    if (enemy.health <= 0) {
+      result()
+      getPlayerHealth.innerHTML =
+        'Health: ' + Math.round(player.health * 100) / 100
+      getEnemyHealth.innerHTML = 'Health: 0'
+
+      // score
+      newFloor()
+      defeatedEnemies(enemy.enemyType)
+    } else {
+      getPlayerHealth.innerHTML =
+        'Health: ' + Math.round(player.health * 100) / 100
+      getEnemyHealth.innerHTML =
+        'Health: ' + Math.round(enemy.health * 100) / 100
+      notification1.textContent =
+        'You stunned enemy and dealt ' +
+        totalDmg +
+        ' damage to ' +
+        enemy.enemyType
+      notification2.textContent = enemy.enemyType + ' got stunned'
+    }
+  },
+}
+let PlayerConfusion = {
+  ability: 'ability2P',
+  cooldown: false,
+
+  calcConfusion: function () {
+    // notifications
+    let notification1 = document.querySelector('.not1')
+    let notification2 = document.querySelector('.not2')
+    notify()
+
+    // cooldowns
+
+    moves.push(this.ability)
+    cooldownCounterAbility2()
+    cooldownCounter1()
+
+    let playerConfusion = function () {
+      let calcConfusion
+      if (player.intelligence) {
+        calcConfusion =
+          Math.round(
+            ((player.intelligence * player.mana) /
+              800 /
+              (0.048 * enemy.defense)) *
+              100
+          ) / 100
+
+        return calcConfusion
+      }
+    }
+
+    // ROUND CONDITION
+    playerConfusion()
+
+    let getPlayerHealth = document.querySelector('.health-player')
+    let getEnemyHealth = document.querySelector('.health-enemy')
+
+    let playerConfusionValue = playerConfusion()
+
+    let totalDmg = Math.floor(playerConfusionValue * 100) / 100
+
+    enemy.health = enemy.health - totalDmg
+
+    // NOTIFICATION WHEN BLOCK
+
+    // HEALTH CONDITION
+
+    if (enemy.health <= 0) {
+      result()
+      getPlayerHealth.innerHTML =
+        'Health: ' + Math.round(player.health * 100) / 100
+      getEnemyHealth.innerHTML = 'Health: 0'
+
+      // score
+      newFloor()
+      defeatedEnemies(enemy.enemyType)
+    } else {
+      getPlayerHealth.innerHTML =
+        'Health: ' + Math.round(player.health * 100) / 100
+      getEnemyHealth.innerHTML =
+        'Health: ' + Math.round(enemy.health * 100) / 100
+      notification1.textContent =
+        'You stunned enemy and dealt ' +
+        totalDmg +
+        ' damage to ' +
+        enemy.enemyType
+      notification2.textContent = enemy.enemyType + ' got stunned'
+    }
+  },
+}
+
+// /////////////////COOLDOWN OF ABILITIES
+//  ////////////////////ABILITY #1
 // unblock ability
-let cooldownCounter1 = function (ability) {
+let cooldownCounter1 = function () {
   let btns = document.querySelectorAll('.player_btn')
   let abilitySrc = getAbilitySRC1()
   let abilityName = getAbilityName1()
+
+  if (moves[moves.length - 2] == abilitySrc) {
+    btns[1].disabled = true
+    btns[1].innerHTML =
+      '<img class="abilityImg" src="img/skills/' +
+      abilitySrc +
+      '.jpg" alt="">Cooldown [1]'
+  }
+
+  if (moves[moves.length - 3] == abilitySrc) {
+    btns[1].disabled = false
+    btns[1].innerHTML =
+      '<img class="abilityImg" src="img/skills/' +
+      abilitySrc +
+      '.jpg" alt="">' +
+      abilityName
+  }
+}
+
+// block ability
+let cooldownCounterAbility1 = function () {
+  let btns = document.querySelectorAll('.player_btn')
+  let abilitySrc = getAbilitySRC1()
+
+  btns[1].disabled = true
+  btns[1].innerHTML =
+    '<img class="abilityImg" src="img/skills/' +
+    abilitySrc +
+    '.jpg" alt="">Cooldown [2]'
+}
+
+// ADDITIONAL STUFF
+let getAbilitySRC1 = function () {
+  const abilities = document.querySelectorAll('.abilityImg')
+
+  let srcImg = abilities[1].src
+  let word = srcImg.slice(srcImg.lastIndexOf('a'), srcImg.lastIndexOf('.'))
+
+  return word
+}
+
+let getAbilityName1 = function () {
+  if (player.classType == 'Warrior') {
+    return 'Counter Attack'
+  } else if (player.classType == 'Druid') {
+    return 'Ferocious Bite'
+  } else if (player.classType == 'Wizard') {
+    return 'Thunder strike'
+  } else if (player.classType == 'Priest') {
+    return 'Healing'
+  }
+}
+
+// /////////////////////////  ABILITY #2
+// unblock ability
+let cooldownCounter2 = function () {
+  let btns = document.querySelectorAll('.player_btn')
+  let abilitySrc = getAbilitySRC2()
+  let abilityName = getAbilityName2()
 
   if (moves[moves.length - 2] == abilitySrc) {
     btns[2].disabled = true
@@ -1169,9 +1318,9 @@ let cooldownCounter1 = function (ability) {
 }
 
 // block ability
-let cooldownCounterAbility1 = function () {
+let cooldownCounterAbility2 = function () {
   let btns = document.querySelectorAll('.player_btn')
-  let abilitySrc = getAbilitySRC1()
+  let abilitySrc = getAbilitySRC2()
 
   btns[2].disabled = true
   btns[2].innerHTML =
@@ -1181,7 +1330,7 @@ let cooldownCounterAbility1 = function () {
 }
 
 // ADDITIONAL STUFF
-let getAbilitySRC1 = function () {
+let getAbilitySRC2 = function () {
   const abilities = document.querySelectorAll('.abilityImg')
 
   let srcImg = abilities[2].src
@@ -1190,7 +1339,7 @@ let getAbilitySRC1 = function () {
   return word
 }
 
-let getAbilityName1 = function () {
+let getAbilityName2 = function () {
   if (player.classType == 'Warrior') {
     return 'Surprise attack'
   } else if (player.classType == 'Druid') {

@@ -173,16 +173,16 @@ let gameManager = {
     let heroes = function () {
       if (player.classType == 'Priest') {
         getAction.innerHTML =
-          '<button class="btn btn__attack player_btn" id="attack" onclick="PlayerAttack.calcAttack()"><img class="abilityImg" src="img/skills/healstaff.jpg" alt="">Attack</button> <button class="btn btn__counter player_btn" id="heal" onclick="PlayerHeal.calcHeal()"> <img class="abilityImg" src="img/skills/ability1P.jpg" alt="">Healing</button> <button class="btn btn__confusion player_btn" id="confusion" onclick="PlayerHeal."> <img class="abilityImg" src="img/skills/confusion.jpg" alt="">Confusion</button>'
+          '<button class="btn btn__attack player_btn" id="attack" onclick="PlayerAttack.calcAttack()"><img class="abilityImg" src="img/skills/healstaff.jpg" alt="">Attack</button> <button class="btn btn__counter player_btn" id="heal" onclick="PlayerHeal.calcHeal()"> <img class="abilityImg" src="img/skills/ability1P.jpg" alt="">Healing</button> <button class="btn btn__confusion player_btn" id="confusion" onclick="PlayerConfusion.calcConfusion()"> <img class="abilityImg" src="img/skills/ability2P.jpg" alt="">Confusion</button>'
       } else if (player.classType == 'Warrior') {
         getAction.innerHTML =
           '<button class="btn btn__attack player_btn" id="attack" onclick="PlayerAttack.calcAttack()"><img class="abilityImg" src="img/skills/attack.jpg" alt="">Attack</button> <button class="btn btn__counter player_btn"  id="counter" onclick="PlayerCounter.calcCounterAttack()"> <img class="abilityImg" src="img/skills/ability1W.jpg" alt="">Counter Attack</button> <button class="btn btn__surprise player_btn"  id="surprise" onclick="PlayerSurprise.calcSurpriseAttack()"> <img class="abilityImg" src="img/skills/ability2W.jpg" alt="">Surprise attack</button>'
       } else if (player.classType == 'Wizard') {
         getAction.innerHTML =
-          '<button class="btn btn__attack player_btn" id="attack" onclick="PlayerAttack.calcAttack()"><img class="abilityImg" src="img/skills/staff.jpg" alt="">Attack</button> <button class="btn btn__thunder player_btn " id="thunder" onclick="PlayerThunder.calcThunderStruck()"> <img class="abilityImg" src="img/skills/ability1Wi.jpg" alt="">Thunder strike</button> <button class="btn btn__pillar player_btn"  id="counter" onclick="PlayerCounter"> <img class="abilityImg" src="img/skills/ability2Wi.jpg" alt="">Freezing pillar</button>'
+          '<button class="btn btn__attack player_btn" id="attack" onclick="PlayerAttack.calcAttack()"><img class="abilityImg" src="img/skills/staff.jpg" alt="">Attack</button> <button class="btn btn__thunder player_btn " id="thunder" onclick="PlayerThunder.calcThunderStruck()"> <img class="abilityImg" src="img/skills/ability1Wi.jpg" alt="">Thunder strike</button> <button class="btn btn__pillar player_btn"  id="pillar" onclick="PlayerPillar.calcFreezingPillar()"> <img class="abilityImg" src="img/skills/ability2Wi.jpg" alt="">Freezing pillar</button>'
       } else if (player.classType == 'Druid') {
         getAction.innerHTML =
-          '<button class="btn btn__attack player_btn" id="attack" onclick="PlayerAttack.calcAttack()"><img class="abilityImg" src="img/skills/nails.jpg" alt="">Attack</button> <button class="btn btn__bite player_btn" id="bite" onclick="PlayerBite.calcFerociousBite()"> <img class="abilityImg" src="img/skills/ability1D.jpg" alt="">Ferocious Bite</button> <button class="btn btn__wrath player_btn"  id="counter" onclick="PlayerCounter"> <img class="abilityImg" src="img/skills/ability2D.jpg" alt="">Wrath of nature</button>'
+          '<button class="btn btn__attack player_btn" id="attack" onclick="PlayerAttack.calcAttack()"><img class="abilityImg" src="img/skills/nails.jpg" alt="">Attack</button> <button class="btn btn__bite player_btn" id="bite" onclick="PlayerBite.calcFerociousBite()"> <img class="abilityImg" src="img/skills/ability1D.jpg" alt="">Ferocious Bite</button> <button class="btn btn__wrath player_btn"  id="wrath" onclick="PlayerWrath.calcWrathOfNature()"> <img class="abilityImg" src="img/skills/ability2D.jpg" alt="">Wrath of nature</button>'
       }
     }
     heroes(player.classType)
@@ -200,6 +200,9 @@ let gameManager = {
     let getArena = document.querySelector('.arena')
     let getEnemy = document.querySelector('.enemy')
     let getInterface = document.querySelector('.interface')
+    const result = document.querySelector('.result')
+
+    result.classList.add('hidden')
 
     getHeader.innerHTML =
       '<p class="header__text">Doom Tower floor: <span class="floor">' +
@@ -279,6 +282,10 @@ let gameManager = {
       '</p>'
     getAction.innerHTML =
       '<button class="btn__prefight btn" onclick="gameManager.setFight()"><img class="abilityImg" src="img/skills/magnifier.svg" alt="">Search for enemy</button>'
+  },
+
+  setLocalStorage: function () {
+    localStorage.setItem('player', JSON.stringify(this.chosenPlayer))
   },
 }
 let enemyLvl = function () {
