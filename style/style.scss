@@ -247,7 +247,8 @@ body {
         width: 40px;
       }
       .ability__description {
-        background: var(--hover);
+        background: var(--secondary);
+        border: 3px solid var(--hover);
         position: absolute;
         top: 120%;
         width: 250px;
@@ -562,6 +563,46 @@ body {
     color: var(--descriptions);
     line-height: 20px;
   }
+}
+
+// ////////////////////////////POPUP
+
+.result {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #171523be;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 100;
+  .result_message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: var(--secondary);
+    padding: 2rem;
+    border-radius: 10px;
+    width: 300px;
+    h1 {
+      padding-bottom: 2rem;
+      color: var(--headers);
+    }
+    h3 {
+      padding-bottom: 1rem;
+      color: var(--descriptions);
+    }
+  }
+}
+.hidden {
+  display: none;
+  opacity: 0;
 }
 
 @media only screen and (max-width: 1300px) {

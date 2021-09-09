@@ -349,7 +349,8 @@ body {
 }
 
 .hero__box .abilities .ability__box .ability__description {
-  background: var(--hover);
+  background: var(--secondary);
+  border: 3px solid var(--hover);
   position: absolute;
   top: 120%;
   width: 250px;
@@ -710,6 +711,64 @@ body {
   font-size: 16px;
   color: var(--descriptions);
   line-height: 20px;
+}
+
+.result {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #171523be;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  z-index: 100;
+}
+
+.result .result_message {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  background: var(--secondary);
+  padding: 2rem;
+  border-radius: 10px;
+  width: 300px;
+}
+
+.result .result_message h1 {
+  padding-bottom: 2rem;
+  color: var(--headers);
+}
+
+.result .result_message h3 {
+  padding-bottom: 1rem;
+  color: var(--descriptions);
+}
+
+.hidden {
+  display: none;
+  opacity: 0;
 }
 
 @media only screen and (max-width: 1300px) {
