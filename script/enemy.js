@@ -92,11 +92,10 @@ const enemyDmg = function () {
 }
 
 const finalBoss = function () {
-  alert('Careful! You have reached the Final boss! Good luck!')
   let getEnemy = document.querySelector('.enemy')
 
-  let boss00 = new Enemy('Mirror man', 1, 4200, 1400, 15, 15, 500, 95, 45)
-  let boss01 = new Enemy('Shark', 1, 4300, 0, 500, 10, 20, 85, 55)
+  let boss00 = new Enemy('Mirror man', 1, 4300, 1400, 15, 15, 550, 95, 70)
+  let boss01 = new Enemy('Shark', 1, 4500, 0, 550, 10, 20, 85, 80)
 
   let chooseRandomEnemy = Math.floor(Math.random() * 2)
   switch (chooseRandomEnemy) {
@@ -130,4 +129,5 @@ const finalBoss = function () {
     '</p><p>Defense: ' +
     enemy.defense +
     '</p></div>'
+  result()
 }

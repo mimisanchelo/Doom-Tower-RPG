@@ -65,7 +65,7 @@ function result() {
 
   if (enemy.health <= 0) {
     resultMessage.innerHTML =
-      '<h1>You Win!</h1><h3>Move to the next floor! Quickly!</h3><button class="btn__next btn" onclick="gameManager.staircase()"><img class="abilityImg" src="img/skills/stairs.svg" alt="">Next floor</button>'
+      '<h1>You Win!</h1><h3>Move to the next floor! Quickly!</h3><button class="btn__next btn btn__result" onclick="gameManager.staircase()"><img class="abilityImg" src="img/skills/stairs.svg" alt="">Next floor</button>'
   }
   if (player.health <= 0) {
     if (
@@ -73,10 +73,29 @@ function result() {
       moves[moves.length - 1] == btnCounter
     ) {
       resultMessage.innerHTML =
-        '<h1>You lose!</h1><h3>Enemy`s hit was stronger than you possible could blocked</h3><button class="btn__goback btn" onclick="gameManager.resetPlayer()"><img class="abilityImg" src="img/skills/player-next.svg" alt="" />Back to heroes</button>'
+        '<h1>You lose!</h1><h3>Enemy`s hit was stronger than you possible could blocked</h3><button class="btn__goback btn btn__result" onclick="gameManager.resetPlayer()"><img class="abilityImg" src="img/skills/player-next.svg" alt="" />Back to heroes</button>'
     } else {
       resultMessage.innerHTML =
         '<h1>You lose!</h1><button class="btn__goback btn" onclick="gameManager.resetPlayer()"><img class="abilityImg" src="img/skills/player-next.svg" alt="" />Back to heroes</button>'
     }
   }
+  if (beatenEnemy.length == 2) {
+    resultMessage.innerHTML =
+      '<h1>Careful!</h1><h3>You have reached the Final boss.</br> Good luck!</h3><i class="ri-close-line close_message"></i>'
+
+    closeMessage()
+  }
+  if (beatenEnemy.length == 3) {
+    resultMessage.innerHTML =
+      '<h1>Great!</h1><h3>You have reached the top of the Doom Tower.</br> Time to go on your next adventure!</h3>  <a class="btn__goback btn btn__result" href="/"><img class="abilityImg" src="img/skills/player-next.svg"alt=""onclick="gameManager.resetPlayer()"/>Leave the Tower</a>'
+  }
+}
+
+const closeMessage = function () {
+  document
+    .querySelector('.close_message')
+    .addEventListener('click', function () {
+      const result = document.querySelector('.result')
+      result.classList.add('hidden')
+    })
 }

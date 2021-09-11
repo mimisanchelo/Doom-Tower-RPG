@@ -61,7 +61,7 @@ let gameManager = {
   createEnemy: function () {
     let getEnemy = document.querySelector('.enemy')
     // CREATE ENEMY
-    if (beatenEnemy.length !== 30) {
+    if (beatenEnemy.length !== 31) {
       let enemy00 = new Enemy('Goblin', 1, 200, 0, 150, 35, 5, 85, 35)
       let enemy01 = new Enemy('Slime', 1, 175, 0, 25, 150, 20, 90, 30)
       let enemy02 = new Enemy('Doomspeaker', 1, 150, 140, 26, 25, 155, 85, 27)
@@ -155,6 +155,9 @@ let gameManager = {
         '</p></div>'
     } else if (beatenEnemy.length == 31) {
       finalBoss()
+    } else if (beatenEnemy.length == 32) {
+      result()
+      return
     }
   },
 
