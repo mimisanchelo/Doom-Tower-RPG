@@ -64,17 +64,17 @@ let gameManager = {
     if (beatenEnemy.length !== 30) {
       let enemy00 = new Enemy('Goblin', 1, 200, 0, 150, 35, 5, 85, 35)
       let enemy01 = new Enemy('Slime', 1, 175, 0, 25, 150, 20, 90, 30)
-      let enemy02 = new Enemy('Doomspeaker', 1, 150, 130, 26, 150, 20, 85, 25)
-      let enemy03 = new Enemy('Witch', 1, 150, 160, 5, 20, 150, 50, 25)
+      let enemy02 = new Enemy('Doomspeaker', 1, 150, 140, 26, 25, 155, 85, 27)
+      let enemy03 = new Enemy('Witch', 1, 150, 155, 5, 20, 150, 50, 27)
       let enemy04 = new Enemy('Basilisk', 1, 175, 0, 27, 150, 20, 90, 35)
       let enemy05 = new Enemy('Boar warrior', 1, 200, 0, 150, 30, 20, 78, 50)
       let enemy06 = new Enemy('Mummy', 1, 150, 0, 30, 152, 0, 88, 30)
       let enemy07 = new Enemy('Henchman', 1, 200, 0, 155, 27, 20, 85, 35)
       let enemy08 = new Enemy('Enforcer', 1, 200, 0, 160, 27, 20, 89, 30)
-      let enemy09 = new Enemy('Gator', 1, 200, 0, 28, 155, 10, 80, 40)
-      let enemy10 = new Enemy('Pirate', 1, 200, 0, 35, 150, 12, 87, 35)
+      let enemy09 = new Enemy('Gator', 1, 200, 0, 155, 28, 10, 80, 40)
+      let enemy10 = new Enemy('Pirate', 1, 175, 0, 35, 150, 12, 86, 38)
       let enemy11 = new Enemy('Raven mocker', 1, 175, 0, 30, 155, 10, 91, 30)
-      let enemy12 = new Enemy('Skelet archer', 1, 175, 0, 20, 160, 0, 84, 25)
+      let enemy12 = new Enemy('Skelet archer', 1, 175, 0, 20, 160, 0, 84, 27)
       let enemy13 = new Enemy('Skelet warrior', 1, 200, 0, 160, 25, 0, 81, 42)
       let enemy14 = new Enemy('Tendriculos', 1, 200, 0, 40, 150, 0, 87, 39)
 
@@ -153,8 +153,6 @@ let gameManager = {
         '</p><p class="enemy-stat">Defense: ' +
         enemy.defense +
         '</p></div>'
-
-      enemyLvl()
     } else if (beatenEnemy.length == 31) {
       finalBoss()
     }
@@ -187,7 +185,7 @@ let gameManager = {
     }
     heroes(player.classType)
     this.createEnemy()
-
+    enemyLvl()
     //////////////
     let getArena = document.querySelector('.arena')
     getArena.style.visibility = 'visible'
@@ -290,106 +288,136 @@ let gameManager = {
 }
 let enemyLvl = function () {
   let getEnemy = document.querySelector('.enemy')
-
   let type = enemy.enemyType
-  let enemy1 = enemy
 
-  enemy.level += 1
-  enemy.health = enemy.maxHP
+  if (beatenEnemy.length < 15) {
+    if (
+      type == 'Goblin' ||
+      type == 'Boar warrior' ||
+      type == 'Henchman' ||
+      type == 'Enforcer' ||
+      type == 'Gator' ||
+      type == 'Skelet warrior'
+    ) {
+      enemy.level = beatenEnemy.length
+      enemy.maxHP = enemy.health + enemy.health * beatenEnemy.length * 0.12
+      enemy.health = enemy.maxHP
+      enemy.mana += enemy.mana * beatenEnemy.length * 0.2
 
-  if (
-    type == 'Gator' ||
-    type == 'Goblin' ||
-    type == 'Tendriculos' ||
-    type == 'Enforcer' ||
-    type == 'Boar warrior' ||
-    type == 'Henchman' ||
-    type == 'Skelet warrior'
-  ) {
-    enemy1.maxHP = enemy1.maxHP + 100
+      enemy.strength += enemy.strength * (beatenEnemy.length * 0.1)
+      enemy.agility += enemy.agility * (beatenEnemy.length * 0.05)
+      enemy.intelligence += enemy.intelligence * (beatenEnemy.length * 0.02)
 
-    enemy1.strength = enemy.strength + 15
-    enemy1.agility = enemy.agility + 5
-    enemy1.intelligence = enemy.intelligence + 5
-    enemy1.speed = enemy.speed + 0.5
-    enemy1.defense = enemy.defense + 4
-    // if (beatenEnemy.length >= 15) {
-    //   enemy.maxHP = enemy.maxHP + 100
-    //   enemy.mana = enemy.mana
-    //   enemy.strength = enemy.strength + 20
-    //   enemy.agility = enemy.agility + 7
-    //   enemy.intelligence = enemy.intelligence + 10
-    //   enemy.speed = enemy.speed + 1
-    //   enemy.defense = enemy.defense + 4
-    //   enemy.health = enemy.maxHP
-    // }
-  } else if (
-    type == 'Slime' ||
-    type == 'Basilisk' ||
-    type == 'Mummy' ||
-    type == 'Skelet archer' ||
-    type == 'Pirate' ||
-    type == 'Raven mocker'
-  ) {
-    enemy1.maxHP = enemy.maxHP + 75
+      enemy.speed = enemy.speed + beatenEnemy.length
+      enemy.defense = enemy.defense + beatenEnemy.length * 2.5
+    } else if (
+      type == 'Slime' ||
+      type == 'Mummy' ||
+      type == 'Pirate' ||
+      type == 'Basilisk' ||
+      type == 'Raven mocker' ||
+      type == 'Skelet archer' ||
+      type == 'Tendriculos'
+    ) {
+      enemy.level = beatenEnemy.length
+      enemy.maxHP = enemy.health + enemy.health * beatenEnemy.length * 0.1
+      enemy.health = enemy.maxHP
+      enemy.mana += enemy.mana * beatenEnemy.length * 2
 
-    enemy1.strength = enemy.strength + 10
-    enemy1.agility = enemy.agility + 15
-    enemy1.intelligence = enemy.intelligence + 5
-    enemy1.defense = enemy.defense + 3
-    enemy1.speed = enemy.speed + 1
+      enemy.strength += enemy.strength * (beatenEnemy.length * 0.05)
+      enemy.agility += enemy.agility * (beatenEnemy.length * 0.105)
+      enemy.intelligence += enemy.intelligence * (beatenEnemy.length * 0.02)
 
-    // if (beatenEnemy.length >= 15 {
-    //   enemy.maxHP = enemy.maxHP + 100
-    //   enemy.mana = enemy.mana
-    //   enemy.strength = enemy.strength + 12
-    //   enemy.agility = enemy.agility + 20
-    //   enemy.intelligence = enemy.intelligence + 10
-    //   enemy.speed = enemy.speed + 1.5
-    //   enemy.defense = enemy.defense + 4
-    //   enemy.health = enemy.maxHP
-    // }
-  } else if (type == 'Witch' || type == 'Doomspeaker') {
-    enemy1.maxHP += enemy.maxHP + 75
-    enemy1.mana += enemy.mana + 40
-    enemy1.strength += enemy.strength + 10
-    enemy1.agility += enemy.agility + 5
-    enemy1.intelligence += enemy.intelligence + 15
-    enemy1.speed += enemy.speed + 1
-    enemy1.defense += enemy.defense + 3
+      enemy.speed = enemy.speed + beatenEnemy.length * 1.1
+      enemy.defense = enemy.defense + beatenEnemy.length * 2.2
+    } else if (type == 'Doomspeaker' || type == 'Witch') {
+      enemy.level = beatenEnemy.length
+      enemy.maxHP = enemy.health + enemy.health * beatenEnemy.length * 0.1
+      enemy.health = enemy.maxHP
+      enemy.mana += enemy.mana * (beatenEnemy.length * 0.25)
 
-    // if (beatenEnemy.length >= 15) {
-    //   enemy.maxHP = enemy.maxHP + 100
-    //   enemy.mana = enemy.mana + 60
-    //   enemy.strength = enemy.strength + 12
-    //   enemy.agility = enemy.agility + 7
-    //   enemy.intelligence = enemy.intelligence + 20
-    //   enemy.speed = enemy.speed + 1
-    //   enemy.defense = enemy.defense + 4
-    //   enemy.health = enemy.maxHP
-    // }
+      enemy.strength += enemy.strength * (beatenEnemy.length * 0.05)
+      enemy.agility += enemy.agility * (beatenEnemy.length * 0.02)
+      enemy.intelligence += enemy.intelligence * (beatenEnemy.length * 0.11)
+
+      enemy.speed = enemy.speed + beatenEnemy.length * 1.05
+      enemy.defense = enemy.defense + beatenEnemy.length * 2
+    }
+  } else {
+    if (
+      type == 'Goblin' ||
+      type == 'Boar warrior' ||
+      type == 'Henchman' ||
+      type == 'Enforcer' ||
+      type == 'Gator' ||
+      type == 'Skelet warrior'
+    ) {
+      enemy.level = beatenEnemy.length
+      enemy.maxHP = enemy.health + enemy.health * beatenEnemy.length * 0.17
+      enemy.health = enemy.maxHP
+      enemy.mana = enemy.mana
+
+      enemy.strength += enemy.strength * (beatenEnemy.length * 0.15)
+      enemy.agility += enemy.agility * (beatenEnemy.length * 0.07)
+      enemy.intelligence += enemy.intelligence * (beatenEnemy.length * 0.05)
+
+      enemy.speed = enemy.speed + beatenEnemy.length
+      enemy.defense += enemy.defense * beatenEnemy.length * 3
+    } else if (
+      type == 'Slime' ||
+      type == 'Mummy' ||
+      type == 'Basilisk' ||
+      type == 'Pirate' ||
+      type == 'Raven mocker' ||
+      type == 'Skelet archer' ||
+      type == 'Tendriculos'
+    ) {
+      enemy.level = beatenEnemy.length
+      enemy.maxHP = enemy.health + enemy.health * beatenEnemy.length * 0.15
+      enemy.health = enemy.maxHP
+      enemy.mana = enemy.mana
+
+      enemy.strength += enemy.strength * (beatenEnemy.length * 0.08)
+      enemy.agility += enemy.agility * (beatenEnemy.length * 0.15)
+      enemy.intelligence += enemy.intelligence * (beatenEnemy.length * 0.04)
+
+      enemy.speed = enemy.speed + beatenEnemy.length
+      enemy.defense += enemy.defense * beatenEnemy.length * 2.8
+    } else if (type == 'Doomspeaker' || type == 'Witch') {
+      enemy.level = beatenEnemy.length
+      enemy.maxHP = enemy.health + enemy.health * beatenEnemy.length * 0.15
+      enemy.health = enemy.maxHP
+
+      enemy.mana += enemy.mana * (beatenEnemy.length * 0.3)
+      enemy.strength += enemy.strength * (beatenEnemy.length * 0.08)
+      enemy.agility += enemy.agility * (beatenEnemy.length * 0.04)
+      enemy.intelligence += enemy.intelligence * (beatenEnemy.length * 0.16)
+
+      enemy.speed = enemy.speed + beatenEnemy.length
+      enemy.defense += enemy.defense * beatenEnemy.length * 2.5
+    }
   }
 
   getEnemy.innerHTML =
     "<img src='img/" +
-    enemy1.enemyType.toLowerCase() +
+    enemy.enemyType.toLowerCase() +
     ".jpg' class='img-avatar'><div><h3>" +
-    enemy1.enemyType +
+    enemy.enemyType +
     ' <span class="lvl">Level: </span><span class="actual-lvl">' +
-    enemy1.level +
+    enemy.level +
     '</span></h3><p class="health-enemy">Health: ' +
-    Math.round(enemy1.health * 100) / 100 +
+    Math.round(enemy.health * 100) / 100 +
     '</p><p>Mana: ' +
-    Math.round(enemy1.mana * 100) / 100 +
+    Math.round(enemy.mana * 100) / 100 +
     '</p><p>Strength: ' +
-    Math.round(enemy1.strength * 100) / 100 +
+    Math.round(enemy.strength * 100) / 100 +
     '</p><p>Agility: ' +
-    Math.round(enemy1.agility * 100) / 100 +
+    Math.round(enemy.agility * 100) / 100 +
     '</p><p>Intelligence: ' +
-    Math.round(enemy1.intelligence * 100) / 100 +
+    Math.round(enemy.intelligence * 100) / 100 +
     '</p><p>Speed: ' +
-    Math.round(enemy1.speed * 100) / 100 +
+    Math.round(enemy.speed * 100) / 100 +
     '</p><p>Defense: ' +
-    Math.round(enemy1.defense * 100) / 100 +
+    Math.round(enemy.defense * 100) / 100 +
     '</p></div>'
 }
