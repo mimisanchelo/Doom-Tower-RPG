@@ -541,6 +541,8 @@ body {
   font-weight: 600;
   cursor: pointer;
   outline: none;
+  text-decoration: none;
+  color: var(--hover);
 }
 
 .btn:active {
@@ -610,6 +612,11 @@ body {
   margin: 1rem auto;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+}
+
+.btn__result {
+  margin: auto;
+  max-width: 80%;
 }
 
 .arena {
@@ -739,12 +746,22 @@ body {
 }
 
 .result .result_message {
+  position: relative;
   margin: auto;
   text-align: center;
   background: var(--secondary);
   padding: 2rem;
   border-radius: 10px;
   width: 300px;
+}
+
+.result .result_message .close_message {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--descriptions);
 }
 
 .result .result_message h1 {
@@ -763,6 +780,9 @@ body {
 }
 
 @media only screen and (max-width: 1300px) {
+  body {
+    overflow-x: hidden;
+  }
   .banner {
     max-width: 100vw;
     height: 100vh;
@@ -804,9 +824,9 @@ body {
     width: 90px;
   }
   .header .header__title {
-    text-align: center;
     margin: auto;
-    width: 400px;
+    width: 100%;
+    padding: 0 1rem;
     font-size: 24px;
   }
   .interface {
@@ -829,7 +849,7 @@ body {
             transition-delay: 0.5s;
   }
   .actions {
-    width: 80%;
+    width: 100%;
   }
   .enemy {
     margin-top: 0.8rem;
@@ -887,7 +907,14 @@ body {
     width: 90px;
   }
   .btn {
-    max-width: 200px;
+    max-width: 30%;
+    margin: 0.5rem 0.3rem;
+    font-size: 12px;
+  }
+  .btn__result {
+    margin: auto;
+    max-width: 80%;
+    font-size: 14px;
   }
 }
 
@@ -895,7 +922,7 @@ body {
   .header {
     background-color: var(--background);
     padding: 1rem;
-    width: 105%;
+    width: 100%;
     text-align: center;
     margin: auto;
   }
@@ -974,7 +1001,7 @@ body {
     right: 5%;
   }
   .header .header__text {
-    max-width: 350px;
+    max-width: 100%;
     font-size: 16px;
   }
   .interface {
@@ -1017,9 +1044,6 @@ body {
   }
   .lvl {
     margin-left: 0.5rem;
-  }
-  .btn {
-    max-width: 150px;
   }
   .enemy {
     width: 100%;
@@ -1081,9 +1105,8 @@ body {
   .arena {
     height: 150px;
   }
-  .btn {
-    max-width: 150px;
-    margin: 0.5rem 0.5rem;
+  .abilityImg {
+    width: 25px;
   }
 }
 /*# sourceMappingURL=style.css.map */

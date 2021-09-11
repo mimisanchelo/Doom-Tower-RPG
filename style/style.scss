@@ -427,6 +427,8 @@ body {
   font-weight: 600;
   cursor: pointer;
   outline: none;
+  text-decoration: none;
+  color: var(--hover);
   &:active {
     transform: scale(0.98);
   }
@@ -481,6 +483,10 @@ body {
   justify-content: center;
   margin: 1rem auto;
   flex-wrap: wrap;
+}
+.btn__result {
+  margin: auto;
+  max-width: 80%;
 }
 
 // //////////////////////////////////////////////////////////ARENA
@@ -583,12 +589,21 @@ body {
   flex-direction: column;
   z-index: 100;
   .result_message {
+    position: relative;
     margin: auto;
     text-align: center;
     background: var(--secondary);
     padding: 2rem;
     border-radius: 10px;
     width: 300px;
+    .close_message {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 2rem;
+      cursor: pointer;
+      color: var(--descriptions);
+    }
     h1 {
       padding-bottom: 2rem;
       color: var(--headers);
@@ -605,6 +620,9 @@ body {
 }
 
 @media only screen and (max-width: 1300px) {
+  body {
+    overflow-x: hidden;
+  }
   // BANNER
   .banner {
     max-width: 100vw;
@@ -655,9 +673,9 @@ body {
   /////////////////////////////////HEADER
   .header {
     .header__title {
-      text-align: center;
       margin: auto;
-      width: 400px;
+      width: 100%;
+      padding: 0 1rem;
       font-size: 24px;
     }
   }
@@ -675,7 +693,7 @@ body {
     transition-delay: 0.5s;
   }
   .actions {
-    width: 80%;
+    width: 100%;
   }
   .enemy {
     margin-top: 0.8rem;
@@ -743,8 +761,16 @@ body {
       width: 90px;
     }
   }
+
   .btn {
-    max-width: 200px;
+    max-width: 30%;
+    margin: 0.5rem 0.3rem;
+    font-size: 12px;
+  }
+  .btn__result {
+    margin: auto;
+    max-width: 80%;
+    font-size: 14px;
   }
 }
 @media only screen and (max-width: 600px) {
@@ -752,7 +778,7 @@ body {
   .header {
     background-color: var(--background);
     padding: 1rem;
-    width: 105%;
+    width: 100%;
     text-align: center;
     margin: auto;
     &.show-interface {
@@ -837,7 +863,7 @@ body {
   // /////////////////////////HEADER
   .header {
     .header__text {
-      max-width: 350px;
+      max-width: 100%;
       font-size: 16px;
     }
   }
@@ -882,11 +908,6 @@ body {
   }
   .lvl {
     margin-left: 0.5rem;
-  }
-
-  // BTNS
-  .btn {
-    max-width: 150px;
   }
   // ENEMY
   .enemy {
@@ -951,8 +972,7 @@ body {
   .arena {
     height: 150px;
   }
-  .btn {
-    max-width: 150px;
-    margin: 0.5rem 0.5rem;
+  .abilityImg {
+    width: 25px;
   }
 }
