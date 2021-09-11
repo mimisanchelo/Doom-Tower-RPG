@@ -576,7 +576,10 @@ body {
   width: 100vw;
   height: 100vh;
   background: #171523be;
-  margin: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
   z-index: 100;
   .result_message {
