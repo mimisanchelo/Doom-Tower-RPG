@@ -73,10 +73,10 @@ function result() {
       moves[moves.length - 1] == btnCounter
     ) {
       resultMessage.innerHTML =
-        '<h1>You lose!</h1><h3>Enemy`s hit was stronger than you possible could blocked</h3><button class="btn__goback btn btn__result" onclick="gameManager.resetPlayer()"><img class="abilityImg" src="img/skills/player-next.svg" alt="" />Back to heroes</button>'
+        '<h1>You lose!</h1><h3>Enemy`s hit was stronger than you possible could blocked</h3><a class="btn__goback btn btn__result" href="/"><img class="abilityImg" src="img/skills/player-next.svg"alt=""onclick="gameManager.resetPlayer()"/>Leave the Tower</a>'
     } else {
       resultMessage.innerHTML =
-        '<h1>You lose!</h1><button class="btn__goback btn" onclick="gameManager.resetPlayer()"><img class="abilityImg" src="img/skills/player-next.svg" alt="" />Back to heroes</button>'
+        '<h1>You lose!</h1><a class="btn__goback btn btn__result" href="/"><img class="abilityImg" src="img/skills/player-next.svg"alt=""onclick="gameManager.resetPlayer()"/>Leave the Tower</a>'
     }
   }
   if (beatenEnemy.length == 2) {

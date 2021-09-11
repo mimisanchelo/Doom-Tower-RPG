@@ -55,7 +55,7 @@ let gameManager = {
       '</span></p><p class="header__title">Task: Find an enemy!</p>'
     getArena.style.visibility = 'visible'
     getAction.innerHTML =
-      '<button class="btn__prefight btn" onclick="gameManager.setFight()"><img class="abilityImg" src="img/skills/magnifier.svg" alt="">Search for enemy</button> <button class="btn__goback btn" onclick="gameManager.resetPlayer()"><img class="abilityImg" src="img/skills/player-next.svg" alt="">Back to heroes</button>'
+      '<button class="btn__prefight btn" onclick="gameManager.setFight()"><img class="abilityImg" src="img/skills/magnifier.svg" alt="">Search for enemy</button> <a class="btn__goback btn" href="/"><img class="abilityImg" src="img/skills/player-next.svg"alt=""onclick="gameManager.resetPlayer()"/>Leave the Tower</a>'
   },
 
   createEnemy: function () {
