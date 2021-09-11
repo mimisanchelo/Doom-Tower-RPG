@@ -79,13 +79,13 @@ function result() {
         '<h1>You lose!</h1><a class="btn__goback btn btn__result" href="/"><img class="abilityImg" src="img/skills/player-next.svg"alt=""onclick="gameManager.resetPlayer()"/>Leave the Tower</a>'
     }
   }
-  if (beatenEnemy.length == 2) {
+  if (beatenEnemy.length == 31) {
     resultMessage.innerHTML =
       '<h1>Careful!</h1><h3>You have reached the Final boss.</br> Good luck!</h3><i class="ri-close-line close_message"></i>'
 
     closeMessage()
   }
-  if (beatenEnemy.length == 3) {
+  if (beatenEnemy.length == 32) {
     resultMessage.innerHTML =
       '<h1>Great!</h1><h3>You have reached the top of the Doom Tower.</br> Time to go on your next adventure!</h3>  <a class="btn__goback btn btn__result" href="/"><img class="abilityImg" src="img/skills/player-next.svg"alt=""onclick="gameManager.resetPlayer()"/>Leave the Tower</a>'
   }
