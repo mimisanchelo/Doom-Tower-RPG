@@ -59,36 +59,40 @@ DOMisLoaded()
 function result() {
   const result = document.querySelector('.result')
   const resultMessage = document.querySelector('.result_message')
-  const btnCounter = document.querySelector('.btn__counter')
 
   result.classList.remove('hidden')
 
   if (enemy.health <= 0) {
     resultMessage.innerHTML =
-      '<h1>You Win!</h1><h3>Move to the next floor! Quickly!</h3><button class="btn__next btn btn__result" onclick="gameManager.staircase()"><img class="abilityImg" src="img/skills/stairs.svg" alt="">Next floor</button>'
+      '<h1>You Win!</h1><h3>Move to the next floor. Quickly!</h3><button class="btn__next btn btn__result" onclick="GameManager.staircase()"><img class="abilityImg" src="img/skills/stairs.svg" alt="">Next floor</button>'
   }
   if (player.health <= 0) {
     if (
-      player.classType == 'Warrior' &&
-      moves[moves.length - 1] == btnCounter
+      player.mainStat == 'Strength' &&
+      moves[moves.length - 1] == 'ability1W'
     ) {
       resultMessage.innerHTML =
-        '<h1>You lose!</h1><h3>Enemy`s hit was stronger than you possible could blocked</h3><a class="btn__goback btn btn__result" href="/"><img class="abilityImg" src="img/skills/player-next.svg"alt=""onclick="gameManager.resetPlayer()"/>Leave the Tower</a>'
+        '<h1>You lose!</h1><h3>Enemy`s hit is stronger than you possible could blocked</h3><a class="btn__goback btn btn__result" href="/"><img class="abilityImg" src="img/skills/player-next.svg"alt=""onclick="GameManager.resetPlayer()"/>Leave the Tower</a>'
     } else {
       resultMessage.innerHTML =
-        '<h1>You lose!</h1><a class="btn__goback btn btn__result" href="/"><img class="abilityImg" src="img/skills/player-next.svg"alt=""onclick="gameManager.resetPlayer()"/>Leave the Tower</a>'
+        '<h1>You lose!</h1><a class="btn__goback btn btn__result" href="/"><img class="abilityImg" src="img/skills/player-next.svg"alt=""onclick="GameManager.resetPlayer()"/>Leave the Tower</a>'
     }
-  }
-  if (beatenEnemy.length == 31) {
+  }  
+}
+function resultBoss() {
+  const result = document.querySelector('.result')
+  const resultMessage = document.querySelector('.result_message')
+
+  result.classList.remove('hidden')
+  if (enemy.boss) {
     resultMessage.innerHTML =
       '<h1>Careful!</h1><h3>You have reached the Final boss.</br> Good luck!</h3><i class="ri-close-line close_message"></i>'
-
-    closeMessage()
-  }
-  if (beatenEnemy.length == 32) {
-    resultMessage.innerHTML =
-      '<h1>Great!</h1><h3>You have reached the top of the Doom Tower.</br> Time to go on your next adventure!</h3>  <a class="btn__goback btn btn__result" href="/"><img class="abilityImg" src="img/skills/player-next.svg"alt=""onclick="gameManager.resetPlayer()"/>Leave the Tower</a>'
-  }
+      closeMessage()
+    if(enemy.health <= 0) {
+      resultMessage.innerHTML =
+        '<h1>Great!</h1><h3>You have reached the top of the Doom Tower.</br> Time to go on your next adventure!</h3>  <a class="btn__goback btn btn__result" href="/"><img class="abilityImg" src="img/skills/player-next.svg"alt=""onclick="GameManager.resetPlayer()"/>Leave the Tower</a>'
+    }
+  } 
 }
 
 const closeMessage = function () {

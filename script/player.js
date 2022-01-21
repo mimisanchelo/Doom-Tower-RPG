@@ -1,17 +1,8 @@
 let player
 
-function Player(
-  classType,
-  level,
-  health,
-  mana,
-  strength,
-  agility,
-  intelligence,
-  speed,
-  defense
-) {
+const Player = function(classType,mainStat,level,health,mana,strength,agility,intelligence,speed,defense) {
   this.classType = classType
+  this.mainStat = mainStat
   this.level = level
 
   this.health = health
@@ -33,7 +24,7 @@ let playerAttack = function () {
   let calcMageDmg
 
   // FULL STRENGTH
-  if (player.classType == 'Warrior') {
+  if (player.mainStat == 'Strength') {
     calcPhysicalDmg =
       Math.round(
         ((player.strength * player.defense) / 250 / (0.048 * enemy.defense)) *
@@ -43,7 +34,7 @@ let playerAttack = function () {
     calcMageDmg = 0
 
     // gibrid
-  } else if (player.classType == 'Druid') {
+  } else if (player.mainStat == 'Gibrid') {
     calcPhysicalDmg =
       Math.round(
         ((player.strength * player.defense) / 250 / (0.048 * enemy.defense)) *
@@ -56,7 +47,7 @@ let playerAttack = function () {
       ) / 100
 
     // MANA BASE CHAMP
-  } else if (player.classType == 'Wizard' || player.classType == 'Priest') {
+  } else if (player.mainStat == 'Mage') {
     calcMageDmg =
       Math.round(
         ((player.intelligence * player.mana) / 1000 / (0.048 * enemy.defense)) *
@@ -65,7 +56,7 @@ let playerAttack = function () {
     calcPhysicalDmg = 0
   }
 
-  let offsetDmg = Math.floor(Math.random() * 5)
+  let offsetDmg = Math.floor(Math.random() * 7) + 1
   let calcOutputDmg = offsetDmg + calcMageDmg + calcPhysicalDmg
 
   let attackValue = calcOutputDmg
@@ -75,6 +66,7 @@ let playerAttack = function () {
 // ////////////////////////////////////PLAYER`s MOVES
 let moves = []
 
+//clear an array of moves
 let newFloor = function () {
   while (moves.length > 0) {
     moves.shift()
@@ -98,8 +90,8 @@ let PlayerAttack = {
     cooldownCounter2()
 
     ////
-    getPlayerSpeed = player.speed
-    getEnemySpeed = enemy.speed
+    let getPlayerSpeed = player.speed
+    let getEnemySpeed = enemy.speed
 
     // PLAYER ATTACK
     playerAttack()
@@ -115,20 +107,19 @@ let PlayerAttack = {
 
     //SPEED CONDIITON
     if (getPlayerSpeed >= getEnemySpeed) {
-      let calcHitLand = Math.round(Math.random() * 100)
-      let calcEnemyHitLand = Math.round(Math.random() * 100)
+      let calcHitLand = Math.round(Math.random() * 100) + 1
+      let calcEnemyHitLand = Math.round(Math.random() * 100) + 1
 
-      let calcLifesteal
+      
       let playerAttackValues = playerAttack()
 
       // IF Player`s HIT LANDED
       if (calcHitLand <= 89) {
-        let totalDmg = playerAttackValues
-        enemy.health = enemy.health - totalDmg
+        enemy.health = enemy.health - playerAttackValues
 
         // DRUID LIFESTEAL
         if (player.classType == 'Druid') {
-          calcLifesteal = Math.round(playerAttackValues * 0.3 * 100) / 100
+          let calcLifesteal = Math.round(playerAttackValues * 0.3 * 100) / 100
 
           if (player.health < player.maxHP) {
             player.health = player.health + calcLifesteal
@@ -154,71 +145,59 @@ let PlayerAttack = {
             enemy.enemyType
         }
         // health condition
-        if (enemy.health <= 0) {
-          result()
-
-          getEnemyHealth.innerHTML = 'Health: 0'
-          getPlayerHealth.innerHTML =
-            'Health: ' + Math.round(player.health * 100) / 100
-
-          // score
-          newFloor()
-          defeatedEnemies(enemy.enemyType)
-        } else {
-          getEnemyHealth.innerHTML =
-            'Health: ' + Math.round(enemy.health * 100) / 100
-
-          ///////////////////// ENEMY`S HIT CHANCE
-
-          if (calcEnemyHitLand <= 89) {
-            let enemyAttackValues = enemyDmg()
-
-            let totalDmg = enemyAttackValues
-            player.health = player.health - totalDmg
-
-            notification2.textContent =
-              enemy.enemyType +
-              ' dealt ' +
-              enemyAttackValues +
-              ' damage to the ' +
-              player.classType
-
-            if (player.health <= 0) {
-              result()
-              getPlayerHealth.innerHTML = 'Health: 0'
-              getEnemyHealth.innerHTML =
-                'Health: ' + Math.round(enemy.health * 100) / 100
-            } else {
-              getPlayerHealth.innerHTML =
-                'Health: ' + Math.round(player.health * 100) / 100
-            }
-          } else {
-            notification2.textContent = enemy.enemyType + ' missed'
-          }
+        if(enemy.boss && enemy.health <= 0) {
+          bossHealthCondition()
         }
+         else if (enemy.health <= 0) {
+          enemyHealthCondition()
+          } else {
+            getEnemyHealth.innerHTML =
+              'Health: ' + Math.round(enemy.health * 100) / 100
+  
+            ///////////////////// ENEMY`S HIT CHANCE
+  
+            if (calcEnemyHitLand <= 89) {
+              let enemyAttackValues = enemyDmg()
+  
+              let totalDmg = enemyAttackValues
+              player.health = player.health - totalDmg
+  
+              notification2.textContent =
+                enemy.enemyType +
+                ' dealt ' +
+                enemyAttackValues +
+                ' damage to the ' +
+                player.classType
+  
+              if (player.health <= 0) {
+                playerHealthCondition()
+              } else {
+                getPlayerHealth.innerHTML =
+                  'Health: ' + Math.round(player.health * 100) / 100
+              }
+            } else {
+              notification2.textContent = enemy.enemyType + ' missed'
+            }
+          }
+        
       } else {
         notification1.textContent = 'You missed'
 
         // //////////////////////////ENEMY ATTACK
-        let enemyAttackValues = enemyDmg()
-        //
 
         if (calcEnemyHitLand < 89) {
-          let totalDmg = enemyAttackValues
+          let totalDmg = enemyDmg()
           player.health = player.health - totalDmg
 
           notification2.textContent =
             enemy.enemyType +
             ' dealt ' +
-            enemyAttackValues +
+            totalDmg +
             ' damage to the ' +
             player.classType
 
           if (player.health <= 0) {
-            result()
-            getPlayerHealth.innerHTML = 'Health: 0'
-            getEnemyHealth.innerHTML =
-              'Health: ' + Math.round(enemy.health * 100) / 100
+            playerHealthCondition()
           } else {
             getPlayerHealth.innerHTML =
               'Health: ' + Math.round(player.health * 100) / 100
@@ -253,10 +232,7 @@ let PlayerAttack = {
           player.classType
 
         if (player.health <= 0) {
-          result()
-          getPlayerHealth.innerHTML = 'Health: 0'
-          getEnemyHealth.innerHTML =
-            'Health: ' + Math.round(enemy.health * 100) / 100
+          playerHealthCondition()
         } else {
           getPlayerHealth.innerHTML =
             'Health: ' + Math.round(player.health * 100) / 100
@@ -297,14 +273,7 @@ let PlayerAttack = {
                 enemy.enemyType
             }
             if (enemy.health <= 0) {
-              result()
-              getEnemyHealth.innerHTML = 'Health: 0'
-              getPlayerHealth.innerHTML =
-                'Health: ' + Math.round(player.health * 100) / 100
-
-              // SCORE
-              newFloor()
-              defeatedEnemies(enemy.enemyType)
+              enemyHealthCondition()
             } else {
               getEnemyHealth.innerHTML =
                 'Health: ' + Math.round(enemy.health * 100) / 100
@@ -353,14 +322,7 @@ let PlayerAttack = {
               enemy.enemyType
           }
           if (enemy.health <= 0) {
-            result()
-            getEnemyHealth.innerHTML = 'Health: 0'
-            getPlayerHealth.innerHTML =
-              'Health: ' + Math.round(player.health * 100) / 100
-
-            // score
-            newFloor()
-            defeatedEnemies(enemy.enemyType)
+            enemyHealthCondition()
           } else {
             getEnemyHealth.innerHTML =
               'Health: ' + Math.round(enemy.health * 100) / 100
@@ -376,6 +338,7 @@ let PlayerAttack = {
 let PlayerHeal = {
   ability: 'ability1P',
   cooldown: false,
+  multiplier: 13,
   calcHeal: function () {
     // notifications
     let notification1 = document.querySelector('.not1')
@@ -394,7 +357,6 @@ let PlayerHeal = {
     let maxHeroHP = player.maxHP
 
     let getPlayerHealth = document.querySelector('.health-player')
-    let getEnemyHealth = document.querySelector('.health-enemy')
 
     let playerHeal = function () {
       let getEnemyDmg = enemyDmg()
@@ -402,7 +364,7 @@ let PlayerHeal = {
 
       if (player.health < maxHeroHP) {
         calcHealedHP = Math.round(
-          ((player.intelligence * player.mana) / player.maxHP / 80) * 10
+          ((player.intelligence * player.mana) / player.maxHP / 75) * this.multiplier
         )
         player.health = player.health + calcHealedHP - getEnemyDmg
 
@@ -412,12 +374,12 @@ let PlayerHeal = {
       } else if (player.health >= maxHeroHP) {
         if (calcHealedHP < getEnemyDmg) {
           calcHealedHP = Math.round(
-            ((player.intelligence * player.mana) / player.maxHP / 80) * 10
+            ((player.intelligence * player.mana) / player.maxHP / 75) * this.multiplier
           )
           player.health = maxHeroHP + calcHealedHP - getEnemyDmg
         } else {
           calcHealedHP = Math.round(
-            ((player.intelligence * player.mana) / player.maxHP / 80) * 10
+            ((player.intelligence * player.mana) / player.maxHP / 75) * this.multiplier
           )
           player.health = maxHeroHP
         }
@@ -425,7 +387,7 @@ let PlayerHeal = {
 
       let totalHealed = Math.floor((calcHealedHP - getEnemyDmg) * 100) / 100
 
-      return totalHealed
+      return totalHealed.toFixed(2)
     }
 
     // ROUND CONDITION
@@ -453,10 +415,7 @@ let PlayerHeal = {
             playerHealValues
           notification2.textContent = 'Enemy dealt ' + enemyAttackValues
           if (player.health <= 0) {
-            getPlayerHealth.innerHTML = 'Health: 0'
-            getEnemyHealth.innerHTML =
-              'Health: ' + Math.round(enemy.health * 100) / 100
-            result()
+            playerHealthCondition()
           }
         } else if (calcHealedHP > enemyAttackValues) {
           player.health = maxHeroHP
@@ -487,10 +446,7 @@ let PlayerHeal = {
 
           notification2.textContent = 'Enemy dealt ' + enemyAttackValues
           if (player.health <= 0) {
-            getPlayerHealth.innerHTML = 'Health: 0'
-            getEnemyHealth.innerHTML =
-              'Health: ' + Math.round(enemy.health * 100) / 100
-            result()
+            playerHealthCondition()
           }
         } else if (calcHealedHP > enemyAttackValues) {
           getPlayerHealth.innerHTML =
@@ -527,10 +483,7 @@ let PlayerHeal = {
 
           notification2.textContent = 'Enemy dealt ' + enemyAttackValues
           if (player.health <= 0) {
-            getPlayerHealth.innerHTML = 'Health: 0'
-            getEnemyHealth.innerHTML =
-              'Health: ' + Math.round(enemy.health * 100) / 100()
-            result()
+            playerHealthCondition()
           }
         } else if (calcHealedHP > enemyAttackValues) {
           calcHealedHP = Math.round(
@@ -559,10 +512,7 @@ let PlayerHeal = {
 
           notification2.textContent = 'Enemy dealt ' + enemyAttackValues
           if (player.health <= 0) {
-            getPlayerHealth.innerHTML = 'Health: 0'
-            getEnemyHealth.innerHTML =
-              'Health: ' + Math.round(enemy.health * 100) / 100()
-            result()
+            playerHealthCondition()
           }
         } else if (calcHealedHP > enemyAttackValues) {
           calcHealedHP = Math.round(
@@ -620,18 +570,12 @@ let PlayerBite = {
     if (getPlayerSpeed >= getEnemySpeed) {
       let playerBiteValue = playerBite()
 
-      // AWAITING FOR MULTIPLY HITs
-
       enemy.health = enemy.health - playerBiteValue
-      if (enemy.health <= 0) {
-        result()
-        getEnemyHealth.innerHTML = 'Health: 0'
-        getPlayerHealth.innerHTML =
-          'Health: ' + Math.round(player.health * 100) / 100
-
-        //score
-        newFloor()
-        defeatedEnemies(enemy.enemyType)
+      if(enemy.boss && enemy.health <= 0) {
+        bossHealthCondition()
+      }
+       else if (enemy.health <= 0) {
+        enemyHealthCondition()
       } else {
         getEnemyHealth.innerHTML =
           'Health: ' + Math.round(enemy.health * 100) / 100
@@ -653,10 +597,7 @@ let PlayerBite = {
           player.classType
 
         if (player.health <= 0) {
-          result()
-          getPlayerHealth.innerHTML = 'Health: 0'
-          getEnemyHealth.innerHTML =
-            'Health: ' + Math.round(enemy.health * 100) / 100
+          playerHealthCondition()
         } else {
           getPlayerHealth.innerHTML =
             'Health: ' + Math.round(player.health * 100) / 100
@@ -677,10 +618,7 @@ let PlayerBite = {
         player.classType
 
       if (player.health <= 0) {
-        result()
-        getPlayerHealth.innerHTML = 'Health: 0'
-        getEnemyHealth.innerHTML =
-          'Health: ' + Math.round(enemy.health * 100) / 100
+        playerHealthCondition()
       } else {
         getPlayerHealth.innerHTML =
           'Health: ' + Math.round(player.health * 100) / 100
@@ -762,15 +700,10 @@ let PlayerThunder = {
 
       // HEALTH CONDITION
 
-      if (enemy.health <= 0) {
-        result()
-        getEnemyHealth.innerHTML = 'Health: 0'
-        getPlayerHealth.innerHTML =
-          'Health: ' + Math.round(player.health * 100) / 100
-
-        // score
-        newFloor()
-        defeatedEnemies(enemy.enemyType)
+      if(enemy.boss && enemy.health <= 0) {
+        bossHealthCondition()
+      } else if (enemy.health <= 0) {
+        enemyHealthCondition()
       } else {
         getEnemyHealth.innerHTML =
           'Health: ' + Math.round(enemy.health * 100) / 100
@@ -795,10 +728,7 @@ let PlayerThunder = {
           player.classType
 
         if (player.health <= 0) {
-          result()
-          getPlayerHealth.innerHTML = 'Health: 0'
-          getEnemyHealth.innerHTML =
-            'Health: ' + Math.round(enemy.health * 100) / 100
+          playerHealthCondition()
         } else {
           getPlayerHealth.innerHTML =
             'Health: ' + Math.round(player.health * 100) / 100
@@ -819,10 +749,7 @@ let PlayerThunder = {
         player.classType
 
       if (player.health <= 0) {
-        result()
-        getPlayerHealth.innerHTML = 'Health: 0'
-        getEnemyHealth.innerHTML =
-          'Health: ' + Math.round(enemy.health * 100) / 100
+        playerHealthCondition()
       } else {
         getPlayerHealth.innerHTML =
           'Health: ' + Math.round(player.health * 100) / 100
@@ -836,19 +763,7 @@ let PlayerThunder = {
         enemy.health = enemy.health - totalDmg
 
         if (enemy.health <= 0) {
-          // NOTIFICATION
-          result()
-
-          // HEALTHS
-          getEnemyHealth.innerHTML = 'Health: 0'
-          getPlayerHealth.innerHTML =
-            'Health: ' + Math.round(player.health * 100) / 100
-
-          // BTN
-
-          // score
-          newFloor()
-          defeatedEnemies(enemy.enemyType)
+          enemyHealthCondition()
         } else {
           getEnemyHealth.innerHTML =
             'Health: ' + Math.round(enemy.health * 100) / 100
@@ -897,10 +812,6 @@ let PlayerCounter = {
     // ROUND CONDITION
     enemyDmg()
     playerAttack()
-
-    let getPlayerHealth = document.querySelector('.health-player')
-    let getEnemyHealth = document.querySelector('.health-enemy')
-
     let playerBlockValues = playerBlock()
     let playerAttackValue = playerAttack()
 
@@ -912,25 +823,16 @@ let PlayerCounter = {
     // NOTIFICATION WHEN BLOCK
 
     // HEALTH CONDITION
-    if (player.health <= 0) {
-      result()
-      getPlayerHealth.innerHTML = 'Health: 0'
-      getEnemyHealth.innerHTML =
-        'Health: ' + Math.round(enemy.health * 100) / 100
+    if(enemy.boss && enemy.health <= 0) {
+      enemyHealthCondition()
+    } else if (player.health <= 0) {
+      playerHealthCondition()
     } else if (enemy.health <= 0) {
-      result()
-      getPlayerHealth.innerHTML =
-        'Health: ' + Math.round(player.health * 100) / 100
-      getEnemyHealth.innerHTML = 'Health: 0'
-
-      // score
-      newFloor()
-      defeatedEnemies(enemy.enemyType)
+      enemyHealthCondition()
     } else {
-      getPlayerHealth.innerHTML =
-        'Health: ' + Math.round(player.health * 100) / 100
-      getEnemyHealth.innerHTML =
-        'Health: ' + Math.round(enemy.health * 100) / 100
+      bothHealthCondition()
+
+      // NOTIFICATIONS
       notification1.textContent =
         'You blocked ' +
         totalDmg +
@@ -945,7 +847,7 @@ let PlayerCounter = {
   },
 }
 
-//
+// SPELL #2
 
 let PlayerSurprise = {
   ability: 'ability2W',
@@ -979,34 +881,22 @@ let PlayerSurprise = {
 
     // ROUND CONDITION
     playerSurprise()
-
-    let getPlayerHealth = document.querySelector('.health-player')
-    let getEnemyHealth = document.querySelector('.health-enemy')
-
     let playerSurpriseValue = playerSurprise()
-
     let totalDmg = Math.floor(playerSurpriseValue * 100) / 100
-
     enemy.health = enemy.health - totalDmg
 
     // NOTIFICATION WHEN BLOCK
 
     // HEALTH CONDITION
 
-    if (enemy.health <= 0) {
-      result()
-      getPlayerHealth.innerHTML =
-        'Health: ' + Math.round(player.health * 100) / 100
-      getEnemyHealth.innerHTML = 'Health: 0'
-
-      // score
-      newFloor()
-      defeatedEnemies(enemy.enemyType)
+    if(enemy.boss && enemy.health <= 0) {
+      bossHealthCondition()
+    } else if (enemy.health <= 0) {
+      enemyHealthCondition()
     } else {
-      getPlayerHealth.innerHTML =
-        'Health: ' + Math.round(player.health * 100) / 100
-      getEnemyHealth.innerHTML =
-        'Health: ' + Math.round(enemy.health * 100) / 100
+      bothHealthCondition()
+
+      // NOTIFICATIONS
       notification1.textContent =
         'You stunned enemy and dealt ' +
         totalDmg +
@@ -1016,7 +906,6 @@ let PlayerSurprise = {
     }
   },
 }
-
 let PlayerWrath = {
   ability: 'ability2D',
   cooldown: false,
@@ -1028,18 +917,18 @@ let PlayerWrath = {
     notify()
 
     // cooldowns
-
     moves.push(this.ability)
     cooldownCounterAbility2()
     cooldownCounter1()
 
+    //CALC SPELL
     let playerWrath = function () {
       let calcWrath
       if (player.intelligence) {
         calcWrath =
           Math.round(
             ((player.intelligence * player.mana) /
-              800 /
+              700 /
               (0.048 * enemy.defense)) *
               100
           ) / 100
@@ -1050,34 +939,22 @@ let PlayerWrath = {
 
     // ROUND CONDITION
     playerWrath()
-
-    let getPlayerHealth = document.querySelector('.health-player')
-    let getEnemyHealth = document.querySelector('.health-enemy')
-
     let playerWrathValue = playerWrath()
-
     let totalDmg = Math.floor(playerWrathValue * 100) / 100
-
     enemy.health = enemy.health - totalDmg
 
     // NOTIFICATION WHEN BLOCK
 
     // HEALTH CONDITION
-
-    if (enemy.health <= 0) {
-      result()
-      getPlayerHealth.innerHTML =
-        'Health: ' + Math.round(player.health * 100) / 100
-      getEnemyHealth.innerHTML = 'Health: 0'
-
-      // score
-      newFloor()
-      defeatedEnemies(enemy.enemyType)
+    if(enemy.boss && enemy.health <= 0) {
+      bossHealthCondition()
+    }
+     else if (enemy.health <= 0) {
+      enemyHealthCondition()
     } else {
-      getPlayerHealth.innerHTML =
-        'Health: ' + Math.round(player.health * 100) / 100
-      getEnemyHealth.innerHTML =
-        'Health: ' + Math.round(enemy.health * 100) / 100
+      bothHealthCondition()
+
+      // NOTIFICATIONS
       notification1.textContent =
         'You stunned enemy and dealt ' +
         totalDmg +
@@ -1098,11 +975,11 @@ let PlayerPillar = {
     notify()
 
     // cooldowns
-
     moves.push(this.ability)
     cooldownCounterAbility2()
     cooldownCounter1()
 
+    // CALC SPELL
     let playerPillar = function () {
       let calcFreezingPillar
       if (player.intelligence) {
@@ -1120,34 +997,20 @@ let PlayerPillar = {
 
     // ROUND CONDITION
     playerPillar()
-
-    let getPlayerHealth = document.querySelector('.health-player')
-    let getEnemyHealth = document.querySelector('.health-enemy')
-
     let playerPillarValue = playerPillar()
-
     let totalDmg = Math.floor(playerPillarValue * 100) / 100
-
     enemy.health = enemy.health - totalDmg
 
     // NOTIFICATION WHEN BLOCK
 
     // HEALTH CONDITION
-
-    if (enemy.health <= 0) {
-      result()
-      getPlayerHealth.innerHTML =
-        'Health: ' + Math.round(player.health * 100) / 100
-      getEnemyHealth.innerHTML = 'Health: 0'
-
-      // score
-      newFloor()
-      defeatedEnemies(enemy.enemyType)
+    if(enemy.boss && enemy.health <= 0) {
+      bossHealthCondition()
+    } else if (enemy.health <= 0) {
+      enemyHealthCondition()
     } else {
-      getPlayerHealth.innerHTML =
-        'Health: ' + Math.round(player.health * 100) / 100
-      getEnemyHealth.innerHTML =
-        'Health: ' + Math.round(enemy.health * 100) / 100
+      bothHealthCondition()
+      // NOTIFICATIONS
       notification1.textContent =
         'You stunned enemy and dealt ' +
         totalDmg +
@@ -1173,6 +1036,7 @@ let PlayerConfusion = {
     cooldownCounterAbility2()
     cooldownCounter1()
 
+    // calcSPELL
     let playerConfusion = function () {
       let calcConfusion
       if (player.intelligence) {
@@ -1191,33 +1055,20 @@ let PlayerConfusion = {
     // ROUND CONDITION
     playerConfusion()
 
-    let getPlayerHealth = document.querySelector('.health-player')
-    let getEnemyHealth = document.querySelector('.health-enemy')
-
     let playerConfusionValue = playerConfusion()
-
     let totalDmg = Math.floor(playerConfusionValue * 100) / 100
-
     enemy.health = enemy.health - totalDmg
 
     // NOTIFICATION WHEN BLOCK
 
     // HEALTH CONDITION
-
-    if (enemy.health <= 0) {
-      result()
-      getPlayerHealth.innerHTML =
-        'Health: ' + Math.round(player.health * 100) / 100
-      getEnemyHealth.innerHTML = 'Health: 0'
-
-      // score
-      newFloor()
-      defeatedEnemies(enemy.enemyType)
+   if(enemy.boss && enemy.health <= 0) {
+    BossHealthCondition()
+    } else  if (enemy.health <= 0) {
+      enemyHealthCondition()
     } else {
-      getPlayerHealth.innerHTML =
-        'Health: ' + Math.round(player.health * 100) / 100
-      getEnemyHealth.innerHTML =
-        'Health: ' + Math.round(enemy.health * 100) / 100
+      bothHealthCondition()
+      // NOTIFICATIONS
       notification1.textContent =
         'You stunned enemy and dealt ' +
         totalDmg +
@@ -1226,6 +1077,53 @@ let PlayerConfusion = {
       notification2.textContent = enemy.enemyType + ' got stunned'
     }
   },
+}
+/// HEALTH CONDITION
+function enemyHealthCondition() {
+  let getPlayerHealth = document.querySelector('.health-player')
+  let getEnemyHealth = document.querySelector('.health-enemy')
+  // notification
+  result()
+
+  //health result
+  getPlayerHealth.innerHTML =
+    'Health: ' + Math.round(player.health * 100) / 100
+  getEnemyHealth.innerHTML = 'Health: 0'
+
+  // score
+  newFloor()
+  defeatedEnemies(enemy.enemyType)
+}
+
+function playerHealthCondition() {
+  let getPlayerHealth = document.querySelector('.health-player')
+  let getEnemyHealth = document.querySelector('.health-enemy')
+  //notification
+  result()
+  //health result
+  getPlayerHealth.innerHTML = 'Health: 0'
+  getEnemyHealth.innerHTML =
+    'Health: ' + Math.round(enemy.health * 100) / 100
+}
+
+function bothHealthCondition() {
+  let getPlayerHealth = document.querySelector('.health-player')
+  let getEnemyHealth = document.querySelector('.health-enemy')
+
+  //HEALTH CONDITION
+  getPlayerHealth.innerHTML = 'Health: ' + Math.round(player.health * 100) / 100
+  getEnemyHealth.innerHTML = 'Health: ' + Math.round(enemy.health * 100) / 100
+}
+
+function bossHealthCondition() {
+  let getPlayerHealth = document.querySelector('.health-player')
+  let getEnemyHealth = document.querySelector('.health-enemy')
+  // notification
+    resultBoss()
+
+  // health result
+  getPlayerHealth.innerHTML = 'Health: ' + Math.round(player.health * 100) / 100
+  getEnemyHealth.innerHTML = 'Health: 0'
 }
 
 // /////////////////COOLDOWN OF ABILITIES
@@ -1284,7 +1182,7 @@ let getAbilityName1 = function () {
   } else if (player.classType == 'Wizard') {
     return 'Thunder strike'
   } else if (player.classType == 'Priest') {
-    return 'Healing'
+    return 'Divine Embrace'
   }
 }
 

@@ -10,10 +10,9 @@
       href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
       rel="stylesheet"
     />
-
-    <script src="script/gameManager.js"></script>
-    <script src="script/player.js"></script>
-    <script src="script/enemy.js"></script>
+    <script defer src="script/gameManager.js"></script>
+    <script defer src="script/player.js"></script>
+    <script defer src="script/enemy.js"></script>
   </head>
   <body>
     <!-- INTERFACE -->
@@ -45,7 +44,8 @@
       <a
         href="#"
         class="hero__box"
-        onclick="gameManager.setGameStart('Warrior')"
+        data-hero="Warrior"
+        onclick="GameManager.setGameStart(`Warrior`)"
       >
         <img src="img/warrior.jpg" alt="warrior" />
 
@@ -66,7 +66,7 @@
                 <h3>Counter attack</h3>
                 <p>
                   The Counter Attack blocks the enemy`s partial damage and
-                  attacks immediately in response
+                  attacks immediately in response.
                 </p>
                 <p class="cooldown">Cooldown 2 turns</p>
               </div>
@@ -77,7 +77,7 @@
                 <h3>Surprise attack</h3>
                 <p>
                   The Surprise Attack causes a physical damage, additionally
-                  Knocking down the target.
+                  Knocking down the target. Stun enemy for 1 turn..
                 </p>
                 <p class="cooldown">Cooldown 3 turns</p>
               </div>
@@ -86,7 +86,9 @@
         </div>
       </a>
 
-      <a href="#" class="hero__box" onclick="gameManager.setGameStart('Druid')">
+      <a href="#" class="hero__box" data-hero='Druid'
+      onclick="GameManager.setGameStart(`${dataset.hero}`)"
+      >
         <img src="img/druid.jpg" alt="druid" />
         <div class="hero__info">
           <h3 class="hero__type">Druid</h3>
@@ -118,7 +120,7 @@
               <img src="img/skills/ability2D.jpg" alt="" />
               <div class="ability__description">
                 <h3>Wrath of nature</h3>
-                <p>Roots the target in place.</p>
+                <p>Roots the target in place. Stun enemy for 1 turn.</p>
                 <p class="cooldown">Cooldown 3 turns</p>
               </div>
             </div>
@@ -129,7 +131,8 @@
       <a
         href="#"
         class="hero__box"
-        onclick="gameManager.setGameStart('Wizard')"
+        data-hero='Wizard'
+        onclick="GameManager.setGameStart(`${dataset.hero}`)"
       >
         <img src="img/wizard.jpg" alt="wizard" />
         <div class="hero__info">
@@ -158,8 +161,8 @@
               <img src="img/skills/ability2Wi.jpg" alt="" />
               <div class="ability__description">
                 <h3>Freezing pillar</h3>
-                <p>Ice Shard falls on the enemy and stuns him</p>
-                <p class="cooldown">Cooldown 2 turns</p>
+                <p>Ice Shard falls on the enemy and stuns him for 1 turn.</p>
+                <p class="cooldown">Cooldown 3 turns</p>
               </div>
             </div>
           </div>
@@ -169,14 +172,15 @@
       <a
         href="#"
         class="hero__box"
-        onclick="gameManager.setGameStart('Priest')"
+        data-hero='Priest'
+        onclick="GameManager.setGameStart(`${dataset.hero}`)"
       >
         <img src="img/priest.jpg" alt="priest" />
         <div class="hero__info">
           <h3 class="hero__type">Priest</h3>
           <p class="hero__description">
             Scion of the Light, priest utilizes his holy and void powers to heal
-            allies and destroy enemies. Priest has two abilities: Healing and
+            allies and destroy enemies. Priest has two abilities: Divine Embrace and
             Confusion. Each of the two abilities utilizes intelligence as a
             primary stat.
           </p>
@@ -184,7 +188,7 @@
             <div class="ability__box">
               <img src="img/skills/ability1P.jpg" alt="" />
               <div class="ability__description">
-                <h3>Healing</h3>
+                <h3>Divine Embrace</h3>
                 <p>Restore points of target's HP.</p>
                 <p class="cooldown">Cooldown 2 turns</p>
               </div>

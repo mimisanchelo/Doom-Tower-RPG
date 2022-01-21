@@ -95,7 +95,7 @@ body {
   color: var(--headers);
   height: 70%;
   width: 70%;
-  margin: auto auto 0 10rem;
+  margin: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -516,7 +516,7 @@ body {
 .question__tab.showQuestionTab {
   visibility: visible;
   opacity: 1;
-  width: 150px;
+  width: 180px;
   padding: 1rem;
   text-align: center;
   background: whitesmoke;
