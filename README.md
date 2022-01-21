@@ -6,7 +6,7 @@ Single-player role-playing game "Doom Tower". 4 heroes with unique abilities to 
 ## Technologies used
 
  - HTML
- - CSS
+ - SCSS
  - JavaScript
 
 ## What the app looks like
